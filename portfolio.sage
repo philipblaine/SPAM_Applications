@@ -60,14 +60,14 @@ def portfolio(mu):
 
     p.set_objective(mu * (x[0]*r1 + x[1]*r2 + x[2]*r3) - ((1/24) * sum([x[o] for o in range(3,27)])))
     
-    p.show()
+    #p.show()
     p.solve()
 
     psol_list = []
     for i in range(0,3):
         psol_list.append(p.get_values(x[i]))
 
-    return psol_list
+    return tuple(psol_list)
     
     
 
