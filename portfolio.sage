@@ -67,7 +67,9 @@ def portfolio(mu):
     for i in range(0,3):
         psol_list.append(p.get_values(x[i]))
 
-    return tuple(psol_list)
+    psol_tuple = tuple(psol_list)
+
+    return psol_tuple
     
     
 
