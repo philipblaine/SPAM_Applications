@@ -1,7 +1,9 @@
-def portfolio(mu):
+def portfolio(mu,base_ring=None):
 
-    p = MixedIntegerLinearProgram(maximization=True,solver="PPL")
-    
+    if base_ring is None:
+        base_ring = mu.parent()
+
+    p = MixedIntegerLinearProgram(maximization=True, base_ring=K)  
     x = p.new_variable(integer=False, nonnegative=True)
     #x0, x1, x2 are portfolio weights
     #x3-x27 are constraint variables
