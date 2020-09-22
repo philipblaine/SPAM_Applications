@@ -6,7 +6,7 @@ def portfolio(mu,base_ring=None):
     p = MixedIntegerLinearProgram(maximization=True, base_ring=K)  
     x = p.new_variable(integer=False, nonnegative=True)
     #x0, x1, x2 are portfolio weights
-    #x3-x27 are constraint variables
+    #x3-x26 are constraint variables
 
     col1 = [1,1003/1000,1005/1000,1007/1000,1002/1000,1001/1000,1005/1000,1004/1000,1004/1000,1008/1000,1007/1000,1002/1000,1002/1000,1002/1000,1002/1000,1,1002/1000,1004/1000,1004/1000,999/1000,997/1000,1007/1000,996/1000,1002/1000]
     col2 = [1044/1000,1015/1000,1024/1000,1027/1000,1040/1000,995/1000,1044/1000,1060/1000,1,1030/1000,963/1000,1005/1000,960/1000,1035/1000,1047/1000,978/1000,1048/1000,1029/1000,1076/1000,1002/1000,1008/1000,958/1000,1056/1000,980/1000]
@@ -31,7 +31,7 @@ def portfolio(mu,base_ring=None):
     #print(r1)
     r2 = r2sum/24
     #print(r2)
-    r3 = r2sum/24
+    r3 = r3sum/24
     #print(r3)
 
     p.add_constraint(x[0]>=0)
