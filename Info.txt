@@ -1,0 +1,8 @@
+https://sage.math.leidenuniv.nl/src/numerical/backends/interactivelp_backend.pyx
+https://doc.sagemath.org/html/en/thematic_tutorials/linear_programming.html#solvers-backends
+https://doc.sagemath.org/html/en/reference/numerical/sage/numerical/backends/generic_backend.html#sage.numerical.backends.generic_backend.default_mip_solver
+https://doc.sagemath.org/html/en/reference/numerical/sage/numerical/mip.html
+https://doc.sagemath.org/html/en/reference/numerical/sage/numerical/interactive_simplex_method.html
+https://sage.math.leidenuniv.nl/src/numerical/interactive_simplex_method.py
+https://sage.math.leidenuniv.nl/src/numerical/backends/generic_backend.pyx
+
