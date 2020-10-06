@@ -7,3 +7,70 @@ https://sage.math.leidenuniv.nl/src/numerical/interactive_simplex_method.py
 https://sage.math.leidenuniv.nl/src/numerical/backends/generic_backend.pyx
 https://sage.math.leidenuniv.nl/src/numerical/backends/interactivelp_backend.pyx
 
+
+from trace("portfolio2(2)")
+run_simplex_method
+_html_
+_preupdate_output
+_repr_
+_latex_
+_ELLUL_
+random_dictionary **using random on SPAM?**
+
+Should I be changing the source code of InteractiveLP? InteractiveSimplexMethod? Or Metaprogramming?
+Why doesn't Latex output appear when I run portfolio2?
+
+
+
+
+sage: A = ([1, 1], [3, 1])
+sage: b = (1000, 1500)
+sage: c = (10, 5)
+sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+sage: P
+LP problem (use typeset mode to see details)
+sage: P.plot()
+Launched png viewer for Graphics object consisting of 19 graphics primitives
+sage: InteractiveLPProblemStandardForm(A, b, c, ["C", "B"])
+LP problem (use typeset mode to see details)
+sage: P = P.standard_form()
+sage: P.run_simplex_method()
+\begin{equation*}
+\renewcommand{\arraystretch}{1.5} %notruncate
+\begin{array}{|rcrcrcr|}
+\hline
+x_{3} \mspace{-6mu}&\mspace{-6mu} = \mspace{-6mu}&\mspace{-6mu} 1000 \mspace{-6mu}&\mspace{-6mu} - \mspace{-6mu}&\color{green}\mspace{-6mu} C \mspace{-6mu}&\mspace{-6mu} - \mspace{-6mu}&\mspace{-6mu} B\\
+\color{red}x_{4} \mspace{-6mu}&\color{red}\mspace{-6mu} = \mspace{-6mu}&\color{red}\mspace{-6mu} 1500 \mspace{-6mu}&\color{red}\mspace{-6mu} - \mspace{-6mu}&\color{blue}\mspace{-6mu} 3 C \mspace{-6mu}&\color{red}\mspace{-6mu} - \mspace{-6mu}&\color{red}\mspace{-6mu} B\\
+\hline
+z \mspace{-6mu}&\mspace{-6mu} = \mspace{-6mu}&\mspace{-6mu} 0 \mspace{-6mu}&\mspace{-6mu} + \mspace{-6mu}&\color{green}\mspace{-6mu} 10 C \mspace{-6mu}&\mspace{-6mu} + \mspace{-6mu}&\mspace{-6mu} 5 B\\
+\hline
+\end{array}
+\end{equation*}
+Entering: $C$. Leaving: $x_{4}$.
+\begin{equation*}
+\renewcommand{\arraystretch}{1.5} %notruncate
+\begin{array}{|rcrcrcr|}
+\hline
+\color{red}x_{3} \mspace{-6mu}&\color{red}\mspace{-6mu} = \mspace{-6mu}&\color{red}\mspace{-6mu} 500 \mspace{-6mu}&\color{red}\mspace{-6mu} + \mspace{-6mu}&\color{red}\mspace{-6mu} \frac{1}{3} x_{4} \mspace{-6mu}&\color{red}\mspace{-6mu} - \mspace{-6mu}&\color{blue}\mspace{-6mu} \frac{2}{3} B\\
+C \mspace{-6mu}&\mspace{-6mu} = \mspace{-6mu}&\mspace{-6mu} 500 \mspace{-6mu}&\mspace{-6mu} - \mspace{-6mu}&\mspace{-6mu} \frac{1}{3} x_{4} \mspace{-6mu}&\mspace{-6mu} - \mspace{-6mu}&\color{green}\mspace{-6mu} \frac{1}{3} B\\
+\hline
+z \mspace{-6mu}&\mspace{-6mu} = \mspace{-6mu}&\mspace{-6mu} 5000 \mspace{-6mu}&\mspace{-6mu} - \mspace{-6mu}&\mspace{-6mu} \frac{10}{3} x_{4} \mspace{-6mu}&\mspace{-6mu} + \mspace{-6mu}&\color{green}\mspace{-6mu} \frac{5}{3} B\\
+\hline
+\end{array}
+\end{equation*}
+Entering: $B$. Leaving: $x_{3}$.
+\begin{equation*}
+\renewcommand{\arraystretch}{1.5} %notruncate
+\begin{array}{|rcrcrcr|}
+\hline
+B \mspace{-6mu}&\mspace{-6mu} = \mspace{-6mu}&\mspace{-6mu} 750 \mspace{-6mu}&\mspace{-6mu} + \mspace{-6mu}&\mspace{-6mu} \frac{1}{2} x_{4} \mspace{-6mu}&\mspace{-6mu} - \mspace{-6mu}&\mspace{-6mu} \frac{3}{2} x_{3}\\
+C \mspace{-6mu}&\mspace{-6mu} = \mspace{-6mu}&\mspace{-6mu} 250 \mspace{-6mu}&\mspace{-6mu} - \mspace{-6mu}&\mspace{-6mu} \frac{1}{2} x_{4} \mspace{-6mu}&\mspace{-6mu} + \mspace{-6mu}&\mspace{-6mu} \frac{1}{2} x_{3}\\
+\hline
+z \mspace{-6mu}&\mspace{-6mu} = \mspace{-6mu}&\mspace{-6mu} 6250 \mspace{-6mu}&\mspace{-6mu} - \mspace{-6mu}&\mspace{-6mu} \frac{5}{2} x_{4} \mspace{-6mu}&\mspace{-6mu} - \mspace{-6mu}&\mspace{-6mu} \frac{5}{2} x_{3}\\
+\hline
+\end{array}
+\end{equation*}
+The optimal value: $6250$. An optimal solution: $\left(250,\,750\right)$.
+
+
+

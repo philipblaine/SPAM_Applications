@@ -4,6 +4,7 @@ def portfolio2(mu,base_ring=None):
         base_ring = mu.parent()
 
     p2 = MixedIntegerLinearProgram(maximization=True, base_ring=K)  
+    #p2 = InteractiveLPProblem
     x = p2.new_variable(integer=False, nonnegative=True)
     #x0, x1, x2, x3, x4, x5, x6, x7, x8 are portfolio weights
     #x9-x32 are constraint variables
