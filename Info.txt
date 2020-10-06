@@ -17,8 +17,10 @@ _latex_
 _ELLUL_
 random_dictionary **using random on SPAM?**
 
-Should I be changing the source code of InteractiveLP? InteractiveSimplexMethod? Or Metaprogramming?
+Questions:
+Should I be copying and changing source for InteractiveLP solver? InteractiveLPProgram? Or Metaprogramming?
 Why doesn't Latex output appear when I run portfolio2?
+In several places of InteractiveSimplexMethod there is *return HtmlFragment("\n".join(output))* which returns output. Is this a good place to look?
 
 
 
