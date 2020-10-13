@@ -102,6 +102,7 @@ def portfolio_test(mu,base_ring=None):
     
     #p2.show()
     p2.solve()
+    
 
     p2sol_list = []
     for i in range(0,9):
@@ -109,7 +110,7 @@ def portfolio_test(mu,base_ring=None):
 
     p2sol_tuple = tuple(p2sol_list)
 
-    return p2sol_tuple
+    return p2
     
     
 
