@@ -17,7 +17,7 @@ def ineqex2check():
 
         EXAMPLES::
         
-            sage: ineqcheck()
+            sage: ineqex2check()
             True
 
     '''
@@ -33,23 +33,23 @@ def ineqex2check():
         g = randint(0,100)
         
         adif = (a-A)
-        b2dif = (2-B)
         b1sum = (1+B)
+        b1sum2 = (1+B)*(1+B)
         bg45 = ((9/2)*b*g)
 
         boolcheck = False
 
-        if ((0<A) and (A<a) and (0<B) and (B<1) and (((adif*b2dif)/(bg45-(b2dif*b1sum)))>0) and (((2*adif)/(3*b))*(bg45/(bg45-(b2dif*b1sum)))>0) and (((adif*b2dif)/(bg45-(b2dif*b1sum))*b1sum)<A) and (((2/9)*(b2dif*b2dif))<(b*g))):
+        if ((0<A) and (A<a) and (0<B) and (B<1) and (((adif*b1sum)/(bg45-(b1sum2)))>0) and (((2*adif)/(3*b))*(bg45/(bg45-(b1sum2)))>0) and ((adif*b1sum2)/(bg45-(b1sum2))<A) and (((2/9)*(b1sum2))<(b*g))):
             boolcheck = True
 
         if boolcheck == True:
-            if (((-a+A)<0) and ((B-1)<0) and (-b<0) and (-B<0) and (-A<0) and ((2*B*B - 9*b*g - 8*B + 8)<0) and ((-2*B*B - 9*b*g + 2*B + 4)<0) and (-g<0) and ((-2*a*B*B - 9*b*A*g + 2*a*B + 4*a)<0)):
+            if (((-a+A)<0) and ((B-1)<0) and (-b<0) and (-B<0) and (-A<0) and (-g<0) and ((2*B*B - 9*b*g + 4*B + 2)<0) and ((2*a*B*B - 9*b*a*g + 4*a*B + 2*a)<0)):
                 boolcheck = True
                 checker.append("True1")
                 #print("True1")
 
         elif boolcheck == False:
-            if not((((-a+A)<0) and ((B-1)<0) and (-b<0) and (-B<0) and (-A<0) and ((2*B*B - 9*b*g - 8*B + 8)<0) and ((-2*B*B - 9*b*g + 2*B + 4)<0) and (-g<0) and ((-2*a*B*B - 9*b*A*g + 2*a*B + 4*a)<0))):
+            if not((((-a+A)<0) and ((B-1)<0) and (-b<0) and (-B<0) and (-A<0) and (-g<0) and ((2*B*B - 9*b*g + 4*B + 2)<0) and ((2*a*B*B - 9*b*a*g + 4*a*B + 2*a)<0))):
                 boolcheck = True
                 checker.append("True2")
                 #print("True2")
@@ -58,6 +58,12 @@ def ineqex2check():
             boolcheck = False
             checker.append("False")
             #print("False")
+
+    print(a)
+    print(A)
+    print(b)
+    print(B)
+    print(g)
     for ele in checker:
         if ele == "False":
             return False
