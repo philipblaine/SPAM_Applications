@@ -1,0 +1,34 @@
+Applications:
+
+* LPSolver (have yet to add to LaTeX doc)
+  optimal maxmin/minmax strategies in basic two-player zero-sum games
+  input m/n payoff matrix A, output optimal probability vector p
+  p is a m or n dimensional tuple describing the percentage of games player 1 or 2 should take actions corresponding to p
+  SPAM used for finding all such payoff matrices that would result in the same probability vector p
+  * created a functional program P for solving concrete examples 
+  * had difficulties understanding proof cell/complex due to list datatype returned by P
+  * don't know how useful this program actually is in economics
+
+* ineq2 (in LaTeX doc)
+  given a set of inequalities from Cournot games (two-player duopolies investigating optimal levels of R&D), simplifies that set 
+  in the d'Aspremont-Jacquemin case (from Adib) ineq2 "simplifies" the parameter conditions by reducing the number of high-degree inequalities
+  does impose additional linear constraints for parameters that were previously unconstrained
+  ** will apply to other two cases in the d'Aspremont-Jacquemin paper
+  ** could be useful in simplifying different sets of inequalities
+
+* portfolio2 (have yet to add to LaTeX doc)
+  given lists of historical financial data, portfolio2 computes the optimal allocation of investment portfolio for a given parameter value of mu (risk)
+  can be adjusted for any lists of historical data
+  ** trying to optimize the interactivelp solver from Sage
+  * use cProfile for execution time of program's components
+  * right now parametric proof cell computation is very slow
+  * computation on QQ valued arguments is fast
+
+References on HackMD page
+
+
+
+
+  
+ 
+  
