@@ -3,5 +3,5 @@ complex.bfs_completion(var_value=[2,1,1,1/2,10], check_completion=False, wall_cr
 sorted(c.region_type for c in complex.components)
 for i in complex.components:
     print(i)
-#for j in range(len(complex.components)):
-    #print(sorted(complex.components[j].bsa.lt_poly()))
+for j in range(len(complex.components)):
+    print(sorted(complex.components[j].bsa.lt_poly()))

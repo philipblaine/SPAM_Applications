@@ -1,4 +1,4 @@
-def ineqex2check():
+def ineqex3check():
     r'''
     Checks to see if Adib's set of inequalities describes the same cell as my generated inequalities from SPAM.
     
@@ -17,7 +17,7 @@ def ineqex2check():
 
         EXAMPLES::
         
-            sage: ineqex2check()
+            sage: ineqex3check()
             True
 
     '''
@@ -35,21 +35,21 @@ def ineqex2check():
         adif = (a-A)
         b1sum = (1+B)
         b1sum2 = (1+B)*(1+B)
-        bg45 = ((9/2)*b*g)
+        bg4 = 4*b*g
 
         boolcheck = False
 
-        if ((0<A) and (A<a) and (0<B) and (B<1) and (((adif*b1sum)/(bg45-(b1sum2)))>0) and (((2*adif)/(3*b))*(bg45/(bg45-(b1sum2)))>0) and ((adif*b1sum2)/(bg45-(b1sum2))<A) and (((2/9)*(b1sum2))<(b*g))):
+        if ((0<A) and (A<a) and (0<B) and (B<1) and (((adif*b1sum)/(bg4-(b1sum2)))>0) and (((adif)/(2*b))*(bg4/(bg4-(b1sum2)))>0) and ((adif*b1sum2)/(bg4-(b1sum2))<A) and (((1/4)*(b1sum2))<(b*g))):
             boolcheck = True
 
         if boolcheck == True:
-            if (((-a+A)<0) and ((B-1)<0) and (-b<0) and (-B<0) and (-A<0) and (-g<0) and ((2*B*B - 9*b*g + 4*B + 2)<0) and ((2*a*B*B - 9*b*A*g + 4*a*B + 2*a)<0)):
+            if (((-a+A)<0) and ((B-1)<0) and (-b<0) and (-B<0) and (-A<0) and (-g<0) and ((B*B - 4*b*g + 2*B + 1)<0) and ((a*B*B - 4*b*A*g + 2*a*B + a)<0)):
                 boolcheck = True
                 checker.append("True1")
                 #print("True1")
 
         elif boolcheck == False:
-            if not((((-a+A)<0) and ((B-1)<0) and (-b<0) and (-B<0) and (-A<0) and (-g<0) and ((2*B*B - 9*b*g + 4*B + 2)<0) and ((2*a*B*B - 9*b*A*g + 4*a*B + 2*a)<0))):
+            if not((((-a+A)<0) and ((B-1)<0) and (-b<0) and (-B<0) and (-A<0) and (-g<0) and ((B*B - 4*b*g + 2*B + 1)<0) and ((a*B*B - 4*b*A*g + 2*a*B + a)<0))):
                 boolcheck = True
                 checker.append("True2")
                 #print("True2")
