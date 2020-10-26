@@ -1,5 +1,5 @@
-complex = SemialgebraicComplex(test_posdef, ['a', 'b'], find_region_type=return_result, default_var_bound=(-2,2))
-complex.bfs_completion(var_value=[1,1], wall_crossing_method="heuristic", goto_lower_dim=False)
+complex = SemialgebraicComplex(test_posdef, ['a', 'b'], find_region_type=return_result, default_var_bound=(-10,10))
+complex.bfs_completion(var_value=[5,4], wall_crossing_method="heuristic", goto_lower_dim=False)
 sorted(c.region_type for c in complex.components)
 for i in complex.components:
     print(i)

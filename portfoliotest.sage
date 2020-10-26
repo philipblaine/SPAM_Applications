@@ -1,6 +1,6 @@
 def portfolio_test(mu,base_ring=None):
 
-    p2 = MixedIntegerLinearProgram(maximization=True, base_ring=QQ, solver="GLPK")  
+    p2 = MixedIntegerLinearProgram(maximization=True, solver="GLPK")  
     x = p2.new_variable(integer=False, nonnegative=True)
 
     #x0, x1, x2, x3, x4, x5, x6, x7, x8 are portfolio weights

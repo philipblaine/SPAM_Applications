@@ -1,2 +1,2 @@
-complex = SemialgebraicComplex(portfolio2, ['mu'], find_region_type=result_concrete_value, default_var_bound=(0,10))
+complex = SemialgebraicComplex(portfolio2, ['mu'], find_region_type=return_result, default_var_bound=(0,10))
 complex.bfs_completion(var_value=[1/2], check_completion=False,wall_crossing_method="heuristic", goto_lower_dim=False)
