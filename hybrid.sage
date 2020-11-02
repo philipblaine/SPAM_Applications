@@ -1010,3 +1010,31 @@ class HybridBackend:
             True
         """
         return self.backends[-1].is_slack_variable_nonbasic_at_lower_bound(index)
+
+
+    """ exact_optsol does not exist in another backend for Hybrid to delegate to """
+    def exact_optsol(self, b):
+    r"""
+        Reconstruct exact rational basic solution. (solver = ``glp_simplex``)
+        EXAMPLES::
+            sage: from cutgeneratingfunctionology.igp import *
+            sage: lp = MixedIntegerLinearProgram(solver = 'GLPK', maximization = False)
+            sage: x, y = lp[0], lp[1]
+            sage: lp.add_constraint(-2*x + y <= 1)
+            sage: lp.add_constraint(x - y <= 1)
+            sage: lp.add_constraint(x + y >= 2)
+            sage: lp.set_objective(x + y)
+            sage: lp.solver_parameter("simplex_or_intopt", "simplex_only")
+            sage: lp.solve()
+            2.0
+            sage: lp.get_values(x)
+            1.5
+            sage: lp.get_values(y)
+            0.5
+            sage: b = lp.get_backend()
+            sage: exact_optsol(b)
+            (3/2, 1/2)
+        """
+
+        return self.backends[-1].exact_optsol(b)
+        
