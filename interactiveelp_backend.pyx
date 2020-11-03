@@ -1149,3 +1149,484 @@ def add_constraint(self, coefficients, constant_term, constraint_type="<="):
         """
         return self._Abcx[1]
 
+def constraint_types(self):
+        r"""
+        Return a tuple listing the constraint types of all rows.
+        OUTPUT:
+        - a tuple of strings
+        EXAMPLES::
+            sage: A = ([1, 1], [3, 1])
+            sage: b = (1000, 1500)
+            sage: c = (10, 5)
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=", constraint_type=["<=", "=="])
+            sage: P.constraint_types()
+            ('<=', '==')
+        """
+        return self._constraint_types
+
+def decision_variables(self):
+        r"""
+        Return decision variables of ``self``, i.e. `x`.
+        OUTPUT:
+        - a vector
+        EXAMPLES::
+            sage: A = ([1, 1], [3, 1])
+            sage: b = (1000, 1500)
+            sage: c = (10, 5)
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+            sage: P.decision_variables()
+            (C, B)
+            sage: P.x()
+            (C, B)
+        """
+        return self._Abcx[3]
+
+def dual(self, y=None):
+        r"""
+        Construct the dual LP problem for ``self``.
+        INPUT:
+        - ``y`` -- (default: depends on :func:`style`)
+          a vector of dual decision variables or a string giving the base name
+        OUTPUT:
+        - an :class:`InteractiveLPProblem`
+        EXAMPLES::
+            sage: A = ([1, 1], [3, 1])
+            sage: b = (1000, 1500)
+            sage: c = (10, 5)
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+            sage: DP = P.dual()
+            sage: DP.b() == P.c()
+            True
+            sage: DP.dual(["C", "B"]) == P
+            True
+        TESTS::
+            sage: DP.standard_form().objective_name()
+            -z
+            sage: sage.numerical.interactive_simplex_method.style("Vanderbei")
+            'Vanderbei'
+            sage: P.dual().standard_form().objective_name()
+            -xi
+            sage: sage.numerical.interactive_simplex_method.style("UAlberta")
+            'UAlberta'
+            sage: P.dual().standard_form().objective_name()
+            -z
+        """
+        A, c, b, x = self.Abcx()
+        A = A.transpose()
+        if y is None:
+            y = default_variable_name(
+                "dual decision" if self.is_primal() else "primal decision")
+        problem_type = "min" if self._problem_type == "max" else "max"
+        constraint_type = []
+        for vt in self._variable_types:
+            if (vt == ">=" and problem_type == "min" or
+                vt == "<=" and problem_type == "max"):
+                constraint_type.append(">=")
+            elif (vt == "<=" and problem_type == "min" or
+                vt == ">=" and problem_type == "max"):
+                constraint_type.append("<=")
+            else:
+                constraint_type.append("==")
+        variable_type = []
+        for ct in self._constraint_types:
+            if (ct == ">=" and problem_type == "min" or
+                ct == "<=" and problem_type == "max"):
+                variable_type.append("<=")
+            elif (ct == "<=" and problem_type == "min" or
+                ct == ">=" and problem_type == "max"):
+                variable_type.append(">=")
+            else:
+                variable_type.append("")
+        if self._is_negative:
+            problem_type = "-" + problem_type
+        return InteractiveLPProblem(A, b, c, y,
+            constraint_type, variable_type, problem_type,
+            is_primal=not self.is_primal(),
+            objective_constant_term=self._constant_term)
+
+def is_negative(self):
+        r"""
+        Return `True` when the problem is of type ``"-max"`` or ``"-min"``.
+        EXAMPLES::
+            sage: A = ([1, 1], [3, 1])
+            sage: b = (1000, 1500)
+            sage: c = (10, 5)
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+            sage: P.is_negative()
+            False
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=", problem_type="-min")
+            sage: P.is_negative()
+            True
+        """
+        return self._is_negative
+
+def is_primal(self):
+        r"""
+        Check if we consider this problem to be primal or dual.
+        This distinction affects only some automatically chosen variable names.
+        OUTPUT:
+        - boolean
+        EXAMPLES::
+            sage: A = ([1, 1], [3, 1])
+            sage: b = (1000, 1500)
+            sage: c = (10, 5)
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+            sage: P.is_primal()
+            True
+            sage: P.dual().is_primal()
+            False
+        """
+        return self._is_primal
+
+def is_optimal(self, *x):
+        r"""
+        Check if given solution is feasible.
+        INPUT:
+        - anything that can be interpreted as a valid solution for
+          this problem, i.e. a sequence of values for all decision variables
+        OUTPUT:
+        - ``True`` is the given solution is optimal, ``False`` otherwise
+        EXAMPLES::
+            sage: A = ([1, 1], [3, 1])
+            sage: b = (1000, 1500)
+            sage: c = (15, 5)
+            sage: P = InteractiveLPProblem(A, b, c, variable_type=">=")
+            sage: P.is_optimal(100, 200)
+            False
+            sage: P.is_optimal(500, 0)
+            True
+            sage: P.is_optimal(499, 3)
+            True
+            sage: P.is_optimal(501, -3)
+            False
+        """
+        return (self.optimal_value() == self.objective_value(*x) and
+                self.is_feasible(*x))
+
+def optimal_solution(self):
+        r"""
+        Return **an** optimal solution of ``self``.
+        OUTPUT:
+        - a vector or ``None`` if there are no optimal solutions
+        EXAMPLES::
+            sage: A = ([1, 1], [3, 1])
+            sage: b = (1000, 1500)
+            sage: c = (10, 5)
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+            sage: P.optimal_solution()
+            (250, 750)
+        """
+        return self._solve()[0]
+
+ def plot(self, *args, **kwds):
+        r"""
+        Return a plot for solving ``self`` graphically.
+        INPUT:
+        - ``xmin``, ``xmax``, ``ymin``, ``ymax`` -- bounds for the axes, if
+          not given, an attempt will be made to pick reasonable values
+        - ``alpha`` -- (default: 0.2) determines how opaque are shadows
+        OUTPUT:
+        - a plot
+        This only works for problems with two decision variables. On the plot
+        the black arrow indicates the direction of growth of the objective. The
+        lines perpendicular to it are level curves of the objective. If there
+        are optimal solutions, the arrow originates in one of them and the
+        corresponding level curve is solid: all points of the feasible set
+        on it are optimal solutions. Otherwise the arrow is placed in the
+        center. If the problem is infeasible or the objective is zero, a plot
+        of the feasible set only is returned.
+        EXAMPLES::
+            sage: A = ([1, 1], [3, 1])
+            sage: b = (1000, 1500)
+            sage: c = (10, 5)
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+            sage: p = P.plot()
+            sage: p.show()
+        In this case the plot works better with the following axes ranges::
+            sage: p = P.plot(0, 1000, 0, 1500)
+            sage: p.show()
+        TESTS:
+        We check that zero objective can be dealt with::
+            sage: InteractiveLPProblem(A, b, (0, 0), ["C", "B"], variable_type=">=").plot()
+            Graphics object consisting of 8 graphics primitives
+        """
+        FP = self.plot_feasible_set(*args, **kwds)
+        c = self.c().n().change_ring(QQ)
+        if c.is_zero():
+            return FP
+        xmin = FP.xmin()
+        xmax = FP.xmax()
+        ymin = FP.ymin()
+        ymax = FP.ymax()
+        xmin, xmax, ymin, ymax = map(QQ, [xmin, xmax, ymin, ymax])
+        start = self.optimal_solution()
+        start = vector(QQ, start.n() if start is not None
+                            else [xmin + (xmax-xmin)/2, ymin + (ymax-ymin)/2])
+        length = min(xmax - xmin, ymax - ymin) / 5
+        end = start + (c * length / c.norm()).n().change_ring(QQ)
+        result = FP + point(start, color="black", size=50, zorder=10)
+        result += arrow(start, end, color="black", zorder=10)
+        ieqs = [(xmax, -1, 0), (- xmin, 1, 0),
+                (ymax, 0, -1), (- ymin, 0, 1)]
+        box = Polyhedron(ieqs=ieqs)
+        d = vector([c[1], -c[0]])
+        for i in range(-10, 11):
+            level = Polyhedron(vertices=[start + i*(end-start)], lines=[d])
+            level = box.intersection(level)
+            if level.vertices():
+                if i == 0 and self.is_bounded():
+                    result += line(level.vertices(), color="black",
+                                   thickness=2)
+                else:
+                    result += line(level.vertices(), color="black",
+                                   linestyle="--")
+        result.set_axes_range(xmin, xmax, ymin, ymax)
+        result.axes_labels(FP.axes_labels())    #FIXME: should be preserved!
+        return result
+
+
+def plot_feasible_set(self, xmin=None, xmax=None, ymin=None, ymax=None,
+                          alpha=0.2):
+        r"""
+        Return a plot of the feasible set of ``self``.
+        INPUT:
+        - ``xmin``, ``xmax``, ``ymin``, ``ymax`` -- bounds for the axes, if
+          not given, an attempt will be made to pick reasonable values
+        - ``alpha`` -- (default: 0.2) determines how opaque are shadows
+        OUTPUT:
+        - a plot
+        This only works for a problem with two decision variables. The plot
+        shows boundaries of constraints with a shadow on one side for
+        inequalities. If the :meth:`feasible_set` is not empty and at least
+        part of it is in the given boundaries, it will be shaded gray and `F`
+        will be placed in its middle.
+        EXAMPLES::
+            sage: A = ([1, 1], [3, 1])
+            sage: b = (1000, 1500)
+            sage: c = (10, 5)
+            sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+            sage: p = P.plot_feasible_set()
+            sage: p.show()
+        In this case the plot works better with the following axes ranges::
+            sage: p = P.plot_feasible_set(0, 1000, 0, 1500)
+            sage: p.show()
+        """
+        if self.n() != 2:
+            raise ValueError("only problems with 2 variables can be plotted")
+        A, b, c, x = self.Abcx()
+        if self.base_ring() is not QQ:
+            # Either we use QQ or crash
+            A = A.n().change_ring(QQ)
+            b = b.n().change_ring(QQ)
+        F = self.feasible_set()
+        if ymax is None:
+            ymax = max([abs(bb) for bb in b] + [v[1] for v in F.vertices()])
+        if ymin is None:
+            ymin = min([-ymax/4.0] + [v[1] for v in F.vertices()])
+        if xmax is None:
+            xmax = max([1.5*ymax] + [v[0] for v in F.vertices()])
+        if xmin is None:
+            xmin = min([-xmax/4.0] + [v[0] for v in F.vertices()])
+        xmin, xmax, ymin, ymax = map(QQ, [xmin, xmax, ymin, ymax])
+        pad = max(xmax - xmin, ymax - ymin) / 20
+        ieqs = [(xmax, -1, 0), (- xmin, 1, 0),
+                (ymax, 0, -1), (- ymin, 0, 1)]
+        box = Polyhedron(ieqs=ieqs)
+        F = box.intersection(F)
+        result = Graphics()
+        colors = rainbow(self.m() + 2)
+        for Ai, ri, bi, color in zip(A.rows(), self._constraint_types,
+                                           b, colors[:-2]):
+            border = box.intersection(Polyhedron(eqns=[[-bi] + list(Ai)]))
+            vertices = border.vertices()
+            if not vertices:
+                continue
+            label = r"${}$".format(_latex_product(Ai, x, " ", tail=[ri, bi]))
+            result += line(vertices, color=color, legend_label=label)
+            if ri == "<=":
+                ieqs = [[bi] + list(-Ai), [-bi+pad*Ai.norm().n()] + list(Ai)]
+            elif ri == ">=":
+                ieqs = [[-bi] + list(Ai), [bi+pad*Ai.norm().n()] + list(-Ai)]
+            else:
+                continue
+            ieqs = [ [QQ(_) for _ in ieq] for ieq in ieqs]
+            halfplane = box.intersection(Polyhedron(ieqs=ieqs))
+            result += halfplane.render_solid(alpha=alpha, color=color)
+        # Same for variables, but no legend
+        for ni, ri, color in zip((QQ**2).gens(), self._variable_types,
+                                 colors[-2:]):
+            border = box.intersection(Polyhedron(eqns=[[0] + list(ni)]))
+            if not border.vertices():
+                continue
+            if ri == "<=":
+                ieqs = [[0] + list(-ni), [pad] + list(ni)]
+            elif ri == ">=":
+                ieqs = [[0] + list(ni), [pad] + list(-ni)]
+            else:
+                continue
+            ieqs = [ [QQ(_) for _ in ieq] for ieq in ieqs]
+            halfplane = box.intersection(Polyhedron(ieqs=ieqs))
+            result += halfplane.render_solid(alpha=alpha, color=color)
+        if F.vertices():
+            result += F.render_solid(alpha=alpha, color="gray")
+            result += text("$F$", F.center(),
+                           fontsize=20, color="black", zorder=5)
+        result.set_axes_range(xmin, xmax, ymin, ymax)
+        result.axes_labels(["${}$".format(latex(xi)) for xi in x])
+        result.legend(True)
+        result.set_legend_options(fancybox=True, handlelength=1.5, loc=1,
+                                  shadow=True)
+        result._extra_kwds["aspect_ratio"] = 1
+        result.set_aspect_ratio(1)
+        return result
+
+
+def standard_form(self, transformation=False, **kwds):
+        r"""
+        Construct the LP problem in standard form equivalent to ``self``.
+        INPUT:
+        - ``transformation`` -- (default: ``False``) if ``True``, a map
+          converting solutions of the problem in standard form to the original
+          one will be returned as well
+        - you can pass (as keywords only) ``slack_variables``,
+          ``auxiliary_variable``,``objective_name`` to the constructor of
+          :class:`InteractiveLPProblemStandardForm`
+        OUTPUT:
+        - an :class:`InteractiveLPProblemStandardForm` by itself or a tuple
+          with variable transformation as the second component
+        EXAMPLES::
+            sage: A = ([1, 1], [3, 1])
+            sage: b = (1000, 1500)
+            sage: c = (10, 5)
+            sage: P = InteractiveLPProblem(A, b, c, variable_type=">=")
+            sage: DP = P.dual()
+            sage: DPSF = DP.standard_form()
+            sage: DPSF.b()
+            (-10, -5)
+            sage: DPSF.slack_variables()
+            (y3, y4)
+            sage: DPSF = DP.standard_form(slack_variables=["L", "F"])
+            sage: DPSF.slack_variables()
+            (L, F)
+            sage: DPSF, f = DP.standard_form(True)
+            sage: f
+            Vector space morphism represented by the matrix:
+            [1 0]
+            [0 1]
+            Domain: Vector space of dimension 2 over Rational Field
+            Codomain: Vector space of dimension 2 over Rational Field
+        A more complicated transformation map::
+            sage: P = InteractiveLPProblem(A, b, c, variable_type=["<=", ""],
+            ....:                          objective_constant_term=42)
+            sage: PSF, f = P.standard_form(True)
+            sage: f
+            Vector space morphism represented by the matrix:
+            [-1  0]
+            [ 0  1]
+            [ 0 -1]
+            Domain: Vector space of dimension 3 over Rational Field
+            Codomain: Vector space of dimension 2 over Rational Field
+            sage: PSF.optimal_solution()
+            (0, 1000, 0)
+            sage: P.optimal_solution()
+            (0, 1000)
+            sage: P.is_optimal(PSF.optimal_solution())
+            Traceback (most recent call last):
+            ...
+            TypeError: given input is not a solution for this problem
+            sage: P.is_optimal(f(PSF.optimal_solution()))
+            True
+            sage: PSF.optimal_value()
+            5042
+            sage: P.optimal_value()
+            5042
+        TESTS:
+        Above also works for the equivalent minimization problem::
+            sage: c = (-10, -5)
+            sage: P = InteractiveLPProblem(A, b, c, variable_type=["<=", ""],
+            ....:                          objective_constant_term=-42,
+            ....:                          problem_type="min")
+            sage: PSF, f = P.standard_form(True)
+            sage: PSF.optimal_solution()
+            (0, 1000, 0)
+            sage: P.optimal_solution()
+            (0, 1000)
+            sage: PSF.optimal_value()
+            -5042
+            sage: P.optimal_value()
+            -5042
+        """
+        A, b, c, x = self.Abcx()
+        f = identity_matrix(self.n()).columns()
+        if not all(ct == "<=" for ct in self._constraint_types):
+            newA = []
+            newb = []
+            for ct, Ai, bi in zip(self._constraint_types, A, b):
+                if ct in ["<=", "=="]:
+                    newA.append(Ai)
+                    newb.append(bi)
+                if ct in [">=", "=="]:
+                    newA.append(-Ai)
+                    newb.append(-bi)
+            A = matrix(newA)
+            b = vector(newb)
+        if not all(vt == ">=" for vt in self._variable_types):
+            newA = []
+            newc = []
+            newx = []
+            newf = []
+            for vt, Aj, cj, xj, fj in zip(
+                                self._variable_types, A.columns(), c, x, f):
+                xj = str(xj)
+                if vt in [">=", ""]:
+                    newA.append(Aj)
+                    newc.append(cj)
+                    newf.append(fj)
+                if vt == ">=":
+                    newx.append(xj)
+                if vt == "":
+                    newx.append(xj + "_p")
+                if vt in ["<=", ""]:
+                    newA.append(-Aj)
+                    newc.append(-cj)
+                    newx.append(xj + "_n")
+                    newf.append(-fj)
+            A = column_matrix(newA)
+            c = vector(newc)
+            x = newx
+            f = newf
+
+        objective_name = SR(kwds.get("objective_name", default_variable_name(
+            "primal objective" if self.is_primal() else "dual objective")))
+        is_negative = self._is_negative
+        constant_term = self._constant_term
+        if self._problem_type == "min":
+            is_negative = not is_negative
+            c = - c
+            constant_term = - constant_term
+            objective_name = - objective_name
+        kwds["objective_name"] = objective_name
+        kwds["problem_type"] = "-max" if is_negative else "max"
+        kwds["is_primal"] = self.is_primal()
+        kwds["objective_constant_term"] = constant_term
+        P = InteractiveLPProblemStandardForm(A, b, c, x, **kwds)
+        f = P.c().parent().hom(f, self.c().parent())
+        return (P, f) if transformation else P
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
