@@ -1013,6 +1013,7 @@ class HybridBackend:
 
 
     """ exact_optsol does not exist in another backend for Hybrid to delegate to """
+
     def exact_optsol(self, b):
     r"""
         Reconstruct exact rational basic solution. (solver = ``glp_simplex``)

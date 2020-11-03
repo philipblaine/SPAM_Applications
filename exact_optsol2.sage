@@ -61,6 +61,7 @@ def exact_optsol2(b):
             eqnlist[j].append(alist[j][k])
 
     poly = Polyhedron(eqns=eqnlist)
+    #polyv = poly.Vrepresentation()
     X = poly.vertices_list()
 
     for s in range(len(X)):
@@ -69,4 +70,5 @@ def exact_optsol2(b):
     tupleX = tuple(X)
 
     return tupleX[0][0:ncol]
+    #return polyv
 
