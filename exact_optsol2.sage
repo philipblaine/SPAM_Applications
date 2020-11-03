@@ -59,6 +59,33 @@ def exact_optsol2(b):
     #filename.close()
 
     #X = A \ Y
-    xpoly = Polyhedron
-    X = A.solve_right(Y, check=False)
-    return X[0:ncol]    
+    #y_list = []
+    #eqn_list = [[]]
+    #for i in range(len(Y)):
+        #eqn_list.append(-Y[i])
+
+    #for ele in A:
+        #for j in ele:
+    eqnlist = []
+    alist = [ele for ele in A]
+    
+    for i in range(len(Y)):
+        
+        eqnlist.append([-Y[i]])
+
+    
+    for j in range(ncol+nrow):
+        for k in range(ncol+nrow):
+            eqnlist[j].append(alist[j][k])
+
+    poly = Polyhedron(eqns=eqnlist, backend='normaliz')
+    X = poly.vertices_list()
+
+    for s in range(len(X)):
+        X[s] = tuple(X[s])
+        
+    tupleX = tuple(X)
+
+    #X = A.solve_right(Y, check=False)
+    return tupleX[0][0:ncol] 
+
