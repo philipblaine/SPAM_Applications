@@ -1,4 +1,6 @@
 import sys
+import cProfile
+import numpy as np
 sys.path.append("/mnt/c/users/phili/cutgeneratingfunctionology")
 import cutgeneratingfunctionology.igp as igp; from cutgeneratingfunctionology.igp import *
 load("LPSolver.sage")

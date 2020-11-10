@@ -69,7 +69,7 @@ def portfolio_test(mu,base_ring=None):
 
     p2sol_tuple = tuple(p2sol_list)
 
-    return p2
+    return p2sol_list, p2
     
     
 
