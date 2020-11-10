@@ -1,11 +1,11 @@
 def exact_optsol2(b):
     r"""
     Want to use InteractiveLP and GLPK solvers.
-    QUESTION:
+    
     Reconstruct exact rational basic solution. (solver = ("GLPK", "InteractiveLP"))
     EXAMPLES::
         sage: from cutgeneratingfunctionology.igp import *
-        sage: lp = MixedIntegerLinearProgram(solver = ('GLPK', 'InteractiveLP'), maximization = False)
+        sage: lp = MixedIntegerLinearProgram(solver = 'GLPK', maximization = False)
         sage: x, y = lp[0], lp[1]
         sage: lp.add_constraint(-2*x + y <= 1)
         sage: lp.add_constraint(x - y <= 1)
@@ -33,12 +33,16 @@ def exact_optsol2(b):
         sage: p.add_constraint(-x[0] + x[1] <= 2)
         sage: p.add_constraint(8 * x[0] + 2 * x[1] <= 17)
         sage: p.set_objective(5.5 * x[0] - 3 * x[1])
+        sage: p.solve()
+        11.6875
+        sage: p.get_values(x)
+        {0: 2.125, 1: 0.0}
         sage: b = p.get_backend()
         sage: b.solver_parameter("simplex_or_intopt", "simplex_only")
         sage: b.solve()
         0
         sage: exact_optsol2(b)
-        #OUTPUT
+        (17/8, 0)
     
     """
 
@@ -71,7 +75,6 @@ def exact_optsol2(b):
         if flag == False:
             A[n, i] = 1
             
-
     """
     for i in range(nrow):
         status =  b.get_row_stat(i)
@@ -83,6 +86,8 @@ def exact_optsol2(b):
                 Y[n] = b.row_bounds(i)[1]
             n += 1
 
+    #Polyhedral construction and computation
+
     eqnlist = []
     alist = [ele for ele in A]
     
@@ -92,11 +97,12 @@ def exact_optsol2(b):
     for j in range(ncol+nrow):
         for k in range(ncol+nrow):
             eqnlist[j].append(alist[j][k])
-    #normaliz backend MUCH slower than default backend
-    poly = Polyhedron(eqns=eqnlist, backend="normaliz")
-    #polyv = poly.Vrepresentation()
+
+    poly = Polyhedron(eqns=eqnlist)
+
     X = poly.vertices_list()
     lenx = len(X)
+
     for s in range(lenx):
         X[s] = tuple(X[s])
         
@@ -104,5 +110,5 @@ def exact_optsol2(b):
 
     for l in range(lenx):
         return tupleX[l][0:ncol]
-    #return polyv
+    
 

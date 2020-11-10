@@ -436,6 +436,63 @@ class HybridBackend:
             MIPSolverException: ...
         """
         ## FIXME: Call backends, copy bases, ...
+
+        """ 
+        ncol = b.ncols()
+        nrow = b.nrows()
+        A = matrix(QQ, ncol + nrow, ncol + nrow, sparse = True)
+        for i in range(nrow):
+            r = b.row(i)
+            for (j, c) in zip(r[0], r[1]):
+                A[i, j] = QQ(c)
+            A[i, ncol + i] = -1
+        n = nrow
+        Y = zero_vector(QQ, ncol + nrow)
+        for i in range(ncol):
+            status =  b.get_col_stat(i)
+            if status > 1:
+                A[n, i] = 1
+                if status == 2:
+                    Y[n] = b.col_bounds(i)[0]
+                else:
+                    Y[n] = b.col_bounds(i)[1]
+                n += 1
+
+         for i in range(nrow):
+            status =  b.get_row_stat(i)
+            if status > 1:
+                A[n, ncol + i] = 1
+                if status == 2:
+                    Y[n] = b.row_bounds(i)[0]
+                else:
+                    Y[n] = b.row_bounds(i)[1]
+                n += 1
+
+        #Polyhedral construction and computation
+
+        eqnlist = []
+        alist = [ele for ele in A]
+    
+        for i in range(len(Y)):
+            eqnlist.append([-Y[i]])
+
+        for j in range(ncol+nrow):
+            for k in range(ncol+nrow):
+                eqnlist[j].append(alist[j][k])
+
+        poly = Polyhedron(eqns=eqnlist)
+
+        X = poly.vertices_list()
+        lenx = len(X)
+
+        for s in range(lenx):
+            X[s] = tuple(X[s])
+        
+        tupleX = tuple(X)
+
+        for l in range(lenx):
+            return tupleX[l][0:ncol]
+        """
         return self.backends[-1].solve()
 
     def get_objective_value(self):
