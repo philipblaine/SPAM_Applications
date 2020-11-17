@@ -437,9 +437,7 @@ class HybridBackend:
         """
         ## FIXME: Call backends, copy bases, ...
 
-        """ 
 
-        """
         return self.backends[-1].solve()
 
     def get_objective_value(self):

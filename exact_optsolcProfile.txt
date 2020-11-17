@@ -615,6 +615,7 @@ sage: cProfile.run("poly = Polyhedron(eqns=eqnlist)")
         2    0.000    0.000    0.000    0.000 {sage.rings.integer_ring.is_IntegerRing}
 
 
+
 sage: cProfile.run("poly2=Polyhedron(eqns=eqnlist,backend='normaliz')")
          136817 function calls (126414 primitive calls) in 15.051 seconds
 
