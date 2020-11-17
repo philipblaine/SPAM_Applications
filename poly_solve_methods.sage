@@ -36,5 +36,6 @@ def get_poly_verts(poly):
     for s in range(len(X)):
         X[s] = tuple(X[s])
 
+    
     for l in range(len(X)):
         return tuple(X)[l]
