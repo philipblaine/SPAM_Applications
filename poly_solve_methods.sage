@@ -25,7 +25,7 @@ def make_poly(A, Y):
         for k in range(ncol):
             eqnlist[j].append(alist[j][k])
 
-    poly = Polyhedron(eqns=eqnlist)
+    poly = Polyhedron(eqns=eqnlist, backend='normaliz')
 
     return poly
 
