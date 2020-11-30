@@ -1,0 +1,15 @@
+random matrices with entries from QQ, num_bound=100, dbound=den_bound
+
+varied matrix size as well as denominator bounds to test differences between methods
+
+
+		50x50 (dbound 100)	100x100 (dbound 100)	100x100 (dbound 1000)	200x200 (dbound 100)	200x200 (dbound 1000)
+
+solve_right	1.956			30.378, 28.357		605.603			780.631			31895.374
+ppl_poly	0.315			5.611,  5.426		5.597			152.508			1176.967
+npoly		18.292			crash			crash			crash			crash
+
+
+note: npoly (polyhedral computation with backend 'normaliz') only worked on small matrices, large ones required more memory than my laptop had and took hours
+
+So, it appears ppl_poly is significantly faster than solve_right with QQ matrices
