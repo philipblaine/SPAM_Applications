@@ -1,8 +1,8 @@
 #methods for creating matrices A, Y; solving Ax = Y using poly
 
-def make_full_matrix(nrows, ncols):
+def make_full_matrix(nrows, ncols, nbound, dbound):
     
-    """ constructs a random full-rank matrix that is echelonizable
+    """ constructs a random rational full-rank matrix 
 
             sage: A = make_full_matrix(3,3)
             sage: A
@@ -20,9 +20,10 @@ def make_full_matrix(nrows, ncols):
 
 
 
-    r = min(nrows,ncols)
+    #r = min(nrows,ncols)
+    
 
-    A = random_matrix(QQ, nrows, ncols,algorithm="", rank=r)
+    A = random_matrix(QQ, nrows, ncols, num_bound=nbound, den_bound=dbound)
     #A = random_matrix(QQ, nrows, ncols, algorithm="echelonizable", rank=r)
 
     return A

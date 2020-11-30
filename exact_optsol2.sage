@@ -66,16 +66,7 @@ def exact_optsol2(b):
                 Y[n] = b.col_bounds(i)[1]
             n += 1
 
-    """
-    Y = zero_vector(QQ, ncol + nrow)
-    
-    n = nrow
-    for i in range(ncol):
-        flag = b.is_variable_basic()
-        if flag == False:
-            A[n, i] = 1
-            
-    """
+
     for i in range(nrow):
         status =  b.get_row_stat(i)
         if status > 1:
@@ -86,8 +77,16 @@ def exact_optsol2(b):
                 Y[n] = b.row_bounds(i)[1]
             n += 1
 
-    #Polyhedral construction and computation
+    #Polyhedral construction and computation done within poly_solve_methods and poly_solve
 
+    polysol = ppl_poly_solve(A,Y)
+
+    return polysol
+
+
+
+
+    """
     eqnlist = []
     alist = [ele for ele in A]
     
@@ -110,5 +109,7 @@ def exact_optsol2(b):
 
     for l in range(lenx):
         return tupleX[l][0:ncol]
+    """
+
     
 
