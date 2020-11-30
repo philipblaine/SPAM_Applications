@@ -19,7 +19,7 @@ def exact_optsol2(b):
         sage: lp.get_values(y)
         0.5
         sage: b = lp.get_backend()
-        sage: exact_optsol(b)
+        sage: exact_optsol2(b)
         (3/2, 1/2)
     """
     #sage_input(b)
@@ -81,7 +81,7 @@ def exact_optsol2(b):
 
     polysol = ppl_poly_solve(A,Y)
 
-    return polysol
+    return polysol[0:ncol]
 
 
 

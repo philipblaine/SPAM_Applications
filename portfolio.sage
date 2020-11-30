@@ -3,7 +3,7 @@ def portfolio(mu,base_ring=None):
     if base_ring is None:
         base_ring = mu.parent()
 
-    p = MixedIntegerLinearProgram(maximization=True, base_ring=K)  
+    p = MixedIntegerLinearProgram(solver="GLPK",maximization=True, base_ring=K)  
     x = p.new_variable(integer=False, nonnegative=True)
     #x0, x1, x2 are portfolio weights
     #x3-x26 are constraint variables
