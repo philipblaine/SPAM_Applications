@@ -1,0 +1,474 @@
+sage: Y5 = random_matrix(QQ,50,1,num_bound=100,den_bound=1000)
+sage: cProfile.run("sol5 = A5.solve_right(Y5)")
+         854115 function calls in 13.297 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     4277    0.013    0.000    0.026    0.000 <frozen importlib._bootstrap>:1009(_handle_fromlist)
+     3813    0.010    0.000    0.014    0.000 <frozen importlib._bootstrap>:416(parent)
+        1    0.000    0.000   13.297   13.297 <string>:1(<module>)
+      458    0.001    0.000    0.001    0.000 additive_magmas.py:209(__init_extra__)
+      458    0.003    0.000    0.006    0.000 category.py:2511(category)
+      458    0.001    0.000    0.003    0.000 category.py:3054(is_subcategory)
+      458    0.002    0.000    0.003    0.000 category.py:419(__classcall__)
+      458    0.001    0.000    0.002    0.000 category.py:648(_subcategory_hook_)
+      458    0.004    0.000    0.091    0.000 category.py:710(__classcontains__)
+    21526    0.038    0.000    0.066    0.000 category.py:750(<genexpr>)
+      458    0.001    0.000    0.001    0.000 category.py:938(all_super_categories)
+      458    0.003    0.000    0.003    0.000 dynamic_class.py:127(dynamic_class)
+      459    0.004    0.000    0.012    0.000 fields.py:63(__contains__)
+      458    0.000    0.000    0.000    0.000 finite_sets.py:42(is_finite)
+      891    0.001    0.000    0.001    0.000 integer_mod_ring.py:1022(characteristic)
+   201144    0.181    0.000    0.181    0.000 integer_mod_ring.py:1082(order)
+      891    0.005    0.000    0.008    0.000 integer_mod_ring.py:191(get_object)
+      891    0.001    0.000    0.001    0.000 integer_mod_ring.py:199(create_key_and_extra_args)
+      891    0.002    0.000    0.003    0.000 integer_mod_ring.py:236(is_IntegerModRing)
+     1785    0.018    0.000    0.038    0.000 matrix_space.py:101(get_matrix_class)
+      892    0.001    0.000    0.001    0.000 matrix_space.py:1684(is_sparse)
+   202042    0.180    0.000    0.180    0.000 matrix_space.py:1924(ncols)
+   202042    0.199    0.000    0.199    0.000 matrix_space.py:1936(nrows)
+     1785    0.020    0.000    0.302    0.000 matrix_space.py:446(__classcall__)
+      458    0.102    0.000    0.235    0.001 matrix_space.py:512(__init__)
+        1    0.000    0.000    0.000    0.000 matrix_space.py:752(__call__)
+      223    0.000    0.000    0.000    0.000 matrix_space.py:851(change_ring)
+     1114    0.020    0.000    0.049    0.000 misc.py:1196(previous_prime)
+    99681    0.324    0.000    0.324    0.000 misc.py:1874(xgcd)
+     9756    0.041    0.000    0.088    0.000 misc.py:273(cputime)
+      223    0.002    0.000    0.702    0.003 misc.py:3276(CRT_basis)
+      223    0.363    0.002    0.687    0.003 misc.py:3317(<listcomp>)
+     8799    0.016    0.000    0.029    0.000 misc.py:475(is_prime)
+     9756    0.023    0.000    0.111    0.000 misc.py:503(verbose)
+      458    0.006    0.000    0.031    0.000 modules.py:113(__classcall_private__)
+      891    0.002    0.000    0.002    0.000 parallelism.py:250(get)
+        1    0.000    0.000    0.000    0.000 proof.py:169(get_flag)
+      458    0.001    0.000    0.004    0.000 sets_cat.py:945(_element_constructor_)
+      458    0.002    0.000    0.241    0.001 unique_representation.py:994(__classcall__)
+      458    0.002    0.000    0.005    0.000 vector_spaces.py:39(__classcall_private__)
+        2    0.000    0.000    0.000    0.000 vt100_input.py:278(_input_parser_generator)
+        1    0.000    0.000    0.000    0.000 weakref.py:109(remove)
+      458    0.001    0.000    0.002    0.000 weakref.py:336(__new__)
+      458    0.002    0.000    0.002    0.000 weakref.py:341(__init__)
+      458    0.001    0.000    0.001    0.000 {built-in method __new__ of type object at 0x7f21ccee7a40}
+        1    0.000    0.000    0.000    0.000 {built-in method _weakref._remove_dead_weakref}
+      458    0.019    0.000    0.084    0.000 {built-in method builtins.any}
+        1    0.000    0.000   13.297   13.297 {built-in method builtins.exec}
+     6517    0.014    0.000    0.014    0.000 {built-in method builtins.hasattr}
+    37572    0.046    0.000    0.046    0.000 {built-in method builtins.isinstance}
+      458    0.001    0.000    0.001    0.000 {built-in method builtins.issubclass}
+      223    0.000    0.000    0.000    0.000 {built-in method builtins.len}
+     9756    0.035    0.000    0.035    0.000 {built-in method resource.getrusage}
+      458    0.001    0.000    0.001    0.000 {built-in method sage.rings.ring._is_Field}
+      891    0.003    0.000    0.003    0.000 {function IntegerModFactory.get_object at 0x7f21c1f4e378}
+      458    0.001    0.000    0.002    0.000 {method 'categories' of 'sage.structure.category_object.CategoryObject' objects}
+      458    0.001    0.000    0.001    0.000 {method 'category' of 'sage.rings.ring.Ring' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+      891    0.001    0.000    0.001    0.000 {method 'get' of 'dict' objects}
+     8799    0.013    0.000    0.013    0.000 {method 'is_prime' of 'sage.rings.integer.Integer' objects}
+     3813    0.005    0.000    0.005    0.000 {method 'rpartition' of 'str' objects}
+        1   11.544   11.544   13.297   13.297 {method 'solve_right' of 'sage.matrix.matrix2.Matrix' objects}
+      458    0.003    0.000    0.238    0.001 {sage.misc.classcall_metaclass.typecall}
+      223    0.013    0.000    0.013    0.000 {sage.misc.misc_c.prod}
+      891    0.001    0.000    0.001    0.000 {sage.rings.finite_rings.finite_field_base.is_FiniteField}
+
+
+sage: cProfile.run("poly5 = ppl_poly_solve(A5,Y5)")
+         33762 function calls (33761 primitive calls) in 0.857 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+      123    0.000    0.000    0.001    0.000 <frozen importlib._bootstrap>:1009(_handle_fromlist)
+        3    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:416(parent)
+        1    0.000    0.000    0.857    0.857 <string>:1(<module>)
+        1    0.001    0.001    0.857    0.857 <string>:10(ppl_poly_solve)
+        1    0.000    0.000    0.001    0.001 <string>:113(get_poly_verts)
+        1    0.005    0.005    0.856    0.856 <string>:92(make_ppl_poly)
+        1    0.000    0.000    0.001    0.001 <string>:99(<listcomp>)
+     5100    0.009    0.000    0.014    0.000 abc.py:137(__instancecheck__)
+        2    0.000    0.000    0.000    0.000 additive_magmas.py:209(__init_extra__)
+       50    0.003    0.000    0.014    0.000 backend_ppl.py:129(<listcomp>)
+       50    0.001    0.000    0.001    0.000 backend_ppl.py:130(<listcomp>)
+        1    0.000    0.000    0.736    0.736 backend_ppl.py:141(_init_Vrepresentation_from_ppl)
+        1    0.000    0.000    0.000    0.000 backend_ppl.py:164(<listcomp>)
+        1    0.006    0.006    0.006    0.006 backend_ppl.py:170(<listcomp>)
+        1    0.001    0.001    0.034    0.034 backend_ppl.py:179(_init_Hrepresentation_from_ppl)
+        1    0.036    0.036    0.822    0.822 backend_ppl.py:96(_init_from_Hrepresentation)
+        1    0.000    0.000    0.823    0.823 base.py:119(__init__)
+        1    0.000    0.000    0.000    0.000 base.py:1635(Vrepresentation)
+        1    0.000    0.000    0.001    0.001 base.py:1839(vertices_list)
+        1    0.000    0.000    0.001    0.001 base.py:1873(<listcomp>)
+        2    0.000    0.000    0.000    0.000 base.py:1875(vertex_generator)
+        1    0.000    0.000    0.000    0.000 category.py:1015(_super_categories_for_classes)
+        2    0.000    0.000    0.000    0.000 category.py:1479(_make_named_class)
+        4    0.000    0.000    0.000    0.000 category.py:1601(<genexpr>)
+        1    0.000    0.000    0.000    0.000 category.py:1606(subcategory_class)
+        1    0.000    0.000    0.000    0.000 category.py:1647(parent_class)
+        1    0.000    0.000    0.000    0.000 category.py:2511(category)
+        1    0.000    0.000    0.000    0.000 category.py:3054(is_subcategory)
+        3    0.000    0.000    0.000    0.000 category.py:419(__classcall__)
+        1    0.000    0.000    0.000    0.000 category.py:450(__init__)
+        1    0.000    0.000    0.000    0.000 category.py:648(_subcategory_hook_)
+        1    0.000    0.000    0.000    0.000 category.py:845(_all_super_categories)
+        1    0.000    0.000    0.000    0.000 category.py:870(<listcomp>)
+        1    0.000    0.000    0.000    0.000 category.py:990(_super_categories)
+        1    0.000    0.000    0.000    0.000 category_types.py:48(__init__)
+        1    0.000    0.000    0.000    0.000 category_types.py:86(super_categories)
+      3/2    0.000    0.000    0.000    0.000 category_with_axiom.py:1966(__classcall__)
+        1    0.000    0.000    0.846    0.846 constructor.py:302(Polyhedron)
+     2551    0.005    0.000    0.007    0.000 constructor.py:614(<genexpr>)
+        9    0.000    0.000    0.000    0.000 dynamic_class.py:127(dynamic_class)
+        3    0.000    0.000    0.000    0.000 dynamic_class.py:346(dynamic_class_internal)
+        6    0.000    0.000    0.000    0.000 dynamic_class.py:445(<genexpr>)
+        1    0.000    0.000    0.000    0.000 family.py:405(<dictcomp>)
+        1    0.000    0.000    0.000    0.000 family.py:53(Family)
+        1    0.000    0.000    0.000    0.000 family.py:536(__init__)
+        1    0.000    0.000    0.000    0.000 family.py:586(keys)
+       54    0.000    0.000    0.000    0.000 fields.py:63(__contains__)
+        1    0.000    0.000    0.001    0.001 finite_dimensional_modules_with_basis.py:343(dense_coefficient_list)
+        1    0.000    0.000    0.000    0.000 finite_dimensional_modules_with_basis.py:369(<listcomp>)
+        1    0.000    0.000    0.001    0.001 finite_dimensional_modules_with_basis.py:371(_vector_)
+        1    0.007    0.007    0.013    0.013 flatten.py:6(flatten)
+        1    0.000    0.000    0.000    0.000 flatten.py:67(<listcomp>)
+        1    0.000    0.000    0.000    0.000 free_module.py:1038(__richcmp__)
+      102    0.000    0.000    0.000    0.000 free_module.py:1871(degree)
+      101    0.000    0.000    0.000    0.000 free_module.py:1959(coordinate_ring)
+      101    0.001    0.000    0.001    0.000 free_module.py:2364(zero_vector)
+      102    0.000    0.000    0.000    0.000 free_module.py:327(create_key)
+        1    0.000    0.000    0.000    0.000 free_module.py:348(create_object)
+       52    0.000    0.000    0.001    0.000 free_module.py:397(VectorSpace)
+        1    0.000    0.000    0.000    0.000 free_module.py:4564(__init__)
+        1    0.000    0.000    0.000    0.000 free_module.py:4624(_coerce_map_from_)
+        1    0.000    0.000    0.000    0.000 free_module.py:5225(__init__)
+        1    0.000    0.000    0.000    0.000 free_module.py:5395(__init__)
+        1    0.000    0.000    0.000    0.000 free_module.py:5487(__init__)
+      101    0.000    0.000    0.002    0.000 free_module.py:5577(_element_constructor_)
+        1    0.000    0.000    0.000    0.000 free_module.py:661(__init__)
+        1    0.000    0.000    0.000    0.000 free_module.py:7226(element_class)
+      101    0.000    0.000    0.001    0.000 free_module.py:972(_element_constructor_)
+     2550    0.007    0.000    0.012    0.000 functional.py:236(denominator)
+        2    0.000    0.000    0.000    0.000 homset.py:1177(domain)
+        2    0.000    0.000    0.000    0.000 homset.py:1192(codomain)
+        2    0.000    0.000    0.000    0.000 homset.py:583(__init__)
+        4    0.000    0.000    0.000    0.000 homset.py:752(homset_category)
+        2    0.000    0.000    0.000    0.000 homset.py:84(Hom)
+        1    0.000    0.000    0.000    0.000 magmas.py:817(__init_extra__)
+       51    0.000    0.000    0.001    0.000 matrix_misc.py:28(row_iterator)
+        1    0.000    0.000    0.001    0.001 matrix_space.py:1504(basis)
+        1    0.000    0.000    0.000    0.000 matrix_space.py:1524(<dictcomp>)
+       50    0.000    0.000    0.000    0.000 matrix_space.py:1924(ncols)
+       50    0.000    0.000    0.000    0.000 matrix_space.py:1936(nrows)
+        5    0.000    0.000    0.000    0.000 misc.py:56(_make_listlist)
+        1    0.000    0.000    0.000    0.000 misc.py:80(<listcomp>)
+        1    0.000    0.000    0.000    0.000 misc.py:83(_common_length_of)
+        1    0.000    0.000    0.000    0.000 modules.py:113(__classcall_private__)
+        1    0.000    0.000    0.000    0.000 parent.py:161(__init__)
+       52    0.000    0.000    0.000    0.000 parent.py:228(ambient_dim)
+        1    0.000    0.000    0.000    0.000 parent.py:25(Polyhedra)
+       51    0.001    0.000    0.001    0.000 parent.py:352(Vrepresentation_space)
+        1    0.000    0.000    0.000    0.000 parent.py:381(Hrepresentation_space)
+        1    0.000    0.000    0.823    0.823 parent.py:453(_element_constructor_)
+        1    0.000    0.000    0.000    0.000 parent.py:734(_coerce_map_from_)
+       50    0.000    0.000    0.033    0.001 parent.py:887(_make_Equation)
+        1    0.000    0.000    0.000    0.000 parent.py:914(_make_Vertex)
+        1    0.000    0.000    0.000    0.000 rational_field.py:1569(is_RationalField)
+        1    0.000    0.000    0.000    0.000 representation.py:1193(is_vertex)
+       50    0.001    0.000    0.004    0.000 representation.py:322(__init__)
+       50    0.015    0.000    0.029    0.001 representation.py:341(_set_data)
+        1    0.000    0.000    0.000    0.000 representation.py:61(__len__)
+       51    0.001    0.000    0.001    0.000 representation.py:74(__getitem__)
+        1    0.000    0.000    0.000    0.000 representation.py:948(__init__)
+        1    0.000    0.000    0.000    0.000 representation.py:965(_set_data)
+        1    0.000    0.000    0.000    0.000 sets_cat.py:1749(is_finite)
+        1    0.000    0.000    0.000    0.000 sets_cat.py:945(_element_constructor_)
+        2    0.000    0.000    0.000    0.000 unique_representation.py:994(__classcall__)
+        1    0.000    0.000    0.000    0.000 vector_spaces.py:39(__classcall_private__)
+       15    0.000    0.000    0.000    0.000 weakref.py:336(__new__)
+       15    0.000    0.000    0.000    0.000 weakref.py:341(__init__)
+       15    0.000    0.000    0.000    0.000 {built-in method __new__ of type object at 0x7f21ccee7a40}
+     5100    0.005    0.000    0.005    0.000 {built-in method _abc._abc_instancecheck}
+        3    0.000    0.000    0.000    0.000 {built-in method builtins.all}
+        1    0.002    0.002    0.009    0.009 {built-in method builtins.any}
+        1    0.000    0.000    0.857    0.857 {built-in method builtins.exec}
+        4    0.000    0.000    0.000    0.000 {built-in method builtins.getattr}
+      128    0.000    0.000    0.000    0.000 {built-in method builtins.hasattr}
+     5299    0.006    0.000    0.006    0.000 {built-in method builtins.isinstance}
+        2    0.000    0.000    0.000    0.000 {built-in method builtins.issubclass}
+     2761    0.003    0.000    0.003    0.000 {built-in method builtins.len}
+        3    0.000    0.000    0.000    0.000 {built-in method builtins.sorted}
+       50    0.000    0.000    0.000    0.000 {built-in method sage.arith.functions.LCM_list}
+        1    0.000    0.000    0.000    0.000 {built-in method sage.categories.category_cy_helper._flatten_categories}
+        1    0.000    0.000    0.000    0.000 {built-in method sage.misc.c3_controlled.C3_sorted_merge}
+        1    0.000    0.000    0.000    0.000 {built-in method sage.rings.ring._is_Field}
+     2551    0.002    0.000    0.002    0.000 {built-in method sage.structure.element.parent}
+        1    0.000    0.000    0.000    0.000 {function FreeModule_ambient._coerce_map_from_ at 0x7f1ebc2add90}
+       50    0.000    0.000    0.000    0.000 {method '__copy__' of 'sage.matrix.matrix_rational_dense.Matrix_rational_dense' objects}
+       50    0.000    0.000    0.000    0.000 {method '__getitem__' of 'dict' objects}
+     2653    0.003    0.000    0.003    0.000 {method 'append' of 'list' objects}
+      207    0.000    0.000    0.000    0.000 {method 'base_ring' of 'sage.structure.category_object.CategoryObject' objects}
+        1    0.000    0.000    0.000    0.000 {method 'category' of 'sage.rings.ring.Ring' objects}
+       50    0.000    0.000    0.000    0.000 {method 'coefficients' of 'ppl.constraint.Constraint' objects}
+        1    0.000    0.000    0.000    0.000 {method 'coefficients' of 'ppl.generator.Generator' objects}
+       52    0.000    0.000    0.000    0.000 {method 'degree' of 'sage.modules.free_module_element.FreeModuleElement' objects}
+     2550    0.002    0.000    0.002    0.000 {method 'denominator' of 'sage.rings.rational.Rational' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        1    0.000    0.000    0.000    0.000 {method 'divisor' of 'ppl.generator.Generator' objects}
+        1    0.000    0.000    0.000    0.000 {method 'empty' of 'ppl.constraint.Constraint_System' objects}
+        1    0.000    0.000    0.000    0.000 {method 'format' of 'str' objects}
+       50    0.000    0.000    0.000    0.000 {method 'inhomogeneous_term' of 'ppl.constraint.Constraint' objects}
+       50    0.000    0.000    0.000    0.000 {method 'insert' of 'ppl.constraint.Constraint_System' objects}
+        2    0.000    0.000    0.000    0.000 {method 'is_commutative' of 'sage.rings.ring.CommutativeRing' objects}
+       50    0.000    0.000    0.000    0.000 {method 'is_equality' of 'ppl.constraint.Constraint' objects}
+        1    0.000    0.000    0.000    0.000 {method 'is_exact' of 'sage.rings.ring.Ring' objects}
+       53    0.000    0.000    0.000    0.000 {method 'is_field' of 'sage.rings.ring.Field' objects}
+       50    0.000    0.000    0.000    0.000 {method 'is_inequality' of 'ppl.constraint.Constraint' objects}
+        1    0.000    0.000    0.000    0.000 {method 'is_one' of 'sage.rings.integer.Integer' objects}
+        1    0.000    0.000    0.000    0.000 {method 'is_point' of 'ppl.generator.Generator' objects}
+        1    0.000    0.000    0.000    0.000 {method 'minimized_constraints' of 'ppl.polyhedron.Polyhedron' objects}
+        1    0.730    0.730    0.730    0.730 {method 'minimized_generators' of 'ppl.polyhedron.Polyhedron' objects}
+        1    0.000    0.000    0.000    0.000 {method 'ncols' of 'sage.matrix.matrix0.Matrix' objects}
+        2    0.000    0.000    0.000    0.000 {method 'nrows' of 'sage.matrix.matrix0.Matrix' objects}
+        1    0.000    0.000    0.000    0.000 {method 'one' of 'sage.rings.ring.Ring' objects}
+       55    0.000    0.000    0.000    0.000 {method 'parent' of 'sage.structure.element.Element' objects}
+        1    0.000    0.000    0.000    0.000 {method 'pop' of 'dict' objects}
+       51    0.000    0.000    0.000    0.000 {method 'pop' of 'list' objects}
+       50    0.001    0.000    0.001    0.000 {method 'row' of 'sage.matrix.matrix_rational_dense.Matrix_rational_dense' objects}
+        3    0.000    0.000    0.000    0.000 {method 'rpartition' of 'str' objects}
+       50    0.000    0.000    0.000    0.000 {method 'set_immutable' of 'sage.matrix.matrix0.Matrix' objects}
+        2    0.000    0.000    0.000    0.000 {sage.misc.classcall_metaclass.typecall}
+        1    0.000    0.000    0.002    0.002 {sage.modules.free_module_element.vector}
+        1    0.000    0.000    0.000    0.000 {sage.rings.integer_ring.is_IntegerRing}
+
+sage: cProfile.run("npoly5 = poly_solve(A5,Y5)")
+         37179 function calls (34469 primitive calls) in 136.304 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     2774    0.005    0.000    0.010    0.000 <frozen importlib._bootstrap>:1009(_handle_fromlist)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:103(release)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:143(__init__)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:147(__enter__)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:151(__exit__)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:157(_get_module_lock)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:176(cb)
+      3/1    0.000    0.000    0.035    0.035 <frozen importlib._bootstrap>:211(_call_with_frames_removed)
+       51    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:222(_verbose_message)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:307(__init__)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:311(__enter__)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:318(__exit__)
+        8    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:321(<genexpr>)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:35(_new_module)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:369(__init__)
+        3    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:403(cached)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:416(parent)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:424(has_location)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:504(_init_module_attrs)
+        2    0.000    0.000    0.034    0.017 <frozen importlib._bootstrap>:576(module_from_spec)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:58(__init__)
+      2/1    0.000    0.000    0.037    0.037 <frozen importlib._bootstrap>:663(_load_unlocked)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:719(find_spec)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:78(acquire)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:792(find_spec)
+        6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:855(__enter__)
+        6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:859(__exit__)
+        2    0.000    0.000    0.002    0.001 <frozen importlib._bootstrap>:882(_find_spec)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:929(_sanity_check)
+      2/1    0.000    0.000    0.038    0.038 <frozen importlib._bootstrap>:948(_find_and_load_unlocked)
+      2/1    0.000    0.000    0.038    0.038 <frozen importlib._bootstrap>:978(_find_and_load)
+        1    0.000    0.000    0.038    0.038 <frozen importlib._bootstrap>:994(_gcd_import)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1029(__init__)
+        1    0.000    0.000    0.033    0.033 <frozen importlib._bootstrap_external>:1040(create_module)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1048(exec_module)
+       12    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1203(_path_importer_cache)
+        2    0.000    0.000    0.002    0.001 <frozen importlib._bootstrap_external>:1240(_get_spec)
+        2    0.000    0.000    0.002    0.001 <frozen importlib._bootstrap_external>:1272(find_spec)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1351(_get_spec)
+       10    0.000    0.000    0.002    0.000 <frozen importlib._bootstrap_external>:1356(find_spec)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:271(cache_from_source)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:369(_get_cached)
+       10    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:40(_relax_case)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:401(_check_name_wrapper)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:438(_classify_pyc)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:471(_validate_timestamp_pyc)
+        3    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:51(_r_long)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:523(_compile_bytecode)
+       47    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:56(_path_join)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:574(spec_from_file_location)
+       47    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:58(<listcomp>)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:62(_path_split)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:719(create_module)
+        1    0.000    0.000    0.037    0.037 <frozen importlib._bootstrap_external>:722(exec_module)
+       13    0.000    0.000    0.001    0.000 <frozen importlib._bootstrap_external>:74(_path_stat)
+        1    0.000    0.000    0.002    0.002 <frozen importlib._bootstrap_external>:793(get_code)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:84(_path_is_mode_type)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:884(__init__)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:909(get_filename)
+        1    0.000    0.000    0.002    0.002 <frozen importlib._bootstrap_external>:914(get_data)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:93(_path_isfile)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:951(path_stats)
+        1    0.000    0.000  136.304  136.304 <string>:1(<module>)
+        1    0.001    0.001  136.304  136.304 <string>:1(poly_solve)
+        1    0.000    0.000    0.001    0.001 <string>:113(get_poly_verts)
+        1    0.004    0.004  136.302  136.302 <string>:64(make_poly)
+        1    0.000    0.000    0.001    0.001 <string>:79(<listcomp>)
+        1    0.000    0.000    0.035    0.035 PyNormaliz.py:3(<module>)
+        1    0.000    0.000    0.000    0.000 PyNormaliz.py:7(Cone)
+        1    0.000    0.000    0.000    0.000 __init__.py:109(__init__)
+        1    0.000    0.000    0.038    0.038 __init__.py:109(import_module)
+        1    0.000    0.000    0.038    0.038 __init__.py:123(is_present)
+        1    0.000    0.000    0.038    0.038 __init__.py:176(require)
+        1    0.000    0.000    0.000    0.000 __init__.py:205(resolution)
+        1    0.000    0.000    0.000    0.000 __init__.py:302(__init__)
+        1    0.000    0.000    0.000    0.000 __init__.py:315(__bool__)
+        1    0.000    0.000    0.000    0.000 __init__.py:577(__init__)
+        1    0.000    0.000    0.038    0.038 __init__.py:588(_is_present)
+        1    0.000    0.000    0.000    0.000 __init__.py:65(__call__)
+        1    0.000    0.000    0.000    0.000 __init__.py:81(__classcall__)
+        1    0.000    0.000    0.000    0.000 additive_magmas.py:209(__init_extra__)
+        1    0.000    0.000  136.273  136.273 backend_normaliz.py:207(__init__)
+        6    0.000    0.000  123.788   20.631 backend_normaliz.py:240(_nmz_result)
+        1    0.000    0.000  123.802  123.802 backend_normaliz.py:282(_init_from_normaliz_cone)
+   2654/2    0.013    0.000    0.030    0.015 backend_normaliz.py:306(_convert_to_pynormaliz)
+     53/2    0.003    0.000    0.030    0.015 backend_normaliz.py:341(<listcomp>)
+        1    0.000    0.000  136.256  136.256 backend_normaliz.py:351(_init_from_normaliz_data)
+        1    0.000    0.000   12.454   12.454 backend_normaliz.py:382(_cone_from_normaliz_data)
+        1    0.000    0.000  136.272  136.272 backend_normaliz.py:560(_init_from_Hrepresentation)
+        1    0.000    0.000    0.016    0.016 backend_normaliz.py:606(nmz_ieqs_eqns_QQ)
+       50    0.003    0.000    0.014    0.000 backend_normaliz.py:616(<listcomp>)
+       50    0.002    0.000    0.002    0.000 backend_normaliz.py:617(<listcomp>)
+        1    0.000    0.000    0.017    0.017 backend_normaliz.py:792(_compute_nmz_data_lists_and_field)
+        1    0.000    0.000    0.010    0.010 backend_normaliz.py:848(_init_Vrepresentation_from_normaliz)
+        1    0.006    0.006    0.006    0.006 backend_normaliz.py:872(<listcomp>)
+        1    0.000    0.000  123.773  123.773 backend_normaliz.py:879(_init_Hrepresentation_from_normaliz)
+       51    0.000    0.000    0.000    0.000 backend_normaliz.py:898(<genexpr>)
+        1    0.000    0.000    0.000    0.000 backend_normaliz.py:942(_number_field_triple)
+        1    0.000    0.000  136.273  136.273 base.py:119(__init__)
+        1    0.000    0.000    0.000    0.000 base.py:1635(Vrepresentation)
+        1    0.000    0.000    0.001    0.001 base.py:1839(vertices_list)
+        1    0.000    0.000    0.001    0.001 base.py:1873(<listcomp>)
+        2    0.000    0.000    0.000    0.000 base.py:1875(vertex_generator)
+        1    0.000    0.000    0.000    0.000 base.py:2270(ambient_dim)
+        2    0.000    0.000    0.000    0.000 base.py:2692(base_ring)
+        2    0.000    0.000    0.000    0.000 category.py:419(__classcall__)
+      2/1    0.000    0.000    0.000    0.000 category_with_axiom.py:1966(__classcall__)
+        1    0.000    0.000  136.293  136.293 constructor.py:302(Polyhedron)
+     2551    0.004    0.000    0.006    0.000 constructor.py:614(<genexpr>)
+        4    0.000    0.000    0.000    0.000 dynamic_class.py:127(dynamic_class)
+        2    0.000    0.000    0.000    0.000 dynamic_class.py:346(dynamic_class_internal)
+        4    0.000    0.000    0.000    0.000 dynamic_class.py:445(<genexpr>)
+        1    0.000    0.000    0.000    0.000 family.py:405(<dictcomp>)
+        1    0.000    0.000    0.000    0.000 family.py:53(Family)
+        1    0.000    0.000    0.000    0.000 family.py:536(__init__)
+        1    0.000    0.000    0.000    0.000 family.py:586(keys)
+       53    0.000    0.000    0.000    0.000 fields.py:63(__contains__)
+        1    0.000    0.000    0.001    0.001 finite_dimensional_modules_with_basis.py:343(dense_coefficient_list)
+        1    0.000    0.000    0.000    0.000 finite_dimensional_modules_with_basis.py:369(<listcomp>)
+        1    0.000    0.000    0.001    0.001 finite_dimensional_modules_with_basis.py:371(_vector_)
+        1    0.006    0.006    0.011    0.011 flatten.py:6(flatten)
+        1    0.000    0.000    0.000    0.000 flatten.py:67(<listcomp>)
+      102    0.000    0.000    0.000    0.000 free_module.py:1871(degree)
+      101    0.000    0.000    0.000    0.000 free_module.py:1959(coordinate_ring)
+      101    0.001    0.000    0.001    0.000 free_module.py:2364(zero_vector)
+      102    0.000    0.000    0.000    0.000 free_module.py:327(create_key)
+       52    0.000    0.000    0.000    0.000 free_module.py:397(VectorSpace)
+      101    0.000    0.000    0.002    0.000 free_module.py:5577(_element_constructor_)
+      101    0.000    0.000    0.001    0.000 free_module.py:972(_element_constructor_)
+     2550    0.007    0.000    0.012    0.000 functional.py:236(denominator)
+        1    0.000    0.000    0.000    0.000 homset.py:1177(domain)
+        1    0.000    0.000    0.000    0.000 homset.py:1192(codomain)
+        1    0.000    0.000    0.000    0.000 homset.py:583(__init__)
+        2    0.000    0.000    0.000    0.000 homset.py:752(homset_category)
+        1    0.000    0.000    0.000    0.000 homset.py:84(Hom)
+        1    0.000    0.000    0.000    0.000 magmas.py:817(__init_extra__)
+       51    0.000    0.000    0.001    0.000 matrix_misc.py:28(row_iterator)
+        1    0.000    0.000    0.001    0.001 matrix_space.py:1504(basis)
+        1    0.000    0.000    0.000    0.000 matrix_space.py:1524(<dictcomp>)
+       50    0.000    0.000    0.000    0.000 matrix_space.py:1924(ncols)
+       50    0.000    0.000    0.000    0.000 matrix_space.py:1936(nrows)
+        5    0.000    0.000    0.000    0.000 misc.py:56(_make_listlist)
+        1    0.000    0.000    0.000    0.000 misc.py:80(<listcomp>)
+        1    0.000    0.000    0.000    0.000 misc.py:83(_common_length_of)
+        1    0.000    0.000    0.000    0.000 parent.py:161(__init__)
+       53    0.000    0.000    0.000    0.000 parent.py:228(ambient_dim)
+        1    0.000    0.000    0.000    0.000 parent.py:25(Polyhedra)
+       51    0.000    0.000    0.001    0.000 parent.py:352(Vrepresentation_space)
+        1    0.000    0.000    0.000    0.000 parent.py:381(Hrepresentation_space)
+        1    0.000    0.000  136.273  136.273 parent.py:453(_element_constructor_)
+        1    0.000    0.000    0.000    0.000 parent.py:734(_coerce_map_from_)
+       50    0.000    0.000    0.007    0.000 parent.py:887(_make_Equation)
+        1    0.000    0.000    0.000    0.000 parent.py:914(_make_Vertex)
+        1    0.000    0.000    0.000    0.000 representation.py:1193(is_vertex)
+       50    0.001    0.000    0.004    0.000 representation.py:322(__init__)
+       50    0.002    0.000    0.003    0.000 representation.py:341(_set_data)
+        1    0.000    0.000    0.000    0.000 representation.py:61(__len__)
+       51    0.001    0.000    0.001    0.000 representation.py:74(__getitem__)
+        1    0.000    0.000    0.000    0.000 representation.py:948(__init__)
+        1    0.000    0.000    0.000    0.000 representation.py:965(_set_data)
+        1    0.000    0.000    0.000    0.000 sets_cat.py:945(_element_constructor_)
+        1    0.000    0.000    0.000    0.000 unique_representation.py:994(__classcall__)
+        9    0.000    0.000    0.000    0.000 weakref.py:336(__new__)
+        9    0.000    0.000    0.000    0.000 weakref.py:341(__init__)
+        1   12.386   12.386   12.386   12.386 {built-in method PyNormaliz_cpp.NmzCone}
+        6  123.788   20.631  123.788   20.631 {built-in method PyNormaliz_cpp.NmzResult}
+        9    0.000    0.000    0.000    0.000 {built-in method __new__ of type object at 0x7f21ccee7a40}
+        1    0.000    0.000    0.000    0.000 {built-in method _imp._fix_co_filename}
+       10    0.000    0.000    0.000    0.000 {built-in method _imp.acquire_lock}
+        1    0.033    0.033    0.033    0.033 {built-in method _imp.create_dynamic}
+        1    0.000    0.000    0.000    0.000 {built-in method _imp.exec_dynamic}
+        2    0.000    0.000    0.000    0.000 {built-in method _imp.is_builtin}
+        2    0.000    0.000    0.000    0.000 {built-in method _imp.is_frozen}
+       10    0.000    0.000    0.000    0.000 {built-in method _imp.release_lock}
+        4    0.000    0.000    0.000    0.000 {built-in method _thread.allocate_lock}
+        4    0.000    0.000    0.000    0.000 {built-in method _thread.get_ident}
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.__build_class__}
+        3    0.000    0.000    0.000    0.000 {built-in method builtins.all}
+        3    0.002    0.001    0.009    0.003 {built-in method builtins.any}
+      2/1    0.000    0.000  136.304  136.304 {built-in method builtins.exec}
+       12    0.000    0.000    0.000    0.000 {built-in method builtins.getattr}
+     2791    0.004    0.000    0.004    0.000 {built-in method builtins.hasattr}
+    10547    0.010    0.000    0.010    0.000 {built-in method builtins.isinstance}
+        2    0.000    0.000    0.000    0.000 {built-in method builtins.issubclass}
+     2763    0.003    0.000    0.003    0.000 {built-in method builtins.len}
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.sorted}
+        3    0.000    0.000    0.000    0.000 {built-in method from_bytes}
+        1    0.000    0.000    0.000    0.000 {built-in method marshal.loads}
+        4    0.000    0.000    0.000    0.000 {built-in method posix.fspath}
+        2    0.000    0.000    0.000    0.000 {built-in method posix.getcwd}
+       13    0.001    0.000    0.001    0.000 {built-in method posix.stat}
+       50    0.000    0.000    0.000    0.000 {built-in method sage.arith.functions.LCM_list}
+     2551    0.002    0.000    0.002    0.000 {built-in method sage.structure.element.parent}
+       50    0.000    0.000    0.000    0.000 {method '__copy__' of 'sage.matrix.matrix_rational_dense.Matrix_rational_dense' objects}
+       50    0.000    0.000    0.000    0.000 {method '__getitem__' of 'dict' objects}
+     2705    0.003    0.000    0.003    0.000 {method 'append' of 'list' objects}
+      209    0.000    0.000    0.000    0.000 {method 'base_ring' of 'sage.structure.category_object.CategoryObject' objects}
+       52    0.000    0.000    0.000    0.000 {method 'degree' of 'sage.modules.free_module_element.FreeModuleElement' objects}
+     2550    0.003    0.000    0.003    0.000 {method 'denominator' of 'sage.rings.rational.Rational' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        3    0.000    0.000    0.000    0.000 {method 'endswith' of 'str' objects}
+        2    0.000    0.000    0.000    0.000 {method 'format' of 'str' objects}
+        5    0.000    0.000    0.000    0.000 {method 'get' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 {method 'is_exact' of 'sage.rings.ring.Ring' objects}
+       52    0.000    0.000    0.000    0.000 {method 'is_field' of 'sage.rings.ring.Field' objects}
+        2    0.000    0.000    0.000    0.000 {method 'items' of 'dict' objects}
+       50    0.000    0.000    0.000    0.000 {method 'join' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 {method 'ncols' of 'sage.matrix.matrix0.Matrix' objects}
+        2    0.000    0.000    0.000    0.000 {method 'nrows' of 'sage.matrix.matrix0.Matrix' objects}
+        1    0.000    0.000    0.000    0.000 {method 'one' of 'sage.rings.ring.Ring' objects}
+       58    0.000    0.000    0.000    0.000 {method 'parent' of 'sage.structure.element.Element' objects}
+        1    0.000    0.000    0.000    0.000 {method 'pop' of 'dict' objects}
+       51    0.000    0.000    0.000    0.000 {method 'pop' of 'list' objects}
+        1    0.001    0.001    0.001    0.001 {method 'read' of '_io.FileIO' objects}
+       50    0.001    0.000    0.001    0.000 {method 'row' of 'sage.matrix.matrix_rational_dense.Matrix_rational_dense' objects}
+       18    0.000    0.000    0.000    0.000 {method 'rpartition' of 'str' objects}
+       96    0.000    0.000    0.000    0.000 {method 'rstrip' of 'str' objects}
+       50    0.000    0.000    0.000    0.000 {method 'set_immutable' of 'sage.matrix.matrix0.Matrix' objects}
+        1    0.000    0.000    0.000    0.000 {method 'startswith' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 {sage.misc.classcall_metaclass.typecall}
+        1    0.000    0.000    0.001    0.001 {sage.modules.free_module_element.vector}
+
+
+sage: A5.str()
+'[  -21/73   35/542  -12/487  -44/123     2/53   63/779    -1/29  -99/932  -69/842    8/123  -69/505   95/479     3/82     1/12   -13/76     3/64   -8/847     3/29     -3/7  -78/563   19/282   32/955  -41/440  -16/247  -12/133  -29/724   -5/132    7/928   12/787   -90/19  -52/337   11/152     4/75   99/232    6/271    -5/77  -40/933   -31/64  -12/557  -92/441   97/690    -3/26   -18/71   46/485    5/371  -36/217  -23/431    39/61   -5/344   87/242]\n[    2/19     -7/5    1/177   11/291    -14/3    -5/23   92/189    4/101  -47/178   57/754   -15/88  -40/101    -5/87   65/106     5/68        0   13/167   87/211   33/767   69/544  -46/493   -29/11   73/943    11/62   79/376   59/176   19/367   -9/323  -91/779  -29/197   26/551  -50/511     7/61   -9/134  -41/253  -19/283   82/203   -7/278  -67/828  -97/822  -85/878  -39/226   15/166  -82/565    33/13  -11/239  -99/353   41/850  -86/805   -7/446]\n[   83/43  -15/178  -94/687   -15/73   63/620  -67/247   46/249  -57/301  -15/164   -19/58    14/31   98/967    -1/51  -21/668   67/758  -71/267    -1/72   -26/63   21/218    7/369  -60/797   86/551   -3/377   63/892    -3/58   79/108  -73/447     1/10     2/75  -21/292  -85/982   40/673    -1/12  -31/575    -8/73    4/157  -16/859    3/289  -18/197     5/82   17/154    59/10   32/509  -71/343  -94/483   87/680   41/475   40/297  -25/988  -13/244]\n[  -4/993   65/389   47/579  -53/203    24/25   15/122       92   81/841  -23/249     9/11     -1/4  -63/676  -59/309   33/118   48/383    -4/37    -8/77   43/488  -56/369   25/394  -76/253    -1/16   -23/71  -95/669   57/454  -43/477    -5/27    9/206  -82/617  -58/905    -5/64   -71/51   91/907   40/913    21/19   94/495    20/79   37/473     9/38  -49/178   11/224   57/451    32/73  -47/814  -18/131  -67/625   -7/223  -16/255   42/155  -25/421]\n[ -28/381    11/98   59/722   -8/193   -9/355      3/8    91/36     -1/3   -20/57   11/197  -30/257  -98/589    7/347   32/311   53/304   29/139  -29/115   83/444  -73/252   -9/509   26/149   22/551    74/41  -94/171   19/920  -83/330      5/3   -68/57   29/235  -48/629  -96/935  -75/196   40/149   45/542  -77/943    42/61   21/164    32/41   -40/33   67/730   37/226    13/86   32/299  -46/849   19/197   -9/158   -9/266    -7/45   49/403  -47/419]\n[   -35/6   16/115   93/337  -38/635  -97/782    25/77  -11/446   54/577   -6/403    1/133   32/397   -8/137   23/198   74/685  -25/109  -49/424    -4/29   91/488   88/315   29/281  -85/186   38/681   -5/117     -2/3  -68/563  -91/519   15/982    -5/68    6/109   25/112   26/161   17/863   16/329   23/237  -39/706  -22/329  -12/455   47/373   51/388  -14/125   -9/196  -33/578    5/286    8/109  -10/401   88/511   13/106    5/326   29/281  -25/307]\n[  83/769   97/715  -49/739  -43/535   76/531     -5/6   94/123      1/7  100/639    19/83     -100   46/485   23/317    -5/68      5/6  -73/181  -79/537    -7/33  100/123  -98/437    3/256  -18/241    -5/28    28/37  -37/970    11/24   -8/209   -99/40    -2/81        0  -13/209  -84/559  -43/242  -16/161  -64/623   72/689   16/121    3/211    7/107    -62/9  -15/493   15/613  -93/154   -11/51   12/161  -56/995    -8/73   -7/776     6/19    -2/99]\n[  -1/974   31/177   -1/245  -28/255   22/929  -16/235   22/395   12/433  -22/169   -31/70  -43/687   71/991   -26/25   -4/107  -61/960   89/219   -27/85   -5/452   26/301     5/62  -11/131  -74/139    5/193      -19  -43/120   22/455   13/574  -93/221    -2/51  -59/518  -39/478  -55/162  -15/221   57/338   91/999    5/286   53/874    15/64   22/607    31/21    -4/55   16/313     1/85  -47/442  -25/641   -5/129    -1/73   25/156   96/697     6/19]\n[ -30/403   59/160   62/205  -22/863    -2/45   10/413  -85/547   47/396  -83/467   40/789   -68/63  -28/325  -19/129    -5/81  -73/845  -13/848  -73/820   15/373  -28/367    7/115    -2/15   -5/144  -41/529   73/139  -89/350  -18/383   32/919  -47/356   81/961    9/386  -26/159   -3/187    23/34   35/137 -29/1000    3/275  -33/278  -16/221   43/899  -53/909  -19/341   69/761  -45/698  -19/174   22/115  -61/269   74/597   17/959    -8/19   -3/553]\n[  29/880    -2/93     -3/7     2/47   51/311   -41/71   -14/73     5/58   71/695  -61/722  -41/762      5/4  -19/910   11/557    8/293  -92/449   47/647   24/199   -4/279  -58/503   96/877   -38/25   61/413    97/32  -27/316  -47/342   57/980   83/718  -79/611     9/59   -5/454    23/81    43/88   88/201  -41/146   -13/14  -76/719  -49/149   -12/37   -34/33    11/48   84/775   16/141  -30/149     2/37  -35/927   98/369   53/890  -25/654   42/677]\n[       0   15/841       93  -46/371  -30/317  -15/232  -66/893  -14/515     -3/4      1/4   -59/63   43/300   25/872  -60/367   -11/69    11/20   72/305   77/932  -83/396   -2/237    -11/9   88/955  -40/263   -31/50  -32/799   41/218   36/181    15/47   19/137   17/100   -5/282   33/241  -12/311    -4/69   92/873   31/905  -43/410   31/184     3/23   95/122    45/52     3/19  -72/353   37/396  -25/346    17/77   -61/22   85/602        0     22/7]\n[   2/145   95/869    99/20   61/452   58/969  -28/571   -59/30  -21/284    11/92    14/87    21/44  -39/289   -17/30  -24/353  -77/741    -1/21    -9/71  -65/899   89/360   13/155  -20/341   37/326  -10/117    55/76   77/215    -8/83    99/26   49/900  -29/244   86/853    82/45   81/787  -79/615   -19/58   28/223   -23/31  -11/215  -41/366  -39/506  -13/358   -1/515    61/83   53/498  -11/101  -31/281   -31/39   26/255   39/958  -23/353    5/442]\n[ -10/461   -46/81  -33/272   50/733  -90/413   80/921  -89/262  -79/796    91/57   77/907  -50/383   67/294     1/34     3/79  -55/466  -94/365    -8/27     6/91   22/821    -18/7  -35/712  -10/493   91/768   55/788  -58/279  -47/454  -11/339   19/749  -43/345  -10/333   -79/80   29/347   -41/25    4/337      2/7  -79/768     8/31   -23/58    6/301  -17/957  -71/293   -24/73   33/359   31/330  -33/239   57/382   35/852   94/265   83/599    8/345]\n[ -43/599  -49/417   31/180   18/911     1/12  -83/947  -49/160  -99/773   97/499  -60/893   -25/61   31/251   31/400   20/527   -14/11  -95/186  -66/641  -32/367    -4/81    3/988    -8/49     4/45   27/179  -90/139   -56/97   39/223   -32/75    3/124  -31/384   77/299   89/522  -21/641   97/304   -8/121     8/43   47/406   17/773   53/771    7/123   45/847  -37/590   -13/36  -11/232   -8/767  -57/367  -21/298   50/457   -9/106     1/14    4/767]\n[  65/332  -85/769  -62/525   65/362    -8/33   79/234   87/413  -83/133   21/145    -3/19  -11/205   -8/119   31/193   58/603  -13/313  -16/665   -3/314  -38/335   75/968   -9/122  -33/160     2/11 -100/727   76/335    13/93  -98/369    1/698   17/643  -92/397   13/697  -23/109    99/47  -15/397   -1/787  -99/937  -49/177  -42/265  -46/143  -83/350   -4/215   30/221   79/846    9/109    -7/71    -2/23   -39/89  -79/663    -1/45    6/133   -74/75]\n[  -19/13   -5/118   68/327   -3/229  -71/437    1/545     1/19  -31/450   -7/109    2/255    11/32    1/327    26/11    61/14   19/289  -63/442  -79/206    9/481   -83/85    -2/67   15/293   88/765   33/544  -31/667   26/745     1/12     3/29   23/415  -63/715   14/367  -15/187     4/35  -26/223   -17/95      1/7   37/347   25/576    -4/29  -97/137  -51/472   59/860  -59/707  -53/121   -4/915  -92/849    31/20    20/43  -63/269   40/369   46/493]\n[ -20/247  -88/469  -95/407   -31/12  -41/161  -61/959   -9/928   50/679  -25/398   25/301   -9/389    43/88  -12/487   19/331  -93/955   79/469    -1/84   -64/77    -8/67   74/583  -70/209  -16/213  -12/475   13/380   17/325   17/201  -24/989  -20/197  -99/325  -97/149  -78/427   -9/113  -60/791  -68/263   73/104  -89/708  -78/269   69/839   13/107  -49/372  -32/421    96/89    13/30  -71/247   -93/56   -21/62    -8/29   -7/157    15/94    -5/28]\n[   20/73   27/305   40/141    -5/24   35/194   17/462     3/37  -81/704     4/17  -47/832  -50/473   37/365  -33/856   45/293  -79/911      1/3   -25/54   16/173  -14/687   42/107  -67/269    -1/18    10/39  -79/159  -39/862  -74/249   -66/47     46/7   46/367   79/218  -32/785  -47/307  100/999    22/71    1/435    -3/44    9/832   37/779   25/408   76/669     3/74  -11/113  -44/599  -42/193    -3/41   50/263   97/888  -92/463  -81/928   31/954]\n[   5/209    80/81     5/16  -19/452   29/230  -30/329  -41/385  -14/115  -31/924   -22/49  -50/229   10/243   55/421   44/805    79/71    -3/13   51/173  -23/401   15/317   61/520    -2/19    17/70   61/853   57/719   23/244     4/41  -37/621  -99/400  -69/446   25/554  -25/556   65/727   -15/38   83/496    -31/3  -19/253  -81/178   41/327    7/211   91/340  -25/213   86/291   -93/17   61/687   -39/70   91/625  -19/971    1/798    -7/82   18/157]\n[ -81/211  -68/249   39/356   75/163  -24/785    41/53   64/231    -4/11   19/243   89/437  -90/769     1/81   -7/725  -48/389   53/341    -9/71   26/171        0  -55/723  -14/191   59/774    1/848      5/3   59/272  -97/611  -97/569  -47/268   17/494   39/695   25/112   44/185    32/25   13/171   -2/207   49/856   74/485    19/87   22/197     -1/8        0   52/761    -4/35    -2/51   21/755   -9/739     3/95     4/19   47/264  -79/989   32/975]\n[   -9/37   82/281    24/53   83/580    -2/17   46/685    3/250   33/677  -43/815    10/93  -40/387    -1/87  -20/601   24/205   -8/687    -4/49      5/2   33/211  -37/269   -9/125     -1/2   33/229  -21/664   -1/134   14/677   -6/113  -58/611  -38/763   31/300   99/722  -34/515      3/5  -65/164   10/277   76/603   15/307   35/438   88/685   30/373   -13/30  -99/575   -3/763   91/178   49/282  -13/190   17/169  -59/309   -1/606   85/873    -1/46]\n[  38/757   -7/296   -7/141    17/12   92/985   -18/67  -19/261    -7/44    5/189    -2/29  -94/895  -31/244    1/235     36/5  -50/269   83/372   11/162   43/158   -25/61   67/882   17/483  -54/991  -65/132  -55/916  -99/520    7/218  -42/689  -23/117    5/116   -11/91  -10/193   -8/749     5/19   19/198   43/280   -41/14    34/13     1/64  -52/633     3/20  -77/101  -77/362   -3/496  -25/953  -53/826  -13/120   29/385      2/7   29/123   11/965]\n[  19/389  -36/415  -58/509   -2/325    17/78  -85/893   23/213   23/490   39/617  -76/809   51/766   73/263  -34/947   13/534  -73/599     9/13   76/709  -12/365   82/105   31/177   39/101   -36/53        0    -9/52  -43/108    44/85     1/30    -5/16  -22/771  -17/173    -5/47  -23/925    5/496  -77/720  -15/346  -25/161      1/2   84/751     -3/4   13/170    1/135  -73/372  -43/232   -1/111   19/871  -29/291  -11/160   -13/25    -9/88    46/27]\n[  67/894  -11/927    4/269     -6/7   -77/18     2/83  -67/946  -85/528   19/106   -38/81   36/563    1/158    -2/15   60/341    -3/28  -24/253   87/176  -61/270   28/573    -1/72  -38/961     2/15       -2    9/730    11/96   86/609    -9/28     9/65   -10/33   75/248  -38/495  -30/359   -11/38   40/747  -72/955   72/925   -15/53   -4/245   25/118  -26/617    93/52      1/7   85/423    7/195  -70/599   -68/47   25/121   26/319     5/22  -28/551]\n[  -13/70  -13/177  -25/319   16/205    19/83    43/38   -7/815  -11/119   -26/75  -23/243     -3/7   77/675   19/119  -20/451   37/963   -4/339   23/964   50/151   89/953   -2/977   28/501  -15/988   25/267   13/979        0   79/513 -100/247    15/41  -43/680     -3/4   68/971    1/335  -17/982  -19/562  -15/358    -3/40   44/383   -5/723  -23/875  -22/203    14/97  -29/338  -49/225    7/138  -91/850  -81/784    9/128   23/174   -6/239  -31/449]\n[  14/503     2/63  -23/532    5/164  -89/757  -23/238   -1/815   20/117    17/95    6/553   -5/199  -14/141  -37/468    -7/23    -7/55   17/233  -86/281  -51/586   31/458   86/107  -21/416    4/147   76/493  -94/677    1/136   35/211     1/37    8/807   31/268   29/213  -31/128    33/71   -1/421   47/688  -96/991     5/66    6/197   -4/107    11/81  -79/610     1/86    15/89   -19/78     -8/3  -15/757   73/869  -31/874   25/358  -60/739    8/161]\n[  36/325  -22/255   -16/89  -77/899   -1/275   53/793   23/846   13/465    13/10   -25/69  -79/193   60/799   71/282  -46/679     1/55    -8/57  -47/581  -26/243    1/297     3/20   34/161  -83/368  -35/601   -5/471   -18/11   30/163    -3/35   -25/74  -93/830    44/67   39/628    2/105    -32/5     -1/3   11/106  -12/179   -9/284   -37/38  -17/363   -1/823  -37/391    16/91   17/350  -15/683  -17/144   -23/72  -41/110   -28/75  -27/323  -33/566]\n[   -12/5  -53/139  -42/419   16/157   61/606    -1/47  -59/525  -11/430   39/644   36/839   71/976  -87/593  -91/760  -62/819  -67/594    -9/37   92/711   71/177      1/5  -33/344  -28/755     1/22    -1/89    -7/41   28/333    -3/86   49/389   11/100  -23/596  -47/826   12/821   35/972    -33/4    -7/47  -85/237   12/307     -2/9   17/106  -14/173  -90/271  -26/597   -9/208   55/593  -21/215   15/448  -49/103  -21/251   -9/428  -25/604  -58/837]\n[ -72/821   -57/50  -44/625  -88/435   43/137   13/941   86/361    39/40   12/949  -94/443   49/178   41/826   31/179        0    22/65    3/302 -100/451    5/934  -53/606  -28/307   39/935    -2/31   49/500  -77/527    49/74  -98/109  -21/199  -45/667    14/17   -22/85   -9/191   -65/21   43/499   71/197   95/846   12/289   -2/947  -32/193     73/4     13/3  -61/683   -3/392   75/371  -29/159   28/797    2/959  -83/403   51/218  -18/233  -98/325]\n[  95/729  -46/135       -1   85/944     2/47   54/163    18/67   53/939     1/20    3/194  -57/349   67/310  -81/748   94/761  -19/963    -9/34  -71/902  -20/223   41/581   63/619  -11/180  -31/808  -39/524   73/392     4/75    -3/50   21/766  -44/449    1/139  -38/219    1/109   -12/91   19/392  -41/299  -33/235  -19/353  -32/755   19/694   43/521  -89/437    52/11   84/227   21/358  -85/823   -9/230  -10/121   53/256   59/701   97/319   -2/185]\n[ -53/827   -7/128   38/303   -3/362  -53/527  -72/395  -39/869   -1/309   80/651   22/193  -69/850  -43/735   37/156     4/43   56/307   53/675   95/226      3/5   -7/739   -34/95    -4/59     3/22  -34/127    -6/41  -65/753   33/655     3/67   76/137     1/14   11/109   36/841    -94/7   50/183    51/97  -47/560  -43/944   -5/258   -72/89   95/297        0  -25/287  -27/463  -43/483    39/70  -63/305   43/605  -32/171  -85/953    67/92  -11/134]\n[ -47/991     6/97  -44/127  -59/324    9/200  100/689  -46/191  -33/524   91/159  -14/363    -3/37  -41/206     5/54    37/60   11/226   71/195    1/503     9/50  -45/431  -57/854  -98/339   44/947  -11/549  -96/299    33/91  -61/679  -33/215   49/240  -48/173    -1/88   -6/413   -53/88   10/797   25/331   59/230  -74/949  -100/51   45/376  -67/834   21/127  -10/153    -9/94   11/870   -5/279  -16/929   33/445  -31/725  -73/714    5/147     1/12]\n[  -67/46   33/401  -21/202  -77/745   54/349   27/442    3/107   82/203   -3/293  -23/488   -9/713  -24/883   47/595  -63/184  -93/953    -3/13  -38/789   50/139   18/851   -23/62    23/72    -7/74  -11/181    6/127  -94/241    -1/16  -87/433  -17/123    -1/50    1/126   -3/160   75/133  -12/613  -29/366   99/599  -34/893  -65/357   95/982   61/701  -59/387   19/132  -11/127    23/53   96/991   67/923  -11/160   24/151   -78/97   51/914   28/169]\n[ -93/529    27/65  -20/173     1/64   89/376   39/736   14/865   -4/107  -11/269   75/706    -8/83   45/652   26/527  -23/292  -37/926   13/604    1/254   40/363    5/143   79/708    2/567   54/115  -15/757   -3/578       -1   77/346     7/69  -26/467   47/680    19/55  -86/115   29/107  -22/129   78/223   -1/448   97/799    8/457   76/413  -45/328   21/566  -33/724  -83/521   48/107  -41/480   13/262   50/123   86/325    12/65     1/99  -21/320]\n[ -19/144   25/458  -32/629   85/156  -27/101   -6/259  -51/820   13/233   -7/164  -18/811   12/557   -5/604     3/73   24/187  -16/417    -7/18    -5/36   35/139     3/37   -9/415  -55/956   -15/86   89/486   95/567   -16/21   87/842   -11/78   -3/335   34/157   43/483  100/679  -13/128  -46/195   19/130    -61/2  -31/604  -55/493   17/117    1/330  -67/943  -22/111    -7/23    -9/17  -45/706  -39/317   33/838     1/54   37/347   42/223  -73/871]\n[ -75/643  -50/673    3/268  -97/510  -32/183  -61/649   63/191   45/241  -83/268   56/477    -8/95   67/149    5/369   14/747   90/899  -63/773  -48/209  -71/670    25/31   -1/100    -31/8   -48/23   53/838  -48/163  -28/365  -12/211     37/8  -23/124  -43/111  -21/115   31/292  -23/829  -43/416        0  -92/321   -9/214   28/431   11/181   33/136   58/467    1/172    11/20  -35/278    -7/36    -1/25    -1/15   47/125  -17/829  -23/130   88/349]\n[ -25/102   -3/242   63/703   55/186 -100/611  -79/199   79/260  -16/259   21/125   47/117     7/29   14/249  -24/295     2/15    13/35    9/506   71/813   -5/839  -66/107    77/94     5/17   31/251    -3/52   74/949   19/238   98/509    -7/78  -56/321  -25/171    5/103  -87/818      9/2    4/181   87/610   55/124   -22/75     3/25  -17/460   11/386   35/998   -2/287    8/109  -55/916     3/23   -3/886   33/142   45/427   -5/793    1/238  -46/955]\n[    3/25  -65/774    7/173    -3/58   65/288   29/160   -7/626  -75/104    82/11    -1/44    -3/19  -52/249  -82/107  -28/249     5/56   -2/173   11/364   -16/19   -34/93   26/139  -87/571  -76/749  -97/696    -82/5  -54/181  -36/317   55/623   -1/120  -16/175    -3/68       -1   71/509   20/237    37/97   23/213   89/934    5/117  -17/286   40/187   -16/41   -32/69  -85/922    -5/26  -63/100   71/120   55/798   17/229  -99/238   89/858  -31/313]\n[ -11/943  -25/204  -19/419   -4/341   81/836  -57/199    2/789  -30/853  -48/605  -52/879  -29/823    -5/56     1/38  -18/943   31/432  -76/239     5/16   99/833        3  -35/106   41/207  -14/215  -26/555   13/376   47/256   26/295   28/397    47/84  -27/406  -72/667    4/101   49/972   55/762    3/196  -12/181   38/769  -85/549   13/471   38/773   67/114  -59/242   83/826  -15/274  -97/915  -31/797   63/200  -87/877   73/941   -7/109   29/155]\n[ -70/437  -47/634   45/299   -27/71     6/65   92/231    14/67  -55/113   31/140   48/715    -7/53    64/79   36/829   14/943     3/55   21/325    -3/82   19/587   30/161  -61/203   -19/99  -62/167    3/283   21/508     4/19  -25/127    -1/31   43/289      2/3  -59/747  -49/233   21/268   32/495   15/769   55/468  -25/164  -41/917  -80/983  -84/389   -8/273   46/825    -3/14  -41/575    4/199  -86/331        1  -51/380   -25/31     21/8  -31/215]\n[    8/17  -26/943   -1/299  -35/193   53/868  -20/151  -68/361  -19/515  -35/873   82/555    -3/44   79/340    6/113    -7/60   -99/47     -7/8   53/427   31/513      3/2  -23/155   57/661    69/47    96/77    9/652   10/257  -59/489   -6/187    19/40        0  -94/749   11/849    -5/96  100/851   47/897   76/669   -13/33     5/76    26/49   49/228  -21/713    -4/47  -39/899   12/247  -71/418   -46/45  -67/943  -83/934   39/404  -50/419  -45/638]\n[  35/262  -38/135   21/310  -83/687  -62/849   -6/431  -33/364  -65/531   -3/236     3/79  -31/350   -12/25  -11/212   34/397    1/124  -44/175   16/243  -64/219   33/635   34/655   -3/104  -96/881     -7/6  -21/325   19/103   19/303    29/53   79/205  -31/360  -66/367   59/262  -46/953     43/2    9/794   31/867   97/589   83/896    9/283  -72/983   81/208  -10/933   58/843     9/31  -17/705  -31/832   -29/84  -73/366    76/15   33/497   19/278]\n[ -35/383   15/746  -11/706  -46/307  -58/421   73/512  -15/227  -47/453  -31/183    9/157  -71/183   72/949    -5/66    26/95  -17/495  -19/637  -81/412    23/34   14/219      3/5   71/548   22/153  -53/365   -8/403  -36/121    14/79   -1/102    -3/59   -2/137  -19/305   69/316  -53/929   -5/332    -4/81  -68/937   19/111   10/249   47/643  -59/892  -26/243   32/241   -7/282  -70/129    2/179  -11/276    47/61  -64/821   58/333   19/308     5/27]\n[  -61/34   55/667  -41/279   13/739  -19/107   -23/71  -26/515  -43/460    2/603  -52/873    73/57       -7     -1/6  -41/917   -5/343   33/601   41/310     5/24   31/256  -47/472   43/765   31/398   25/743   77/331   23/551     1/59   83/840  -37/987  -22/359  -41/408     2/29   17/168   23/416   -49/16   -55/12   -1/102    23/60    7/166    3/866  -83/999  -31/142  -35/198  -37/674    23/50  -83/304   38/301     1/16  -35/384   81/548   99/212]\n[   7/342   -33/49   54/605  -53/951    -25/8   79/196   -1/766    12/41  -58/943  -97/449        0   27/326   34/173   22/301    5/781   41/228   63/893    10/41   83/119    -6/47  -32/583    -4/77  -76/605    -9/31   41/235    77/97        0   67/725    -2/17   85/138  -92/961  -59/338     1/17   -80/17   11/472   67/305  -19/224  -86/857   24/215   31/997   19/756     6/83  -11/203    19/84    -9/32   -2/179  -29/217    -7/81    -1/72  -18/481]\n[     -32    15/38   -98/33   31/136  -11/152  -29/247   25/451  -41/459     3/19   -31/33     2/57   64/743   18/131  -13/166   89/757     4/69  -27/443   56/381   53/108   48/289  -73/688   11/163  -31/140  -51/802    6/625        0   -1/133   -5/509   -4/901  -11/736   51/728   -61/75  -34/117   16/119   75/116  -26/109      -49    10/81  -27/214   84/601  -21/145    -2/17     8/53     1/48    8/157   70/923    -8/95   -47/64  -40/159   -38/27]\n[    2/53      3/2      6/5  -43/634   22/119  -12/263  -10/287   13/718   53/183  -35/468     6/59   99/425    -7/31        6   -9/749  -87/524   23/312  -21/521  -53/117     5/61   21/289   88/351   68/229   61/997  -16/433    27/89    -13/2  -53/629  -85/458  -43/550   23/167    47/88  -72/775    7/165  -60/931    9/995    -3/86   13/144    1/202   19/332    -8/21    11/73    -1/44   37/917  -44/205   -34/45   43/968  -39/155  -83/786     3/95]\n[  84/451   47/560     3/56  -45/643    -7/57  -10/163   16/887    1/975   17/626  -37/430  -82/457   24/301   -9/277  -71/344   -11/27  -21/169   15/104   17/111   99/761    3/220    -7/79   -7/953     2/51  -17/139    17/98   -9/200  -53/827  -74/881   -35/17   30/289   15/112   -34/31  -40/471   32/901  -48/721     -2/9   -3/175  -36/905   -7/774  -32/501    -5/34  -60/599  -49/475    -3/20   -14/83  -29/440  -27/310     7/75  -21/467   64/959]\n[ -61/161  -41/860   -3/995     1/54  -87/959   33/817   94/491   33/998  -89/275   23/327   -37/67    9/428   14/939  -96/265  -38/523    5/211     3/34   58/485  -41/502   85/444   46/263  -78/977  -45/232  -37/140   17/195   61/796  -34/279   74/387    -2/15  -65/189   23/369  -26/463   94/783  -76/373   -8/183    10/57   -4/167   26/297  -62/391   41/135  -33/805   88/443  -21/131  -13/295   65/464   25/239    -39/7   -9/218  -69/296   74/517]\n[    3/85   -13/11  -99/532   32/171   72/281   85/671  -23/200  -19/115  -37/123   41/309  -59/431   37/378   52/405  -69/277    9/841    89/71    -7/93  -77/921  -14/899   59/719   29/120    3/671  -47/451   -2/289   63/569    -1/48   -20/57  -25/339   77/169  -38/871  -63/136    31/77  -48/331   -34/93       -1     29/8  -19/286    -1/51  -12/253    7/436  -39/431   -9/367   50/309  -15/238    -7/78  -38/191   -7/271    3/299  -26/693    -3/31]'
+sage: Y5.str()
+'[-70/271]\n[  16/27]\n[-40/299]\n[  46/17]\n[  3/482]\n[-85/598]\n[-44/487]\n[-87/218]\n[-62/669]\n[21/1000]\n[-21/236]\n[-36/931]\n[ 42/379]\n[-32/601]\n[-69/281]\n[   7/67]\n[ -7/150]\n[-35/543]\n[ -13/23]\n[      1]\n[  -4/45]\n[ -3/593]\n[ 63/617]\n[ -1/273]\n[-29/480]\n[ -6/127]\n[      9]\n[ 48/209]\n[ 79/353]\n[ -40/71]\n[-29/202]\n[ 86/419]\n[-39/311]\n[ 33/871]\n[ 21/274]\n[ -63/25]\n[-11/345]\n[  -7/93]\n[-23/181]\n[ 37/369]\n[ 79/643]\n[-14/421]\n[ 63/232]\n[ 85/691]\n[-34/195]\n[-38/119]\n[ 74/277]\n[-75/839]\n[  -1/18]\n[ -6/173]'

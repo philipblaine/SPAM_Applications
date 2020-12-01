@@ -3,7 +3,7 @@ import random
 
 def make_matrix_with_dens(nrows, ncols, nbound, dbound, density):
 
-    """ constructs a random rational full-rank matrix, then rounds *density* percent of the entries to integers
+    """ constructs a random rational full-rank matrix, then rounds ~~ density percent of the entries to integers
 
     sage: A = make_matrix_with_dens(5,5,100,100,0.5)
     sage: A

@@ -1,0 +1,332 @@
+sage: A3 = make_matrix_with_dens(50,50,100,100,0.5)
+sage: Y3 = make_matrix_with_dens(50,1,100,100,0.5)
+sage: cProfile.run("sol3 = A3.solve_right(Y3)")
+         125848 function calls (125622 primitive calls) in 0.904 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     1536    0.004    0.000    0.009    0.000 <frozen importlib._bootstrap>:1009(_handle_fromlist)
+     1270    0.003    0.000    0.005    0.000 <frozen importlib._bootstrap>:416(parent)
+        1    0.000    0.000    0.904    0.904 <string>:1(<module>)
+      240    0.000    0.000    0.000    0.000 additive_magmas.py:209(__init_extra__)
+        1    0.000    0.000    0.000    0.000 bimodules.py:123(left_base_ring)
+        1    0.000    0.000    0.000    0.000 bimodules.py:135(right_base_ring)
+        1    0.000    0.000    0.001    0.001 bimodules.py:161(super_categories)
+        1    0.000    0.000    0.001    0.001 bimodules.py:39(__init__)
+        3    0.000    0.000    0.000    0.000 bimodules.py:58(_make_named_class_key)
+     14/8    0.000    0.000    0.005    0.001 category.py:1015(_super_categories_for_classes)
+    24/11    0.000    0.000    0.007    0.001 category.py:1479(_make_named_class)
+    65/58    0.000    0.000    0.001    0.000 category.py:1601(<genexpr>)
+    16/10    0.000    0.000    0.007    0.001 category.py:1606(subcategory_class)
+     10/7    0.000    0.000    0.001    0.000 category.py:1647(parent_class)
+      199    0.000    0.000    0.002    0.000 category.py:1781(is_subcategory)
+      5/1    0.000    0.000    0.000    0.000 category.py:1990(axioms)
+     29/5    0.000    0.000    0.000    0.000 category.py:2008(<genexpr>)
+     26/6    0.000    0.000    0.006    0.001 category.py:2012(_with_axiom_as_tuple)
+    69/19    0.000    0.000    0.003    0.000 category.py:2060(<genexpr>)
+        6    0.000    0.000    0.008    0.001 category.py:2069(_with_axiom)
+       12    0.000    0.000    0.005    0.000 category.py:2306(join)
+      240    0.001    0.000    0.003    0.000 category.py:2511(category)
+        8    0.000    0.000    0.000    0.000 category.py:2583(is_Category)
+    26/13    0.000    0.000    0.007    0.001 category.py:2715(_make_named_class)
+        6    0.000    0.000    0.001    0.000 category.py:2876(_subcategory_hook_)
+        5    0.000    0.000    0.002    0.000 category.py:2943(__init__)
+       16    0.000    0.000    0.000    0.000 category.py:2964(<genexpr>)
+        6    0.000    0.000    0.000    0.000 category.py:2973(_make_named_class_key)
+       20    0.000    0.000    0.000    0.000 category.py:3003(<genexpr>)
+        8    0.000    0.000    0.000    0.000 category.py:3005(super_categories)
+      251    0.001    0.000    0.002    0.000 category.py:3054(is_subcategory)
+        2    0.000    0.000    0.003    0.002 category.py:3071(_with_axiom)
+        2    0.000    0.000    0.002    0.001 category.py:3101(<listcomp>)
+  257/251    0.001    0.000    0.010    0.000 category.py:419(__classcall__)
+    16/10    0.000    0.000    0.008    0.001 category.py:450(__init__)
+      343    0.001    0.000    0.001    0.000 category.py:648(_subcategory_hook_)
+      250    0.002    0.000    0.048    0.000 category.py:710(__classcontains__)
+    11266    0.021    0.000    0.036    0.000 category.py:750(<genexpr>)
+     14/8    0.000    0.000    0.005    0.001 category.py:845(_all_super_categories)
+       14    0.000    0.000    0.000    0.000 category.py:870(<listcomp>)
+        2    0.000    0.000    0.000    0.000 category.py:880(_all_super_categories_proper)
+        2    0.000    0.000    0.000    0.000 category.py:905(_set_of_super_categories)
+      240    0.000    0.000    0.000    0.000 category.py:938(all_super_categories)
+     14/8    0.000    0.000    0.005    0.001 category.py:990(_super_categories)
+      8/3    0.000    0.000    0.006    0.002 category_types.py:167(__init__)
+       24    0.000    0.000    0.000    0.000 category_types.py:206(_make_named_class_key)
+       33    0.000    0.000    0.000    0.000 category_types.py:255(base)
+      8/3    0.000    0.000    0.006    0.002 category_types.py:334(__init__)
+       33    0.000    0.000    0.000    0.000 category_types.py:350(base_ring)
+       50    0.000    0.000    0.001    0.000 category_types.py:363(_subcategory_hook_)
+      6/4    0.000    0.000    0.004    0.001 category_with_axiom.py:1966(__classcall__)
+        5    0.000    0.000    0.000    0.000 category_with_axiom.py:2006(__classget__)
+        3    0.000    0.000    0.000    0.000 category_with_axiom.py:2122(extra_super_categories)
+      4/2    0.000    0.000    0.003    0.002 category_with_axiom.py:2135(super_categories)
+      8/4    0.000    0.000    0.002    0.001 category_with_axiom.py:2175(<genexpr>)
+        4    0.000    0.000    0.000    0.000 category_with_axiom.py:2441(axioms)
+       36    0.000    0.000    0.000    0.000 category_with_axiom.py:2486(<genexpr>)
+      4/2    0.000    0.000    0.004    0.002 category_with_axiom.py:2493(__init__)
+      280    0.002    0.000    0.006    0.000 dynamic_class.py:127(dynamic_class)
+       41    0.003    0.000    0.004    0.000 dynamic_class.py:346(dynamic_class_internal)
+       99    0.000    0.000    0.000    0.000 dynamic_class.py:445(<genexpr>)
+     2577    0.003    0.000    0.003    0.000 enumerated_sets.py:825(_some_elements_from_iterator)
+      241    0.002    0.000    0.006    0.000 fields.py:63(__contains__)
+      238    0.000    0.000    0.000    0.000 finite_sets.py:42(is_finite)
+        2    0.000    0.000    0.000    0.000 free_module.py:631(is_FreeModule)
+        2    0.000    0.000    0.000    0.000 groupoid.py:34(__init__)
+        2    0.000    0.000    0.000    0.000 groupoid.py:61(_make_named_class_key)
+        8    0.000    0.000    0.000    0.000 inspect.py:478(getmro)
+       12    0.000    0.000    0.000    0.000 inspect.py:72(isclass)
+      238    0.000    0.000    0.000    0.000 integer_mod_ring.py:1022(characteristic)
+    14876    0.014    0.000    0.014    0.000 integer_mod_ring.py:1082(order)
+      238    0.001    0.000    0.002    0.000 integer_mod_ring.py:191(get_object)
+      238    0.000    0.000    0.000    0.000 integer_mod_ring.py:199(create_key_and_extra_args)
+      238    0.000    0.000    0.001    0.000 integer_mod_ring.py:236(is_IntegerModRing)
+        1    0.000    0.000    0.000    0.000 left_modules.py:34(super_categories)
+      480    0.004    0.000    0.010    0.000 matrix_space.py:101(get_matrix_class)
+        2    0.000    0.000    0.000    0.000 matrix_space.py:1537(dimension)
+      245    0.000    0.000    0.000    0.000 matrix_space.py:1684(is_sparse)
+    15128    0.013    0.000    0.013    0.000 matrix_space.py:1924(ncols)
+    15128    0.014    0.000    0.014    0.000 matrix_space.py:1936(nrows)
+        2    0.014    0.007    0.033    0.016 matrix_space.py:2048(_an_element_)
+      480    0.006    0.000    0.112    0.000 matrix_space.py:446(__classcall__)
+      240    0.011    0.000    0.091    0.000 matrix_space.py:512(__init__)
+        3    0.001    0.000    0.001    0.000 matrix_space.py:752(__call__)
+        2    0.000    0.000    0.000    0.000 matrix_space.py:82(is_MatrixSpace)
+       60    0.000    0.000    0.000    0.000 matrix_space.py:851(change_ring)
+        2    0.001    0.000    0.033    0.017 matrix_space.py:916(_get_action_)
+      298    0.005    0.000    0.013    0.000 misc.py:1196(previous_prime)
+     7200    0.015    0.000    0.015    0.000 misc.py:1874(xgcd)
+     2575    0.010    0.000    0.021    0.000 misc.py:273(cputime)
+       60    0.000    0.000    0.033    0.001 misc.py:3276(CRT_basis)
+       60    0.017    0.000    0.032    0.001 misc.py:3317(<listcomp>)
+     2434    0.004    0.000    0.008    0.000 misc.py:475(is_prime)
+     2575    0.006    0.000    0.027    0.000 misc.py:503(verbose)
+  241/240    0.003    0.000    0.017    0.000 modules.py:113(__classcall_private__)
+        1    0.000    0.000    0.001    0.001 modules.py:158(super_categories)
+        1    0.000    0.000    0.004    0.004 modules.py:331(FiniteDimensional)
+        1    0.000    0.000    0.002    0.002 modules.py:461(WithBasis)
+        1    0.000    0.000    0.000    0.000 modules.py:486(extra_super_categories)
+      238    0.000    0.000    0.000    0.000 parallelism.py:250(get)
+        1    0.000    0.000    0.000    0.000 proof.py:169(get_flag)
+     2577    0.006    0.000    0.006    0.000 rational_field.py:1129(some_elements)
+        1    0.000    0.000    0.000    0.000 right_modules.py:34(super_categories)
+        2    0.000    0.000    0.000    0.000 sets_cat.py:1749(is_finite)
+        1    0.000    0.000    0.001    0.001 sets_cat.py:722(Finite)
+        1    0.000    0.000    0.002    0.002 sets_cat.py:762(Enumerated)
+      240    0.001    0.000    0.002    0.000 sets_cat.py:945(_element_constructor_)
+  256/242    0.001    0.000    0.095    0.000 unique_representation.py:994(__classcall__)
+        1    0.000    0.000    0.000    0.000 vector_spaces.py:109(base_field)
+        1    0.000    0.000    0.002    0.002 vector_spaces.py:121(super_categories)
+      239    0.001    0.000    0.004    0.000 vector_spaces.py:39(__classcall_private__)
+        1    0.000    0.000    0.002    0.002 vector_spaces.py:72(__init__)
+        2    0.000    0.000    0.000    0.000 vt100_input.py:278(_input_parser_generator)
+      280    0.001    0.000    0.001    0.000 weakref.py:336(__new__)
+      276    0.001    0.000    0.001    0.000 weakref.py:341(__init__)
+      280    0.000    0.000    0.000    0.000 {built-in method __new__ of type object at 0x7f21ccee7a40}
+       46    0.000    0.000    0.000    0.000 {built-in method builtins.all}
+      240    0.010    0.000    0.044    0.000 {built-in method builtins.any}
+        1    0.000    0.000    0.904    0.904 {built-in method builtins.exec}
+  124/117    0.000    0.000    0.001    0.000 {built-in method builtins.getattr}
+     2254    0.005    0.000    0.005    0.000 {built-in method builtins.hasattr}
+    16438    0.020    0.000    0.020    0.000 {built-in method builtins.isinstance}
+      420    0.001    0.000    0.001    0.000 {built-in method builtins.issubclass}
+     5206    0.004    0.000    0.004    0.000 {built-in method builtins.len}
+       28    0.000    0.000    0.000    0.000 {built-in method builtins.sorted}
+     2575    0.008    0.000    0.008    0.000 {built-in method resource.getrusage}
+       24    0.000    0.000    0.000    0.000 {built-in method sage.categories.category_cy_helper._flatten_categories}
+       29    0.000    0.000    0.002    0.000 {built-in method sage.categories.category_cy_helper._sort_uniq}
+        9    0.000    0.000    0.002    0.000 {built-in method sage.categories.category_cy_helper.join_as_tuple}
+       14    0.000    0.000    0.000    0.000 {built-in method sage.misc.c3_controlled.C3_sorted_merge}
+      240    0.001    0.000    0.001    0.000 {built-in method sage.rings.ring._is_Field}
+      238    0.001    0.000    0.001    0.000 {function IntegerModFactory.get_object at 0x7f21c1f4e378}
+      104    0.000    0.000    0.000    0.000 {method 'an_element' of 'sage.structure.parent.Parent' objects}
+     5100    0.004    0.000    0.004    0.000 {method 'append' of 'list' objects}
+       52    0.000    0.000    0.000    0.000 {method 'base' of 'sage.structure.category_object.CategoryObject' objects}
+      240    0.001    0.000    0.001    0.000 {method 'categories' of 'sage.structure.category_object.CategoryObject' objects}
+      240    0.000    0.000    0.000    0.000 {method 'category' of 'sage.rings.ring.Ring' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+       16    0.000    0.000    0.000    0.000 {method 'format' of 'str' objects}
+      238    0.000    0.000    0.000    0.000 {method 'get' of 'dict' objects}
+     2434    0.003    0.000    0.003    0.000 {method 'is_prime' of 'sage.rings.integer.Integer' objects}
+        2    0.000    0.000    0.001    0.001 {method 'matrix' of 'sage.matrix.args.MatrixArgs' objects}
+     1270    0.001    0.000    0.001    0.000 {method 'rpartition' of 'str' objects}
+        1    0.637    0.637    0.904    0.904 {method 'solve_right' of 'sage.matrix.matrix2.Matrix' objects}
+  256/242    0.001    0.000    0.093    0.000 {sage.misc.classcall_metaclass.typecall}
+       60    0.001    0.000    0.001    0.000 {sage.misc.misc_c.prod}
+      238    0.000    0.000    0.000    0.000 {sage.rings.finite_rings.finite_field_base.is_FiniteField}
+
+
+sage: cProfile.run("poly3 = ppl_poly_solve(A3,Y3)")
+         33867 function calls (33866 primitive calls) in 0.243 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+      132    0.000    0.000    0.001    0.000 <frozen importlib._bootstrap>:1009(_handle_fromlist)
+        6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:416(parent)
+        1    0.000    0.000    0.243    0.243 <string>:1(<module>)
+        1    0.001    0.001    0.243    0.243 <string>:10(ppl_poly_solve)
+        1    0.000    0.000    0.000    0.000 <string>:113(get_poly_verts)
+        1    0.004    0.004    0.242    0.242 <string>:92(make_ppl_poly)
+        1    0.000    0.000    0.001    0.001 <string>:99(<listcomp>)
+     5100    0.009    0.000    0.014    0.000 abc.py:137(__instancecheck__)
+        3    0.000    0.000    0.000    0.000 additive_magmas.py:209(__init_extra__)
+       50    0.003    0.000    0.015    0.000 backend_ppl.py:129(<listcomp>)
+       50    0.001    0.000    0.001    0.000 backend_ppl.py:130(<listcomp>)
+        1    0.000    0.000    0.126    0.126 backend_ppl.py:141(_init_Vrepresentation_from_ppl)
+        1    0.000    0.000    0.000    0.000 backend_ppl.py:164(<listcomp>)
+        1    0.001    0.001    0.001    0.001 backend_ppl.py:170(<listcomp>)
+        1    0.001    0.001    0.034    0.034 backend_ppl.py:179(_init_Hrepresentation_from_ppl)
+        1    0.036    0.036    0.213    0.213 backend_ppl.py:96(_init_from_Hrepresentation)
+        1    0.000    0.000    0.213    0.213 base.py:119(__init__)
+        1    0.000    0.000    0.000    0.000 base.py:1635(Vrepresentation)
+        1    0.000    0.000    0.000    0.000 base.py:1839(vertices_list)
+        1    0.000    0.000    0.000    0.000 base.py:1873(<listcomp>)
+        2    0.000    0.000    0.000    0.000 base.py:1875(vertex_generator)
+        1    0.000    0.000    0.000    0.000 category.py:1015(_super_categories_for_classes)
+        2    0.000    0.000    0.000    0.000 category.py:1479(_make_named_class)
+        4    0.000    0.000    0.000    0.000 category.py:1601(<genexpr>)
+        1    0.000    0.000    0.000    0.000 category.py:1606(subcategory_class)
+        1    0.000    0.000    0.000    0.000 category.py:1647(parent_class)
+        2    0.000    0.000    0.000    0.000 category.py:2511(category)
+        2    0.000    0.000    0.000    0.000 category.py:3054(is_subcategory)
+        4    0.000    0.000    0.000    0.000 category.py:419(__classcall__)
+        1    0.000    0.000    0.000    0.000 category.py:450(__init__)
+        2    0.000    0.000    0.000    0.000 category.py:648(_subcategory_hook_)
+        1    0.000    0.000    0.000    0.000 category.py:845(_all_super_categories)
+        1    0.000    0.000    0.000    0.000 category.py:870(<listcomp>)
+        1    0.000    0.000    0.000    0.000 category.py:990(_super_categories)
+        1    0.000    0.000    0.000    0.000 category_types.py:48(__init__)
+        1    0.000    0.000    0.000    0.000 category_types.py:86(super_categories)
+      4/3    0.000    0.000    0.000    0.000 category_with_axiom.py:1966(__classcall__)
+        1    0.000    0.000    0.233    0.233 constructor.py:302(Polyhedron)
+     2551    0.005    0.000    0.007    0.000 constructor.py:614(<genexpr>)
+       11    0.000    0.000    0.000    0.000 dynamic_class.py:127(dynamic_class)
+        3    0.000    0.000    0.000    0.000 dynamic_class.py:346(dynamic_class_internal)
+        6    0.000    0.000    0.000    0.000 dynamic_class.py:445(<genexpr>)
+        1    0.000    0.000    0.000    0.000 family.py:405(<dictcomp>)
+        1    0.000    0.000    0.000    0.000 family.py:53(Family)
+        1    0.000    0.000    0.000    0.000 family.py:536(__init__)
+        1    0.000    0.000    0.000    0.000 family.py:586(keys)
+       55    0.000    0.000    0.000    0.000 fields.py:63(__contains__)
+        1    0.000    0.000    0.000    0.000 finite_dimensional_modules_with_basis.py:291(_dense_free_module)
+        1    0.000    0.000    0.001    0.001 finite_dimensional_modules_with_basis.py:343(dense_coefficient_list)
+        1    0.000    0.000    0.000    0.000 finite_dimensional_modules_with_basis.py:369(<listcomp>)
+        1    0.000    0.000    0.002    0.002 finite_dimensional_modules_with_basis.py:371(_vector_)
+        1    0.005    0.005    0.010    0.010 flatten.py:6(flatten)
+        1    0.000    0.000    0.000    0.000 flatten.py:67(<listcomp>)
+        2    0.000    0.000    0.000    0.000 free_module.py:1038(__richcmp__)
+      102    0.000    0.000    0.000    0.000 free_module.py:1871(degree)
+      101    0.000    0.000    0.000    0.000 free_module.py:1959(coordinate_ring)
+      101    0.001    0.000    0.002    0.000 free_module.py:2364(zero_vector)
+      103    0.000    0.000    0.000    0.000 free_module.py:327(create_key)
+        2    0.000    0.000    0.001    0.000 free_module.py:348(create_object)
+       52    0.000    0.000    0.001    0.000 free_module.py:397(VectorSpace)
+        2    0.000    0.000    0.000    0.000 free_module.py:4564(__init__)
+        2    0.000    0.000    0.000    0.000 free_module.py:4624(_coerce_map_from_)
+        2    0.000    0.000    0.000    0.000 free_module.py:5225(__init__)
+        2    0.000    0.000    0.000    0.000 free_module.py:5395(__init__)
+        2    0.000    0.000    0.001    0.000 free_module.py:5487(__init__)
+      101    0.000    0.000    0.002    0.000 free_module.py:5577(_element_constructor_)
+        2    0.000    0.000    0.000    0.000 free_module.py:661(__init__)
+        2    0.000    0.000    0.000    0.000 free_module.py:7226(element_class)
+      101    0.000    0.000    0.002    0.000 free_module.py:972(_element_constructor_)
+     2550    0.007    0.000    0.012    0.000 functional.py:236(denominator)
+        3    0.000    0.000    0.000    0.000 homset.py:1177(domain)
+        3    0.000    0.000    0.000    0.000 homset.py:1192(codomain)
+        3    0.000    0.000    0.000    0.000 homset.py:583(__init__)
+        6    0.000    0.000    0.000    0.000 homset.py:752(homset_category)
+        3    0.000    0.000    0.000    0.000 homset.py:84(Hom)
+        1    0.000    0.000    0.000    0.000 magmas.py:817(__init_extra__)
+       51    0.000    0.000    0.001    0.000 matrix_misc.py:28(row_iterator)
+        1    0.000    0.000    0.001    0.001 matrix_space.py:1504(basis)
+        1    0.000    0.000    0.001    0.001 matrix_space.py:1524(<dictcomp>)
+        1    0.000    0.000    0.000    0.000 matrix_space.py:1537(dimension)
+       50    0.000    0.000    0.000    0.000 matrix_space.py:1924(ncols)
+       50    0.000    0.000    0.000    0.000 matrix_space.py:1936(nrows)
+        5    0.000    0.000    0.000    0.000 misc.py:56(_make_listlist)
+        1    0.000    0.000    0.000    0.000 misc.py:80(<listcomp>)
+        1    0.000    0.000    0.000    0.000 misc.py:83(_common_length_of)
+        2    0.000    0.000    0.000    0.000 modules.py:113(__classcall_private__)
+        1    0.000    0.000    0.000    0.000 parent.py:161(__init__)
+       52    0.000    0.000    0.000    0.000 parent.py:228(ambient_dim)
+        1    0.000    0.000    0.000    0.000 parent.py:25(Polyhedra)
+       51    0.001    0.000    0.001    0.000 parent.py:352(Vrepresentation_space)
+        1    0.000    0.000    0.000    0.000 parent.py:381(Hrepresentation_space)
+        1    0.000    0.000    0.213    0.213 parent.py:453(_element_constructor_)
+        1    0.000    0.000    0.000    0.000 parent.py:734(_coerce_map_from_)
+       50    0.000    0.000    0.033    0.001 parent.py:887(_make_Equation)
+        1    0.000    0.000    0.001    0.001 parent.py:914(_make_Vertex)
+        2    0.000    0.000    0.000    0.000 rational_field.py:1569(is_RationalField)
+        1    0.000    0.000    0.000    0.000 representation.py:1193(is_vertex)
+       50    0.001    0.000    0.004    0.000 representation.py:322(__init__)
+       50    0.015    0.000    0.028    0.001 representation.py:341(_set_data)
+        1    0.000    0.000    0.000    0.000 representation.py:61(__len__)
+       51    0.000    0.000    0.000    0.000 representation.py:74(__getitem__)
+        1    0.000    0.000    0.001    0.001 representation.py:948(__init__)
+        1    0.000    0.000    0.000    0.000 representation.py:965(_set_data)
+        2    0.000    0.000    0.000    0.000 sets_cat.py:1749(is_finite)
+        1    0.000    0.000    0.000    0.000 sets_cat.py:945(_element_constructor_)
+        2    0.000    0.000    0.000    0.000 unique_representation.py:994(__classcall__)
+        2    0.000    0.000    0.000    0.000 vector_spaces.py:39(__classcall_private__)
+        1    0.000    0.000    0.000    0.000 vt100_input.py:278(_input_parser_generator)
+       22    0.000    0.000    0.000    0.000 weakref.py:336(__new__)
+       22    0.000    0.000    0.000    0.000 weakref.py:341(__init__)
+       22    0.000    0.000    0.000    0.000 {built-in method __new__ of type object at 0x7f21ccee7a40}
+     5100    0.005    0.000    0.005    0.000 {built-in method _abc._abc_instancecheck}
+        3    0.000    0.000    0.000    0.000 {built-in method builtins.all}
+        1    0.002    0.002    0.009    0.009 {built-in method builtins.any}
+        1    0.000    0.000    0.243    0.243 {built-in method builtins.exec}
+        4    0.000    0.000    0.000    0.000 {built-in method builtins.getattr}
+      140    0.000    0.000    0.000    0.000 {built-in method builtins.hasattr}
+     5314    0.005    0.000    0.005    0.000 {built-in method builtins.isinstance}
+        3    0.000    0.000    0.000    0.000 {built-in method builtins.issubclass}
+     2762    0.002    0.000    0.002    0.000 {built-in method builtins.len}
+        3    0.000    0.000    0.000    0.000 {built-in method builtins.sorted}
+       50    0.000    0.000    0.000    0.000 {built-in method sage.arith.functions.LCM_list}
+        1    0.000    0.000    0.000    0.000 {built-in method sage.categories.category_cy_helper._flatten_categories}
+        1    0.000    0.000    0.000    0.000 {built-in method sage.misc.c3_controlled.C3_sorted_merge}
+        2    0.000    0.000    0.000    0.000 {built-in method sage.rings.ring._is_Field}
+     2551    0.002    0.000    0.002    0.000 {built-in method sage.structure.element.parent}
+        2    0.000    0.000    0.000    0.000 {function FreeModule_ambient._coerce_map_from_ at 0x7f1ebc2add90}
+       50    0.000    0.000    0.000    0.000 {method '__copy__' of 'sage.matrix.matrix_rational_dense.Matrix_rational_dense' objects}
+       50    0.000    0.000    0.000    0.000 {method '__getitem__' of 'dict' objects}
+     2653    0.002    0.000    0.002    0.000 {method 'append' of 'list' objects}
+      208    0.000    0.000    0.000    0.000 {method 'base_ring' of 'sage.structure.category_object.CategoryObject' objects}
+        2    0.000    0.000    0.000    0.000 {method 'category' of 'sage.rings.ring.Ring' objects}
+       50    0.000    0.000    0.000    0.000 {method 'coefficients' of 'ppl.constraint.Constraint' objects}
+        1    0.000    0.000    0.000    0.000 {method 'coefficients' of 'ppl.generator.Generator' objects}
+       52    0.000    0.000    0.000    0.000 {method 'degree' of 'sage.modules.free_module_element.FreeModuleElement' objects}
+     2550    0.002    0.000    0.002    0.000 {method 'denominator' of 'sage.rings.rational.Rational' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        1    0.000    0.000    0.000    0.000 {method 'divisor' of 'ppl.generator.Generator' objects}
+        1    0.000    0.000    0.000    0.000 {method 'empty' of 'ppl.constraint.Constraint_System' objects}
+        1    0.000    0.000    0.000    0.000 {method 'format' of 'str' objects}
+       50    0.000    0.000    0.000    0.000 {method 'inhomogeneous_term' of 'ppl.constraint.Constraint' objects}
+       50    0.000    0.000    0.000    0.000 {method 'insert' of 'ppl.constraint.Constraint_System' objects}
+        4    0.000    0.000    0.000    0.000 {method 'is_commutative' of 'sage.rings.ring.CommutativeRing' objects}
+       50    0.000    0.000    0.000    0.000 {method 'is_equality' of 'ppl.constraint.Constraint' objects}
+        1    0.000    0.000    0.000    0.000 {method 'is_exact' of 'sage.rings.ring.Ring' objects}
+       54    0.000    0.000    0.000    0.000 {method 'is_field' of 'sage.rings.ring.Field' objects}
+       50    0.000    0.000    0.000    0.000 {method 'is_inequality' of 'ppl.constraint.Constraint' objects}
+        1    0.000    0.000    0.000    0.000 {method 'is_one' of 'sage.rings.integer.Integer' objects}
+        1    0.000    0.000    0.000    0.000 {method 'is_point' of 'ppl.generator.Generator' objects}
+        1    0.000    0.000    0.000    0.000 {method 'minimized_constraints' of 'ppl.polyhedron.Polyhedron' objects}
+        1    0.123    0.123    0.123    0.123 {method 'minimized_generators' of 'ppl.polyhedron.Polyhedron' objects}
+        1    0.000    0.000    0.000    0.000 {method 'ncols' of 'sage.matrix.matrix0.Matrix' objects}
+        2    0.000    0.000    0.000    0.000 {method 'nrows' of 'sage.matrix.matrix0.Matrix' objects}
+        1    0.000    0.000    0.000    0.000 {method 'one' of 'sage.rings.ring.Ring' objects}
+       55    0.000    0.000    0.000    0.000 {method 'parent' of 'sage.structure.element.Element' objects}
+        1    0.000    0.000    0.000    0.000 {method 'pop' of 'dict' objects}
+       51    0.000    0.000    0.000    0.000 {method 'pop' of 'list' objects}
+       50    0.001    0.000    0.001    0.000 {method 'row' of 'sage.matrix.matrix_rational_dense.Matrix_rational_dense' objects}
+        6    0.000    0.000    0.000    0.000 {method 'rpartition' of 'str' objects}
+       50    0.000    0.000    0.000    0.000 {method 'set_immutable' of 'sage.matrix.matrix0.Matrix' objects}
+        2    0.000    0.000    0.000    0.000 {sage.misc.classcall_metaclass.typecall}
+        1    0.000    0.000    0.002    0.002 {sage.modules.free_module_element.vector}
+        2    0.000    0.000    0.000    0.000 {sage.rings.integer_ring.is_IntegerRing}
+
+
+sage: A3.str()
+'[      6       5  -47/51   37/91   29/98       9       2     1/6       8      -1       2      -8    30/7      10   34/39       3       1       8      10  -35/37   95/47       9   73/14       5       4    -1/4   21/41  -97/61   -47/2  -31/11  -56/15       9       9      10       3       6       6      10       4   59/13    2/81  -15/28       3       3       4       4       7       6     -86       2]\n[      1       3       4       7      71    6/29   46/79   -1/26   23/68       5   13/16   46/39   23/28      10    47/8   93/22       2       1   -6/17   33/34   17/78       1      10       9       2       1  -37/85       3   88/41       1       9       3  -49/13       8       8  -49/27       3    9/88      10       1  -63/19  -36/31      10       9      -5    3/19       4       5       5  -23/90]\n[      6   12/29       1       5   11/15       6   11/12       8       7      10  -33/25     2/5       5       4       5   27/86  -46/25      10       4  -13/22   69/79      34   -31/5  -43/70      10       3   83/29  -32/67      45  -19/34      10       6       3   94/33   11/23   -62/7       8       5  -12/95       5       9   47/41       2       4     -25   27/10       1   30/37      10       6]\n[      8  -10/93   46/47       4      -3       4       8       6       8       8  -16/85   65/87       8   27/53  -12/23       5    17/7       3      10       2  -27/41       5       1  -47/51       9    11/7  -29/14    5/29      10       6  -20/21       2  -88/97       6     7/9       1  -75/58       7       8       1   88/21       7     9/5   45/98   29/81  -75/34    -3/4       6    1/17       9]\n[      9   31/69       4       1   41/86       7  -67/16     -35       6       9   12/19       2  -11/26       6       3       8   38/67   17/30      -3      10   89/81       4       9       9       7  -74/99      10       2       5       8       8       8       5      10       3       4   97/77   85/11       7   37/97  -45/74       3       5       8  -27/53  -47/50       4       6       1   86/73]\n[      7       5       5       2   -69/4       2   73/82  -22/13    33/7       7       2       3     -53  -38/43      25       6       8       8       6       9      10      62      20       6    5/13  -12/19       4       7       9       4   83/74  -12/43   77/29   61/73  -30/79   99/50       7       5     -94       8       3       5  -37/85       2       8    15/8   39/73      10      10       2]\n[  43/21      10       8    23/5    7/11   71/55    -1/5   14/17   24/47  -55/42    77/6       9      12       7   -5/41       4       5       1    2/33       9      -2  -26/21       7       7       7   -82/5   55/54  -67/85     7/2       7       1  -10/21  -41/14       3      10  -23/45   18/17       5       5   77/79   94/89   16/29       7   53/43  -33/58   25/87   -23/4      10       4  -25/22]\n[      3   81/97     -98       8       6       1       4       3   -14/5       9   26/35   31/67  -81/71       9       2       1   -4/31       1       3       7       3     1/8       5       2       1       1       3       8       2       1   42/23       7   -1/12  -31/61   69/70      10   -48/5       9       7     -99       7       2       9      50       7     1/3  -84/73       4   53/34      10]\n[ -15/28       1       4       0       6       4   75/17       2       7   54/89       1    11/6    19/3   22/27       6       9       8  -62/39       1       6   31/20       1       2       2       7  -15/41   -53/2       1       2       6       3       6  -69/89       2       2       5       1       0   52/47  -37/19   55/57    3/13   35/16       8   -67/9       4      10  -34/61       6  -18/25]\n[     10    -9/2       2    -5/2  -71/44       3       7       8      10    -5/7    -1/5      10   -51/7       6      10  -11/17       9   -23/8       9   47/14       2   59/54  -11/17   40/37   31/21       4       6       6   55/21       2       6       8   87/28   -5/47   67/72     5/4   79/14      10       3   -75/8   26/41     1/7       3       1       7  -21/23  -28/15       6       9  -50/13]\n[      5       4  -71/55       7       7     3/4       6   30/89       6       8       2       8       3       9    46/3       4       8  -14/17       1   73/92      10  -43/17       6       4       4       8  -68/31       8       5       2       7       4    35/2  -44/29   -19/2      10   99/29    3/11   14/19       2       3       7   35/11   -61/5       8       1       6       2     5/9      10]\n[   62/5       1      10  -83/57       8   -7/26       5   29/67   99/37  -17/95       8       2   86/21       6       9       5       1       2  -49/13       2  -67/10       4   -8/11   32/41       9  -55/38       9       5      10       2       9  -97/74       9   22/23       5       2      25     7/6       7       3   39/89   55/79       8       8       6  -96/59       3  -96/41      10       6]\n[ -67/57       8      10       9      10   11/30       9    -5/8      10       1     5/6       9      -1       1  -67/31       2       6       8       7       4       1       2       2   71/27       1      10   38/73       3   -1/41   83/84      -3       4    -8/3       7       8       2     3/2   46/15  -87/86    1/62       4   -1/70       2       8   -2/11       6       5       3  -13/11   11/12]\n[ -80/59    11/2       5   31/78       9  -71/27       7      10      10    9/20       6       6  -83/28       2  -13/86   62/49    27/4     8/5      10       9   21/20       1    17/9       7     7/8       5   83/33       1    2/15       1     -17       1       4  -15/53  -10/23       4  100/97   17/81       5   -37/5       7       4  -73/51    23/8       9  -93/29  -38/97       1       1   -17/7]\n[ -99/19    -7/2       1       9       9   73/35      10       9   17/96       4  -23/38       1       2       7      10  -46/13       6      -2       6  -25/49   17/42       8  -12/23    15/2   15/16       7       8       1   71/43  -44/37  -83/34       9     7/8     -19       6       3       6       6    -2/7       7       1  -17/96       6       2       7       3   12/25      10       9       8]\n[      9       3       4      10   -10/7       6       0       1       9    53/8       8      10       1       6   73/27       5     5/7       7  -91/74       4       6       8  -43/63       2      10  -53/26   44/89      10       2   29/34       6  -32/15  -73/69       2       1  -27/70     1/3       3       9    14/5   59/12  -89/18  -29/49       1       7       9   73/96   24/55       5    -5/3]\n[     10       5       8       2      10       8   42/29       8  -42/79  -17/32    -1/2       3  -10/39       8       3       6       6       9       2    14/3    8/45  -58/35   27/29       3       6   -15/7  -92/75  -88/49      -1   47/19   11/45  -11/13       9       6       7      10   -1/50    9/10       9   -9/14       7       9   43/66      10       9       1       6      10       7  -89/96]\n[      2      86       6  -43/81  -24/29  -69/49   21/16   82/89      10       4       9   -17/2       8   95/93   58/99   39/97       7   -9/20   13/18       9  -59/31  -43/96      -1       7   54/41       1  -11/18   29/73   37/35       3   -17/7       2   -7/29     8/9       1  -76/97       2       4   78/77       4  -22/15  -15/17       7       8  -27/22       7       6       5   -19/4      10]\n[      5      10       1   71/46   44/31    43/9   35/11  -29/43       6   94/83      10       6       4   37/64       3   67/17       8 -100/23       4       7  -53/92    43/6       1  -71/82      10   -22/9    3/31   37/79      -2       4       1    11/3       7       1  -93/56       9       9     2/3  -79/44       7   13/80  -52/19       3   49/76       7       3       4       8       5       6]\n[      9   67/84  -19/35   32/23  -97/57  -76/27   83/66   19/31       7       4       7   -93/5       2       2      12  -74/55  -79/98   -20/9       7  -91/69       3       2  -16/15    -4/7       1       5      10   37/53       5  -69/37   17/82  -79/45       9   23/18   -11/4  -94/99       4       9  -25/49   91/38      10       1     -13  -93/52  -85/24       1       7       6     7/4  -29/57]\n[  81/86  -31/71  -11/18       4       3       5       6   25/26       5   18/13   31/65   -31/2    93/5       1       3      10       7       6     1/4       5       1   27/19       4      10  -83/37   19/22       7       5  -13/23       2       3      10       8     2/3       7    69/4    6/11   17/13       5  -29/63       3    -2/5       6   99/71       7      10   12/13  -13/12  -31/40       6]\n[    5/3       3   17/67       1       8       9    -7/4       9       6  -72/31    -1/7       2       6      10       8  -43/24       9   12/71    -1/8       3  -77/20       3      10       3       4       2       4  -89/80       2       6  -39/44  -54/25      10       8   -4/43    1/41    3/16       8      10    1/26       2       8   49/10       1   11/35  -56/11       8     3/8   46/27       7]\n[      1       6       9   93/98       2       9       1     2/5       2       4       2   -5/36   19/11       3       9       4      10   64/41   97/89       6  -23/87   85/26       8   61/89   31/41       4       1  -36/13  -78/43       2  -28/53   91/41    40/3   11/16  -89/26  -70/73       3       9   25/93       7   55/82    3/50       3       3  -15/77   42/17       9   77/97   17/28       3]\n[ -73/46   -5/36       7       8       8  -81/44       5       5      10       3   14/25       1   23/21       7   36/19  -29/32       3       9       3       1     -34      10    9/52       8       7       5   49/65    21/4  -98/85  -50/43       2   33/10   11/56       1   35/78   29/31       5       8     1/2   -29/3      10  -54/41       9       6      10    65/9     5/9       7       1     1/2]\n[      6       3  -12/47       9  -94/91   -3/37       8  -73/49       5       3       1       9       3   19/90       7       7       2       9       5  -85/94       7  -54/19      10  -34/33   31/26    2/89       5    83/4   88/53   27/19       8   92/71       3       9       2       2       7   71/40       7    49/2   35/62  97/100       2   14/39  -67/58   -7/10       7      10       9  -97/38]\n[   7/18       9       5    14/5  -73/18       1   46/39       2     7/4   67/56       7   46/77  -11/40       7       3       8       3       5   46/63  -12/23       8       5       7  -56/87   99/97       2 -31/100       6       3    -8/7       5       2   -10/3       7      10  -31/16    -5/8       5    47/3  33/100       5       9   16/59   47/46   83/71       1   10/81    6/19     5/3  -83/18]\n[  30/11   94/65       7  -89/36      12    14/9  -11/50  -43/99     6/5       8      10   30/49  -47/98   46/67   -64/3   37/35  -37/33   -1/17  -23/48   -15/8       2       6   49/43       6       9       6       5    7/31  -72/65   56/13  -99/35   11/14       2       2       2       3       4      64   71/35       4       6       8       8  -27/34       5   54/17    8/93       1       4   47/16]\n[ -71/78       2       4       2  -13/88   55/72  -11/62       5       5     9/2       6    -1/4       6      10       6       6   -31/8       2       5    36/7       6    5/22   93/10    13/6       5       6      10   93/82       8       8    1/37       1       4  -15/29       6       6   67/54       1    13/4       3    50/7       6       9   11/15       7       3     -65       1       6       5]\n[   3/13  -13/47       8   43/64    7/79   -33/5       0   71/24  -37/41  -27/11  -13/11       7  -66/49   10/11   19/30   -1/44   -7/15       1       6       7      10      10   30/11  -23/12       2   94/55       8       5       1       6       7   12/13       9   89/45       7  -56/43  -58/93       8      10       1       6       6   -9/31    -9/7      -1  -41/93       7  -47/43  -24/11       3]\n[  32/93   39/40       6       1       7   -7/51     2/7    13/9       7       5       6  -71/89       2    4/19      10    -1/4       1  -41/19       8      10   -19/8     3/2   29/17  -39/97   33/23   -3/14   83/61       7      10   -5/29       5      10   83/37       7    7/39  -22/43       7       8  -31/39       8   11/62    54/5       8       1   37/64       6       4       6       2   -16/5]\n[      2   54/43       5   21/29       2  -31/15    9/58  -90/17   -5/31      10       6     6/5       1    65/6       1    -4/7  -35/18       6       3       6   -29/5    7/38       6    -5/7       9     6/5      10    -7/8       3       9       5   74/59  -67/41       7       6  -75/86    3/56       2       5       4   -2/11    -4/5       4   -7/20       3   17/71       6       4       3       3]\n[  67/42   43/37       8     9/4       1   19/11      10  -19/22       8  -13/11  -76/97       6   -7/95      10       2       2       9      10  -19/33       2   58/73    1/31       4       9  -74/65       9    -3/7      10       5   -2/85  -17/64       1       6       8  -79/75   -8/41       2       2       6   31/12  -20/49       2     -10  -44/27  -11/20   85/77    -3/4    7/72       8       9]\n[      7       6   33/68       1       7  -76/89   79/60       5  -23/63      28       1       4     4/3  -55/81   40/43   89/37   72/31  -13/12    7/26      -3   22/59       4       7       4       5   51/74       7      10   91/79       9     5/7   -8/17       1       1   13/21   31/38  -31/56   -97/4    7/10      10       7   38/45       7      10      10   21/55       3   -11/4       1     7/8]\n[    -49       3     5/4   90/17  -36/35  -31/74       2       1       2       9  -74/33       6  -17/18       5       2    1/32   66/53       1       8   -22/5       9       2       4   31/48       2       7    12/7       3       2       7       9       8   41/47   49/39   32/87       6   62/99       1  -97/89       8    43/6     9/8       5       1       6       3  -65/29  -33/94   11/89       6]\n[      2       2       5  -43/39   83/78  -62/77       8  -13/23       2    6/67   65/79   12/89      10       8       7       1  -73/59       6  -43/44       6   -2/73    3/14       8       4       2      10   18/95       2  -50/89       4       4       1   76/85   26/33       6    7/10  -41/24   19/14       5   -1/16       7       3       3       9   83/41       3       5       1  -13/14  -34/47]\n[      1   91/85       8       9  -22/71   51/28      10       9  -61/19  -65/19       8   90/53      -3   -6/41       7    1/43      10       3       7       3   73/18       6   -2/11       6       7  -39/20       2       3       9   39/25       4   -1/56       1       4       9       3   71/23  -15/32       9    -7/9       9   83/16       2       3   69/16       8   -7/11   37/26      10    -4/9]\n[    5/6   35/47       2       5   81/82       6       7   -7/27   23/22  -58/67       2       5       6       4   39/28   -32/5       8   15/22       1    7/13       8  -34/31       2       9   -9/35   82/23       9       6       8  -43/62       3       1       7  -14/93       4       3       4       2       5   63/67       8      -3    -5/7    78/7       8       4       6  -49/30       7  -18/19]\n[      3       1  -83/93       1   -3/23       1       6       1  -91/83   17/60       3       6  -42/97       6    -8/3    1/21  -67/44   -17/5       2       5       7       7   77/74  -11/61    6/53      10       5  -49/93      10   17/21  -22/19  -25/46       5       4       6      10       2   -1/14   17/12       7      -1   73/52       0  -47/80      10      10   62/57      10  -18/49  -73/42]\n[      9  -41/40       4       4      10  -25/28       7  -98/31       6  -92/77  -15/41       6    13/9   49/57       9  -67/94       9       1       9   15/82   41/50    5/76       9       4       9   16/13       4       6    11/6       5     1/5       8       2     4/7   21/11   -1/10   51/67       9  -91/67   36/25  -91/74  -37/13       1       9       5       7    3/23       7   -3/31       4]\n[ -31/83   -10/3       4   12/25       4       9    77/4       2       1       9    25/7     7/6     6/7   32/63       3       1      10   37/84       6  -22/21   11/30      10      10      11   -9/11       8  -98/15       2       2  -73/95       4       8       3       5       2       2       9       8   94/53       9   67/60  -95/86   55/38  -46/65   13/12   41/37       7  -62/55   -83/6   -7/41]\n[  41/45       3       3       8   51/61  -32/23   -2/73       1   89/25       8   28/27   24/91       4  -29/10    29/4   43/26   -1/44  -63/44       4       9       6       3    5/32   49/17    30/7     3/5       5       2   27/32       7       9  -43/25      10       3   89/95  -33/20      10      10      10       6       1       2    -4/3  -84/89   43/34     -21  -31/40   -3/32  -95/29       1]\n[    5/7       7       2   69/17       2     -10   20/17   99/29       3   10/21   67/38    -1/3   43/19   17/10     1/3       9  -96/29  -61/48       2       3       9  -47/85     5/6       3       7       9       1   13/45       6   97/51   25/69       3       2       2       3       3       1  -91/45   77/73       0       4       9       1       1  -17/67     3/2  -87/44   52/25  -89/16       1]\n[      9   31/36   -1/14       7      -4       2    -5/3       7   39/23      -1       7   -11/9    9/11  -23/19  -85/99       0  -35/93       5       9  -39/23  -53/63      10       1     1/3   44/93       8  -17/15       3  -37/28  -31/64       8  -73/62       9       2       3   57/64       3      10       8   31/78  -35/96      10  -10/93  -46/25     3/5    8/73       9    59/5       4       6]\n[ -45/88       5       2       4      10   49/81  -47/12       8       8       8    5/21   47/21    -4/7       4       8       6      10       4  -82/81       1       7       2  -82/25       8  -31/47       5    49/9       2       8       6   -51/8  -89/62       2       9  -77/13  -14/53   84/59       9  -16/71  -94/45       6       6       2       5       7   37/16       2   89/69      10       1]\n[  -7/11     8/9       5       8   -3/32       1    26/5       7       4       5      27   28/53       6       3    16/7  -65/41  -12/25   27/22  -69/34       6      10       4       5     3/5   14/15  -34/95   -9/55    22/7   -3/22       3  -82/89   -2/25       2   -79/7       4  -97/98       2       6   -28/3       9       9       7   75/52       3   15/23       7       9  -77/65   -13/6   13/19]\n[  -23/8       2       0   -8/11     1/4  -55/92   33/20  -51/50   91/17     -12      43   97/51       5       4   71/18      10       3       8   -37/9   34/37       6   -23/7       8       4  -71/64       6  -13/21  -91/76   35/19       8       4       6   43/30   40/77  -17/31       9       2       2       1       6  -12/61       5     5/4       8   13/83   43/18   15/44   41/92  -92/65       1]\n[     10   13/70       7  -46/15       5       1    -1/2       7   15/59    83/5       6   -41/8    77/4  -41/59      10       5       5       3   -4/81   23/78       8     2/7    19/6       7  -88/91   68/23       4       2       5       5  -40/13       5      10   25/12       8       5       5       5  -15/82       5  -55/97   21/74       2       8  -54/71   -7/10    19/3  -53/23  -95/29       7]\n[     -5    -6/5       1  -16/25  -86/85  -21/43       2  -28/41       5   35/83       3       2   -7/44       1    1/90  -81/83   -64/5       1       9       2       4   57/50  -35/16   30/11   49/46   -8/41       3    4/11       1       7   51/10      -7   15/32    9/19       7       1       6  -14/33       3       9      10       1    2/19   67/69       3       2       5       8  -16/15       6]\n[ -43/79   -3/23      10       7       7       7    8/17   -43/4       7   64/75       9       2  -97/82  -11/40       1       1    13/9   42/11       4      10    21/4       6    5/11      10       2       4   26/51     -19  -44/75       7      10      10   71/90   23/83       9      10       7   87/14   12/13  -23/59       9       3      10   89/94     -12       7    11/2       1       9       9]\n[ -14/15  -13/79       1   69/74  -53/39     7/5       6   48/19   83/93   92/83       6   -9/22  -13/41       6    4/13    83/6       2   29/59   46/13      -1       2   21/68  -27/20  -64/91       5     7/3      10       6       1       3       1       6       2       6      10  -26/37    91/8       1   -21/2    59/4       5      10       3       5       6       1       9       2       1  -27/71]'
+sage: Y3.str()
+'[ 18/55]\n[     9]\n[    10]\n[    10]\n[   7/5]\n[    -8]\n[-14/29]\n[     2]\n[     8]\n[ -9/25]\n[     9]\n[   -32]\n[-19/53]\n[     8]\n[     6]\n[     3]\n[     8]\n[ 85/44]\n[    10]\n[     1]\n[ 17/16]\n[-79/49]\n[     9]\n[     1]\n[-46/49]\n[     2]\n[ 83/61]\n[     3]\n[ -7/38]\n[     5]\n[     6]\n[     7]\n[    10]\n[ 55/59]\n[ 97/53]\n[-90/53]\n[ 20/99]\n[     8]\n[     5]\n[ 18/65]\n[     9]\n[     7]\n[ 75/28]\n[  2/15]\n[     4]\n[     7]\n[ -8/11]\n[     7]\n[-29/79]\n[     3]'
