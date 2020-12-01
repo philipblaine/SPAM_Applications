@@ -23,7 +23,6 @@ def make_matrix_with_dens(nrows, ncols, nbound, dbound, density):
         for j in range(ncols):
             
             flag = random.random()
-            #print(flag)
 
             if flag <= density:
                 
