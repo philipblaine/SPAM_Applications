@@ -5,6 +5,15 @@ def make_matrix_with_dens(nrows, ncols, nbound, dbound, density):
 
     """ constructs a random rational full-rank matrix, then rounds *density* percent of the entries to integers
 
+    sage: A = make_matrix_with_dens(5,5,100,100,0.5)
+    sage: A
+    [     4      9      2      3      4]
+    [ 23/29     10 -77/16 -22/61      8]
+    [     3      9  43/37      7   37/8]
+    [     3      9      1      7  83/68]
+    [    10   91/4      3   2/11      3]
+
+
 
     """
 
@@ -18,7 +27,7 @@ def make_matrix_with_dens(nrows, ncols, nbound, dbound, density):
 
             if flag <= density:
                 
-                A[i,j] = randint(1,10)
+                A[i,j] = randint(0,10)
   
     return A
 
