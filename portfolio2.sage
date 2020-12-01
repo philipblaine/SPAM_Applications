@@ -1,6 +1,6 @@
 def portfolio2(mu,base_ring=None):
 
-    p2 = MixedIntegerLinearProgram(maximization=True, base_ring=K)  
+    p2 = MixedIntegerLinearProgram(solver="GLPK",maximization=True, base_ring=K)  
 
     #if base_ring is None:
     #    base_ring = mu.parent()
