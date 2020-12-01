@@ -1,4 +1,30 @@
 #methods for creating matrices A, Y; solving Ax = Y using poly
+import random
+
+def make_matrix_with_dens(nrows, ncols, nbound, dbound, density):
+
+    """ constructs a random rational full-rank matrix, then rounds *density* percent of the entries to integers
+
+
+    """
+
+    A = random_matrix(QQ, nrows, ncols, num_bound=nbound, den_bound=dbound)
+
+    for i in range(nrows):
+        for j in range(ncols):
+            
+            flag = random.random()
+            #print(flag)
+
+            if flag <= density:
+                
+                A[i,j] = randint(1,10)
+  
+    return A
+
+        
+
+    
 
 def make_full_matrix(nrows, ncols, nbound, dbound):
     
