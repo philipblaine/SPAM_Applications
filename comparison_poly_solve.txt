@@ -1,3 +1,6 @@
+### TO DO:
+### more comprehensive description of each test and results
+
 random matrices with entries from QQ, num_bound=100, dbound=den_bound
 
 varied matrix size as well as denominator bounds to test differences between methods
@@ -7,7 +10,7 @@ varied matrix size as well as denominator bounds to test differences between met
 
 solve_right	1.956			13.297			30.378, 28.357		605.603			780.631			31895.374
 ppl_poly	0.315			0.857			5.611,  5.426		5.597			152.508			1176.967
-npoly		18.292			136.304			crash,  crash		crash			crash			crash
+npoly		18.292			136.304			MEMORY, MEMORY     	MEMORY			MEMORY			MEMORY
 
 
 note: npoly (polyhedral computation with backend 'normaliz') only worked on small matrices, large ones required more memory than my laptop had and took hours

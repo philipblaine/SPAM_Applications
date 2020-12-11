@@ -2,6 +2,13 @@
 ### then use those basic variables to perform one iteration of the simplex method
 ### on exact InteractiveLP-solved LP to get exact solutions
 
+
+TO DO:
+### add input/output doctest
+### use solve from InteractiveLP, don't replicate solve method
+### take a single LP (possibly backend) as input, output optsol
+### write generic function calls (e.g. remove RevisedLPDictionary) to accommodate future backend solvers 
+
 import sys
 import cProfile
 import numpy as np
