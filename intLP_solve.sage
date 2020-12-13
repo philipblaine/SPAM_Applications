@@ -26,9 +26,6 @@ p2.add_constraint(0.5*w[0]+1.5*w[1] <= 100)
 p2.add_constraint(3*w[0]+w[1] <= 150)
 p2.set_objective(10*w[0]+5*w[1])
 
-p2.solver_parameter("simplex_or_intopt", "simplex_only")
-sol = p2.solve()
-
 b2 = p2.get_backend()
 
 b2.solve()
@@ -51,10 +48,10 @@ for i in range(len(basic_vars)):
 #print(basic_vars)
 
 # exact LP setup
-A = ([1/2, 3/2], [3, 1])
-b = (100, 150)
-c = (10, 5)
-P = InteractiveLPProblemStandardForm(A, b, c)
+#A = ([1/2, 3/2], [3, 1])
+#b = (100, 150)
+#c = (10, 5)
+#P = InteractiveLPProblemStandardForm(A, b, c)
 #P.run_revised_simplex_method()
 
 # create revised dictionary with basic variables found from inexact LP
