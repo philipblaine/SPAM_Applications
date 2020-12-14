@@ -1,9 +1,6 @@
-def exact_optsol2(LP):
+def exact_optsol(b):
     r"""
-
-    INPUT:  MILP object with solver="GLPK"
-    OUTPUT: exact rational solution to LP
-    
+    Reconstruct exact rational basic solution. (solver = ``glp_simplex``)
     EXAMPLES::
         sage: from cutgeneratingfunctionology.igp import *
         sage: lp = MixedIntegerLinearProgram(solver = 'GLPK', maximization = False)
@@ -12,25 +9,18 @@ def exact_optsol2(LP):
         sage: lp.add_constraint(x - y <= 1)
         sage: lp.add_constraint(x + y >= 2)
         sage: lp.set_objective(x + y)
-        sage: exact_optsol2(lp)
-        sage: (3/2, 1/2)
-
-        
-        sage: p = MixedIntegerLinearProgram(maximization=True, solver="GLPK")
-        sage: x = p.new_variable(nonnegative=True)
-        sage: p.add_constraint(-x[0] + x[1] <= 2)
-        sage: p.add_constraint(8 * x[0] + 2 * x[1] <= 17)
-        sage: p.set_objective(5.5 * x[0] - 3 * x[1])
-        sage: exact_optsol2(p)
-        sage: (17/8, 0)
-    
+        sage: lp.solver_parameter("simplex_or_intopt", "simplex_only")
+        sage: lp.solve()
+        2.0
+        sage: lp.get_values(x)
+        1.5
+        sage: lp.get_values(y)
+        0.5
+        sage: b = lp.get_backend()
+        sage: exact_optsol(b)
+        (3/2, 1/2)
     """
-
-    LP.solver_parameter("simplex_or_intopt", "simplex_only")
-    LP.solve()
-
-    b = LP.get_backend()
-
+    #sage_input(b)
     ncol = b.ncols()
     nrow = b.nrows()
     A = matrix(QQ, ncol + nrow, ncol + nrow, sparse = True)
@@ -50,7 +40,6 @@ def exact_optsol2(LP):
             else:
                 Y[n] = b.col_bounds(i)[1]
             n += 1
-
     for i in range(nrow):
         status =  b.get_row_stat(i)
         if status > 1:
@@ -61,9 +50,14 @@ def exact_optsol2(LP):
                 Y[n] = b.row_bounds(i)[1]
             n += 1
 
-    polysol = ppl_poly_solve(A,Y)
+    #filename = open(dir_math+"profiler/solveAXisY", "w")
+    #print >> filename, "A =",
+    #print >> filename, sage_input(A)
+    #print >> filename
+    #print >> filename, "Y =",
+    #print >> filename, sage_input(Y)
+    #filename.close()
 
-    return polysol[0:ncol]
-
-    
-
+    #X = A \ Y
+    X = A.solve_right(Y, check=False)
+    return X[0:ncol]
