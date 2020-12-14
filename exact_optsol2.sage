@@ -1,5 +1,6 @@
 def exact_optsol2(LP):
     r"""
+
     INPUT:  MILP object with solver=GLPK
     OUTPUT: exact rational solution to LP
     
@@ -11,17 +12,8 @@ def exact_optsol2(LP):
         sage: lp.add_constraint(x - y <= 1)
         sage: lp.add_constraint(x + y >= 2)
         sage: lp.set_objective(x + y)
-        sage: lp.solver_parameter("simplex_or_intopt", "simplex_only")
-        sage: lp.solve()
-        2.0
-        sage: lp.get_values(x)
-        1.5
-        sage: lp.get_values(y)
-        0.5
-        sage: b = lp.get_backend()
-        sage: exact_optsol2(b)
-        (3/2, 1/2)
-
+        sage: exact_optsol2(lp)
+        sage: (3/2, 1/2)
 
         
         sage: p = MixedIntegerLinearProgram(maximization=True, solver="GLPK")
@@ -29,16 +21,8 @@ def exact_optsol2(LP):
         sage: p.add_constraint(-x[0] + x[1] <= 2)
         sage: p.add_constraint(8 * x[0] + 2 * x[1] <= 17)
         sage: p.set_objective(5.5 * x[0] - 3 * x[1])
-        sage: p.solve()
-        11.6875
-        sage: p.get_values(x)
-        {0: 2.125, 1: 0.0}
-        sage: b = p.get_backend()
-        sage: b.solver_parameter("simplex_or_intopt", "simplex_only")
-        sage: b.solve()
-        0
-        sage: exact_optsol2(b)
-        (17/8, 0)
+        sage: exact_optsol2(p)
+        sage: (17/8, 0)
     
     """
 
