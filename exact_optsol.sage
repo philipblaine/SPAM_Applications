@@ -1,5 +1,13 @@
 def exact_optsol(LP):
+
+    
+
     r"""
+
+    INPUT:  MILP object with solver="GLPK"
+    OUTPUT: exact rational solution (found using solve_right) to LP
+
+
     Reconstruct exact rational basic solution. (solver = ``glp_simplex``)
     EXAMPLES::
         sage: from cutgeneratingfunctionology.igp import *

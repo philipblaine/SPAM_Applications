@@ -2,7 +2,7 @@ def exact_optsol2(LP):
     r"""
 
     INPUT:  MILP object with solver="GLPK"
-    OUTPUT: exact rational solution to LP
+    OUTPUT: exact rational solution (found using ppl_poly) to LP
     
     EXAMPLES::
         sage: from cutgeneratingfunctionology.igp import *
@@ -19,7 +19,7 @@ def exact_optsol2(LP):
         sage: p = MixedIntegerLinearProgram(maximization=True, solver="GLPK")
         sage: x = p.new_variable(nonnegative=True)
         sage: p.add_constraint(-x[0] + x[1] <= 2)
-        sage: p.add_constraint(8 * x[0] + 2 * x[1] <= 17)
+        sage: p.add_constraint(1.5 * x[0] + 2.5 * x[1] <= 17)
         sage: p.set_objective(5.5 * x[0] - 3 * x[1])
         sage: exact_optsol2(p)
         sage: (17/8, 0)
