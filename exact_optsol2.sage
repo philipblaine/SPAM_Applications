@@ -1,8 +1,8 @@
-def exact_optsol2(b):
+def exact_optsol2(LP):
     r"""
-    Want to use InteractiveLP and GLPK solvers.
+    INPUT:  MILP object with solver=GLPK
+    OUTPUT: exact rational solution to LP
     
-    Reconstruct exact rational basic solution. (solver = ("GLPK", "InteractiveLP"))
     EXAMPLES::
         sage: from cutgeneratingfunctionology.igp import *
         sage: lp = MixedIntegerLinearProgram(solver = 'GLPK', maximization = False)
@@ -21,13 +21,9 @@ def exact_optsol2(b):
         sage: b = lp.get_backend()
         sage: exact_optsol2(b)
         (3/2, 1/2)
-    """
-    #sage_input(b)
 
-    """
-    Integrating InteractiveLP steps to extract basic variables from GLPK-solved LP.
 
-        EXAMPLES::
+        
         sage: p = MixedIntegerLinearProgram(maximization=True, solver="GLPK")
         sage: x = p.new_variable(nonnegative=True)
         sage: p.add_constraint(-x[0] + x[1] <= 2)
@@ -45,6 +41,11 @@ def exact_optsol2(b):
         (17/8, 0)
     
     """
+
+    LP.solver_parameter("simplex_or_intopt", "simplex_only")
+    LP.solve()
+
+    b = LP.get_backend()
 
     ncol = b.ncols()
     nrow = b.nrows()
@@ -66,7 +67,6 @@ def exact_optsol2(b):
                 Y[n] = b.col_bounds(i)[1]
             n += 1
 
-
     for i in range(nrow):
         status =  b.get_row_stat(i)
         if status > 1:
@@ -77,39 +77,9 @@ def exact_optsol2(b):
                 Y[n] = b.row_bounds(i)[1]
             n += 1
 
-    #Polyhedral construction and computation done within poly_solve_methods and poly_solve
-
     polysol = ppl_poly_solve(A,Y)
 
     return polysol[0:ncol]
-
-
-
-
-    """
-    eqnlist = []
-    alist = [ele for ele in A]
-    
-    for i in range(len(Y)):
-        eqnlist.append([-Y[i]])
-
-    for j in range(ncol+nrow):
-        for k in range(ncol+nrow):
-            eqnlist[j].append(alist[j][k])
-
-    poly = Polyhedron(eqns=eqnlist)
-
-    X = poly.vertices_list()
-    lenx = len(X)
-
-    for s in range(lenx):
-        X[s] = tuple(X[s])
-        
-    tupleX = tuple(X)
-
-    for l in range(lenx):
-        return tupleX[l][0:ncol]
-    """
 
     
 

@@ -3,7 +3,7 @@
 ### on exact InteractiveLP-solved LP to get exact solutions
 
 
-TO DO:
+###TO DO:
 ### add input/output doctest
 ### use solve from InteractiveLP, don't replicate solve method
 ### take a single LP (possibly backend) as input, output optsol
@@ -19,16 +19,72 @@ load_attach_path("/mnt/c/users/phili/SPAM_Applications")
 load("startup.sage")
 #%display latex
 
-# inexact LP setup
-p2 = MixedIntegerLinearProgram(maximization=True, solver="GLPK")
-w = p2.new_variable(nonnegative=True)
-p2.add_constraint(0.5*w[0]+1.5*w[1] <= 100)
-p2.add_constraint(3*w[0]+w[1] <= 150)
-p2.set_objective(10*w[0]+5*w[1])
 
-b2 = p2.get_backend()
+def exact_optsol3(self):
 
-b2.solve()
+    """
+    INPUT:  MILP object with at least one designated exact rational solver
+    OUTPUT: exact rational solution to LP
+
+    EXAMPLE::
+	
+    sage: p = MixedIntegerLinearProgram(maximization=True, solver=("GLPK","InteractiveLP"))
+    sage: w = p.new_variable(nonnegative=True)
+    sage: p.add_constraint(0.5*w[0]+1.5*w[1] <= 100)
+    sage: p.add_constraint(3*w[0]+w[1] <= 150)
+    sage: p.set_objective(10*w[0]+5*w[1])
+    sage: b.exact_optsol3()
+    sage: 
+
+
+            sage: from sage.numerical.backends.generic_backend import get_solver
+            sage: p = get_solver(solver = ("GLPK", "InteractiveLP"))
+            sage: p.add_variables(2)
+            1
+            sage: p.add_linear_constraint([(0,1), (1,2)], None, 3)
+            sage: p.set_objective([2, 5])
+            sage: p.solve()
+            0
+            sage: p.get_objective_value()
+            15/2
+            sage: p.get_variable_value(0)
+            0
+            sage: p.get_variable_value(1)
+            3/2
+
+    """
+
+    b = p.get_backend()
+    b.solver_parameter("simplex_or_intopt", "simplex_only")
+    b.solve()
+
+    
+
+ 
+    #p.solver_parameter("simplex_or_intopt", "simplex_only")
+    #inexact_optsol = p.solve()
+
+    #basic_vars = []
+    #for i in range(self.backends[-1].ncols()):
+        #if self.backends[-1].is_variable_basic(i):
+            #basic_vars.append(i)
+
+    dict = self.backends[-1].dictionary()
+
+    basic_vars = dict.basic_variables()
+
+    basic_sol = dict.basic_solution()
+
+    return basic_sol
+    
+
+    
+
+    
+    
+
+    
+"""
 
 #find exact_optsol2 to compare with exact_optsol3
 bsol = exact_optsol2(b2)
@@ -82,3 +138,4 @@ for i in range(len(exact_optsol3)):
 print(exact_optsol3)
 print(bsol)
 print(exact_optsol3_value)
+"""

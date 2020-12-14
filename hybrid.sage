@@ -1016,9 +1016,10 @@ class HybridBackend:
 
     """ exact_optsol does not exist in another backend for Hybrid to delegate to """
 
-    def exact_optsol(self, b):
-    r"""
-        Reconstruct exact rational basic solution. (solver = ``glp_simplex``)
+
+    #def exact_optsol(self, b):
+    """
+    Reconstruct exact rational basic solution. (solver = ``glp_simplex``)
         EXAMPLES::
             sage: from cutgeneratingfunctionology.igp import *
             sage: lp = MixedIntegerLinearProgram(solver = 'GLPK', maximization = False)
@@ -1037,7 +1038,7 @@ class HybridBackend:
             sage: b = lp.get_backend()
             sage: exact_optsol(b)
             (3/2, 1/2)
-        """
+    """
 
-        return self.backends[-1].exact_optsol(b)
+        #return self.backends[-1].exact_optsol(b)
         
