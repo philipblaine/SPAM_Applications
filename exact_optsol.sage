@@ -1,4 +1,4 @@
-def exact_optsol(b):
+def exact_optsol(LP):
     r"""
     Reconstruct exact rational basic solution. (solver = ``glp_simplex``)
     EXAMPLES::
@@ -20,7 +20,12 @@ def exact_optsol(b):
         sage: exact_optsol(b)
         (3/2, 1/2)
     """
-    #sage_input(b)
+
+    LP.solver_parameter("simplex_or_intopt", "simplex_only")
+    LP.solve()
+
+    b = LP.get_backend()
+    
     ncol = b.ncols()
     nrow = b.nrows()
     A = matrix(QQ, ncol + nrow, ncol + nrow, sparse = True)
