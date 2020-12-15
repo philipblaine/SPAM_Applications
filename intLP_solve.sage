@@ -9,7 +9,7 @@ def exact_optsol3(self):
 
     """
     INPUT:  MILP object with at least one designated exact rational solver
-    OUTPUT: exact rational solution to LP
+    OUTPUT: exact rational solution to LP (found using LP's backend basis functions)
 
     EXAMPLE::
 	
@@ -39,21 +39,23 @@ def exact_optsol3(self):
 
     """
 
-    b = p.get_backend()
-    b.solver_parameter("simplex_or_intopt", "simplex_only")
-    b.solve()
+    self.backends[0].solver_parameter("simplex_or_intopt", "simplex_only")
+    self.backends[0].solve()
 
+    basic_indices = []
 
-    #basic_vars = []
-    #for i in range(self.backends[-1].ncols()):
-        #if self.backends[-1].is_variable_basic(i):
-            #basic_vars.append(i)
+    for i in range(self.number_of_variables()):
+        if self.backends[0].is_variable_basic(i):
+            basic_indices.append(i)
 
-    dict = self.backends[-1].dictionary()
+    #HELP: construct dictionary with exact solver using basic_indices 
+    #HELP: perform one pivot with final basic variables and solve() 
+    
+    d = self.backends[-1].dictionary()
 
-    basic_vars = dict.basic_variables()
+    basic_vars = d.basic_variables()
 
-    basic_sol = dict.basic_solution()
+    basic_sol = d.basic_solution()
 
     return basic_sol
     
