@@ -84,10 +84,11 @@ def get_solver2(constraint_generation = False, solver = None, base_ring = None):
 
     Passing a tuple as solver::
 
-        sage: p = get_solver(solver=("glpk","interactivelp"))
+        sage: p, q = get_solver(solver=("glpk","interactivelp"))
         sage: p
-        [ <...sage.numerical.backends.glpk_backend.GLPKBackend...>,
-          <...sage.numerical.backends.interactivelp_backend.InteractiveLPBackend...>]
+        <...sage.numerical.backends.glpk_backend.GLPKBackend...>
+        sage: q
+        <...sage.numerical.backends.interactivelp_backend.InteractiveLPBackend...>
 
     TESTS:
 
