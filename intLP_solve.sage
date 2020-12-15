@@ -12,6 +12,8 @@ def exact_optsol3(self):
     OUTPUT: exact rational solution to LP (found using LP's backend basis functions)
 
     EXAMPLE::
+
+    #FIXME: need support for MILP with tuple solvers
 	
     sage: p = MixedIntegerLinearProgram(maximization=True, solver=("GLPK","InteractiveLP"))
     sage: w = p.new_variable(nonnegative=True)
@@ -22,8 +24,8 @@ def exact_optsol3(self):
     sage: 
 
 
-            sage: from sage.numerical.backends.generic_backend import get_solver
-            sage: p = get_solver(solver = ("GLPK", "InteractiveLP"))
+            
+            sage: p = get_solver2(solver = ("GLPK", "InteractiveLP"))
             sage: p.add_variables(2)
             1
             sage: p.add_linear_constraint([(0,1), (1,2)], None, 3)
