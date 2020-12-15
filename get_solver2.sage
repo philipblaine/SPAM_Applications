@@ -12,8 +12,11 @@ def get_solver2(constraint_generation = False, solver = None, base_ring = None):
         - ``None`` (default), in which case the default solver is used
           (see :func:`default_mip_solver`);
 
-        - or a callable (such as a class), in which case it is called,
+        - a callable (such as a class), in which case it is called,
           and its result is returned.
+
+        - or a tuple (of available solvers), in which case a list of
+          results is returned
 
     - ``base_ring`` -- If not ``None``, request a solver that works over this
         (ordered) field.  If ``base_ring`` is not a field, its fraction field
@@ -79,6 +82,13 @@ def get_solver2(constraint_generation = False, solver = None, base_ring = None):
         sage: codes.bounds.delsarte_bound_additive_hamming_space(11,3,4,solver=glpk_exact_solver) # long time
         8
 
+    Passing a tuple as solver::
+
+        sage: p = get_solver(solver=("glpk","interactivelp"))
+        sage: p
+        [ <...sage.numerical.backends.glpk_backend.GLPKBackend...>,
+          <...sage.numerical.backends.interactivelp_backend.InteractiveLPBackend...>]
+
     TESTS:
 
     Test that it works when the default solver is a callable, see :trac:`28914`::
@@ -120,12 +130,6 @@ def get_solver2(constraint_generation = False, solver = None, base_ring = None):
     else:
         if type(solver) == str:
             solver = solver.capitalize()
-        #elif type(solver) == tuple:
-            #solver_list = ["",""]
-            #print("tuple1")
-            #for ele in solver:
-                #ele = ele.capitalize()
-                #print(ele)
 
     if type(solver) == str:
 
@@ -199,9 +203,6 @@ def get_solver2(constraint_generation = False, solver = None, base_ring = None):
                 solver_list[i] = InteractiveLPBackend(base_ring=base_ring)
 
         return solver_list
-    
-
-
     
 
     else:
