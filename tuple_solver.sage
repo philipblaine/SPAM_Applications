@@ -118,68 +118,86 @@ def get_solver2(constraint_generation = False, solver = None, base_ring = None):
         return solver(**kwds)
 
     else:
-        solver = solver.capitalize()
+        if type(solver) == str:
+            solver = solver.capitalize()
+        #elif type(solver) == tuple:
+            #solver_list = ["",""]
+            #print("tuple1")
+            #for ele in solver:
+                #ele = ele.capitalize()
+                #print(ele)
 
-    if solver == "Coin":
-        from sage_numerical_backends_coin.coin_backend import CoinBackend
-        return CoinBackend()
+    if type(solver) == str:
 
-    elif solver == "Glpk":
-        print("hello")
-        from sage.numerical.backends.glpk_backend import GLPKBackend
-        return GLPKBackend()
+        if solver == "Coin":
+            from sage_numerical_backends_coin.coin_backend import CoinBackend
+            return CoinBackend()
 
-    elif solver == "Glpk/exact":
-        from sage.numerical.backends.glpk_exact_backend import GLPKExactBackend
-        return GLPKExactBackend()
+        elif solver == "Glpk":
+            print("hello")
+            from sage.numerical.backends.glpk_backend import GLPKBackend
+            return GLPKBackend()
 
-    elif solver == "Cplex":
-        from sage_numerical_backends_cplex.cplex_backend import CPLEXBackend
-        return CPLEXBackend()
+        elif solver == "Glpk/exact":
+            from sage.numerical.backends.glpk_exact_backend import GLPKExactBackend
+            return GLPKExactBackend()
 
-    elif solver == "Cvxopt":
-        from sage.numerical.backends.cvxopt_backend import CVXOPTBackend
-        return CVXOPTBackend()
+        elif solver == "Cplex":
+            from sage_numerical_backends_cplex.cplex_backend import CPLEXBackend
+            return CPLEXBackend()
 
-    elif solver == "Gurobi":
-        from sage_numerical_backends_gurobi.gurobi_backend import GurobiBackend
-        return GurobiBackend()
+        elif solver == "Cvxopt":
+            from sage.numerical.backends.cvxopt_backend import CVXOPTBackend
+            return CVXOPTBackend()
 
-    elif solver == "Ppl":
-        from sage.numerical.backends.ppl_backend import PPLBackend
-        return PPLBackend(base_ring=base_ring)
+        elif solver == "Gurobi":
+            from sage_numerical_backends_gurobi.gurobi_backend import GurobiBackend
+            return GurobiBackend()
 
-    elif solver == "Interactivelp":
-        from sage.numerical.backends.interactivelp_backend import InteractiveLPBackend
-        return InteractiveLPBackend(base_ring=base_ring)
+        elif solver == "Ppl":
+            from sage.numerical.backends.ppl_backend import PPLBackend
+            return PPLBackend(base_ring=base_ring)
+
+        elif solver == "Interactivelp":
+            from sage.numerical.backends.interactivelp_backend import InteractiveLPBackend
+            return InteractiveLPBackend(base_ring=base_ring)
 
     elif type(solver) == tuple:
-        print("tuple")
+        solver_list = ["",""]
+        
         for i in range(len(solver)):
-            if solver[i] == "Coin":
+            if solver[i].upper() == "COIN":
                 from sage_numerical_backends_coin.coin_backend import CoinBackend
                 solver_list[i] = CoinBackend()
-            elif solver[i] == "Glpk":
+
+            elif solver[i].upper() == "GLPK":
                 from sage.numerical.backends.glpk_backend import GLPKBackend
                 solver_list[i] = GLPKBackend()
-            elif solver[i] == "Glpk/exact":
+
+            elif solver[i].upper() == "GLPK/EXACT":
                 from sage.numerical.backends.glpk_exact_backend import GLPKExactBackend
                 solver_list[i] = GLPKExactBackend()
-            elif solver[i] == "Cplex":
+
+            elif solver[i].upper() == "CPLEX":
                 from sage_numerical_backends_cplex.cplex_backend import CPLEXBackend
                 solver_list[i] = CPLEXBackend()
-            elif solver[i] == "Cvxopt":
+
+            elif solver[i].upper() == "CVXOPT":
                 from sage.numerical.backends.cvxopt_backend import CVXOPTBackend
                 solver_list[i] = CVXOPTBackend()
-            elif solver[i] == "Gurobi":
+
+            elif solver[i].upper() == "GUROBI":
                 from sage_numerical_backends_gurobi.gurobi_backend import GurobiBackend
                 solver_list[i] = GurobiBackend()
-            elif solver[i] == "Ppl":
+
+            elif solver[i].upper() == "PPL":
                 from sage.numerical.backends.ppl_backend import PPLBackend
                 solver_list[i] = PPLBackend(base_ring=base_ring)
-            elif solver[i] == "Interactivelp":
+
+            elif solver[i].upper() == "INTERACTIVELP":
                 from sage.numerical.backends.interactivelp_backend import InteractiveLPBackend
                 solver_list[i] = InteractiveLPBackend(base_ring=base_ring)
+
         return solver_list
     
 

@@ -50,6 +50,7 @@ def exact_optsol3(self):
 
     #HELP: construct dictionary with exact solver using basic_indices 
     #HELP: perform one pivot with final basic variables and solve() 
+    # need MILP get/set basis status functions here?
     
     d = self.backends[-1].dictionary()
 
