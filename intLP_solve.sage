@@ -13,8 +13,8 @@ def exact_optsol3(self):
 
     EXAMPLE::
 
+    
     #FIXME: need support for MILP with tuple solvers
-	
     sage: p = MixedIntegerLinearProgram(maximization=True, solver=("GLPK","InteractiveLP"))
     sage: w = p.new_variable(nonnegative=True)
     sage: p.add_constraint(0.5*w[0]+1.5*w[1] <= 100)
@@ -24,20 +24,20 @@ def exact_optsol3(self):
     sage: 
 
 
-            
-            sage: p = get_solver2(solver = ("GLPK", "InteractiveLP"))
-            sage: p.add_variables(2)
-            1
-            sage: p.add_linear_constraint([(0,1), (1,2)], None, 3)
-            sage: p.set_objective([2, 5])
-            sage: p.solve()
-            0
-            sage: p.get_objective_value()
-            15/2
-            sage: p.get_variable_value(0)
-            0
-            sage: p.get_variable_value(1)
-            3/2
+    #NOTE: simply testing the get_solver2 solver functionality for compatibility with tuple
+    sage: p,q = get_solver2(solver=("glpk","interactivelp"))
+    sage: p.add_variables(2)
+    1
+    sage: q.add_variables(2)
+    1
+    sage: p.add_linear_constraint([(0,1), (1,2)], None, 3)
+    sage: q.add_linear_constraint([(0,1), (1,2)], None, 3)
+    sage: p.set_objective([2,5])
+    sage: q.set_objective([2,5])
+    sage: p.solve()
+    0
+    sage: q.solve()
+    0
 
     """
 

@@ -120,13 +120,9 @@ def get_solver2(constraint_generation = False, solver = None, base_ring = None):
     else:
         if type(solver) == str:
             solver = solver.capitalize()
-        #elif type(solver) == tuple:
-            #solver_list = ["",""]
-            #print("tuple1")
-            #for ele in solver:
-                #ele = ele.capitalize()
-                #print(ele)
 
+    
+    #NEW: is solver is string, proceed as before with returning backend
     if type(solver) == str:
 
         if solver == "Coin":
@@ -162,6 +158,7 @@ def get_solver2(constraint_generation = False, solver = None, base_ring = None):
             from sage.numerical.backends.interactivelp_backend import InteractiveLPBackend
             return InteractiveLPBackend(base_ring=base_ring)
 
+    #NEW: if solver type is tuple, create a list of backends
     elif type(solver) == tuple:
         solver_list = ["",""]
         

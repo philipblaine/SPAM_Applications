@@ -16,3 +16,7 @@ load("posdef.sage")
 load("poly_solve.sage")
 load("poly_solve_methods.sage")
 load("exact_optsol2.sage")
+load("tuple_solver.sage")
+load("get_solver2.sage")
+load("intLP_solve.sage")
+
