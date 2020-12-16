@@ -15,11 +15,6 @@ def reconstruct(LP):
         sage: reconstruct(lp)
         sage: (3/2, 1/2)
 
-
-
-
-
-
     """
 
 
