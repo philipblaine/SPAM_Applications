@@ -29,7 +29,7 @@ def exact_optsol3(self):
     sage: q.solve()
     0
 
-    #FIXME: need support for MILP with tuple solvers
+    #FIXME: need support for MILP with tuple solvers, this doctest is incomplete
     sage: p = MixedIntegerLinearProgram(maximization=True, solver=("GLPK","InteractiveLP"))
     sage: w = p.new_variable(nonnegative=True)
     sage: p.add_constraint(0.5*w[0]+1.5*w[1] <= 100)
