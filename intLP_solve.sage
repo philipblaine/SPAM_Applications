@@ -72,7 +72,7 @@ bsol = exact_optsol2(b2)
 
 #create list of basic indices
 
-basic_vars = []
+basic_vars = [] #getbasisstatus from ticket for GLPK
 
 #add basic variables to list
 for i in range(p2.number_of_variables()):

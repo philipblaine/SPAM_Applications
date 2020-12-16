@@ -28,7 +28,7 @@ def reconstruct(LP):
     for i in range(len(LP.constraints())):
         for ele in LP.constraints()[i][1][1]:
             num_cons_coeffs += 1
-            if ele == int(ele):
+            if ele == int(ele): #try type instead
                 int_counter += 1
 
     if num_cons_coeffs == int_counter:
