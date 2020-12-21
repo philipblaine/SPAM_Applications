@@ -41,8 +41,6 @@ def exact_optsol3(LP):
 
     """
 
-    #self.backends[0].solver_parameter("simplex_or_intopt", "simplex_only")
-    #self.backends[0].solve()
     LP.solver_parameter("simplex_or_intopt","simplex_only")
     LP.solve()
 
@@ -50,28 +48,22 @@ def exact_optsol3(LP):
 
     basic_vars = []
 
-    #add basic variables to list
     for i in range(LP.number_of_variables()):
         if b.get_col_stat(i) == 1:
             basic_vars.append(i)
         
     for i in range(len(basic_vars)):
         basic_vars[i] += 1
-
     
     A = []
     Y = []
-
-    
-    
-    
 
     for i in range(len(LP.constraints())):
 
         A_list = []
 
         for j in range(len(LP.constraints()[i][1][1])):
-            LP.constraints()[i][1][1][j] = Rational(LP.constraints()[i][1][1][j])
+            
             A_list.append(Rational(LP.constraints()[i][1][1][j]))
         
         A.append(list(A_list))
