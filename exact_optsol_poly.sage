@@ -7,11 +7,11 @@ def exact_optsol2(LP):
     EXAMPLES::
         sage: from cutgeneratingfunctionology.igp import *
         sage: lp = MixedIntegerLinearProgram(solver = 'GLPK', maximization = False)
-        sage: x, y = lp[0], lp[1]
-        sage: lp.add_constraint(-2*x + y <= 1)
-        sage: lp.add_constraint(x - y <= 1)
-        sage: lp.add_constraint(x + y >= 2)
-        sage: lp.set_objective(x + y)
+        sage: x = lp.new_variable()
+        sage: lp.add_constraint(-2*x[0] + x[1] <= 1)
+        sage: lp.add_constraint(x[0] - x[1] <= 1)
+        sage: lp.add_constraint(x[0] + x[1] >= 2)
+        sage: lp.set_objective(x[0]+x[1])
         sage: exact_optsol2(lp)
         sage: (3/2, 1/2)
 
