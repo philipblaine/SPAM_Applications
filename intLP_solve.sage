@@ -32,10 +32,10 @@ def exact_optsol3(LP):
     #FIXME: need support for MILP with tuple solvers, this doctest is incomplete
     sage: p = MixedIntegerLinearProgram(maximization=True, solver=("GLPK","InteractiveLP"))
     sage: w = p.new_variable(nonnegative=True)
-    sage: p.add_constraint(0.5*w[0]+1.5*w[1] <= 100)
+    sage: p.add_constraint(1/2*w[0]+3/2*w[1] <= 100)
     sage: p.add_constraint(3*w[0]+w[1] <= 150)
     sage: p.set_objective(10*w[0]+5*w[1])
-    sage: p.exact_optsol3()
+    sage: exact_optsol3(p)
     sage: 
 
 
@@ -48,76 +48,45 @@ def exact_optsol3(LP):
 
     b = LP.get_backend()
 
-    basic_indices = []
+    basic_vars = []
 
+    #add basic variables to list
     for i in range(LP.number_of_variables()):
-        if b.is_variable_basic(i):
-            basic_indices.append(i)
-
-    D = LPRevisedDictionary(LP,basic_indices)
-    #HELP: construct dictionary with exact solver using basic_indices
-
- 
-    #HELP: perform one pivot with final basic variables and solve() 
-    # need MILP get/set basis status functions here: get_col_stat is this for GLPK
-    
-    #create LPProblemStandardForm here, with A, b, c matrices to compare speed with poly and solve_right
-
-
-
-    #d = self.backends[-1].dictionary()
-    #basic_vars = d.basic_variables()
-    #basic_sol = d.basic_solution()
-
-    return basic_sol
-    
-
-    
-
-"""
-
-#find exact_optsol2 to compare with exact_optsol3
-bsol = exact_optsol2(b2)
-
-#create list of basic indices
-
-basic_vars = [] #getbasisstatus from ticket for GLPK
-
-#add basic variables to list
-
-for i in range(LP.number_of_variables()):
-    if b.get_col_stat(i) == 1:
-        basic_vars.append(i)
-
-for i in range(len(basic_vars)):
-    basic_vars[i] += 1
+        if b.get_col_stat(i) == 1:
+            basic_vars.append(i)
         
+    for i in range(len(basic_vars)):
+        basic_vars[i] += 1
 
+    """
+    this code results in floating point A, Y, and
+     solution (.constraints() returns floats)
 
+    need to construct exact LP with rational A, Y entries
+    
+    A = []
+    Y = []
 
-F = P.final_revised_dictionary()
+    for i in range(len(LP.constraints())):
+        A.append(LP.constraints()[i][1][1])
+        Y.append(LP.constraints()[i][2])
 
-D.is_optimal()
+    A = Matrix(A)
+    Y = Matrix(Y)
 
-#final pivot computations, return exact_optsol3
-Binv = D.B_inverse()
+    print(A)
+    print(Y)
 
-b = Matrix(b)
-b = b.transpose()
+    """
+    A = ([[1/2,3/2],[3,1]])
+    Y = (100,150)
+    c = (10, 5)
 
-Binvb = Binv * b
+    P = InteractiveLPProblemStandardForm(A, Y, c)
 
-exact_optsol3 = tuple(Binvb.transpose())
-exact_optsol3
-exact_optsol3_value = 0
+    D = LPRevisedDictionary(P,basic_vars)
 
-exact_optsol3 = exact_optsol3[0]
-exact_optsol3
-for i in range(len(exact_optsol3)):
-    exact_optsol3_value += c[i]*Binvb[i]
+    return D.basic_solution()
     
 
-print(exact_optsol3)
-print(bsol)
-print(exact_optsol3_value)
-"""
+
