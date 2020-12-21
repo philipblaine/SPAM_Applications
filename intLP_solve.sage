@@ -81,7 +81,10 @@ def exact_optsol3(LP):
     A = Matrix(A)
     Y = Matrix(Y)
 
-    c = (10, 5)
+    c = []
+
+    for j in range(LP.number_of_variables()):
+        c.append(Rational(b.objective_coefficient(j)))
 
     P = InteractiveLPProblemStandardForm(A, Y, c)
 
