@@ -58,28 +58,29 @@ def exact_optsol3(LP):
     for i in range(len(basic_vars)):
         basic_vars[i] += 1
 
-    """
-    this code results in floating point A, Y, and
-     solution (.constraints() returns floats)
-
-    need to construct exact LP with rational A, Y entries
     
     A = []
     Y = []
 
+    
+    
+    
+
     for i in range(len(LP.constraints())):
-        A.append(LP.constraints()[i][1][1])
-        Y.append(LP.constraints()[i][2])
+
+        A_list = []
+
+        for j in range(len(LP.constraints()[i][1][1])):
+            LP.constraints()[i][1][1][j] = Rational(LP.constraints()[i][1][1][j])
+            A_list.append(Rational(LP.constraints()[i][1][1][j]))
+        
+        A.append(list(A_list))
+        
+        Y.append(Rational(LP.constraints()[i][2]))
 
     A = Matrix(A)
     Y = Matrix(Y)
 
-    print(A)
-    print(Y)
-
-    """
-    A = ([[1/2,3/2],[3,1]])
-    Y = (100,150)
     c = (10, 5)
 
     P = InteractiveLPProblemStandardForm(A, Y, c)
