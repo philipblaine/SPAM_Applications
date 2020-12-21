@@ -5,7 +5,7 @@
 ### write generic function calls (e.g. remove RevisedLPDictionary) to accommodate future backend solvers 
 
 
-def exact_optsol3(self):
+def exact_optsol3(LP):
 
     """
     INPUT:  MILP object with at least one designated exact rational solver
@@ -41,14 +41,20 @@ def exact_optsol3(self):
 
     """
 
-    self.backends[0].solver_parameter("simplex_or_intopt", "simplex_only")
-    self.backends[0].solve()
+    #self.backends[0].solver_parameter("simplex_or_intopt", "simplex_only")
+    #self.backends[0].solve()
+    LP.solver_parameter("simplex_or_intopt","simplex_only")
+    LP.solve()
+
+    b = LP.get_backend()
 
     basic_indices = []
 
-    for i in range(self.number_of_variables()):
-        if self.backends[0].is_variable_basic(i):
+    for i in range(LP.number_of_variables()):
+        if b.is_variable_basic(i):
             basic_indices.append(i)
+
+    D = LPRevisedDictionary(LP,basic_indices)
 
     #HELP: construct dictionary with exact solver using basic_indices 
     #HELP: perform one pivot with final basic variables and solve() 
@@ -75,15 +81,16 @@ bsol = exact_optsol2(b2)
 basic_vars = [] #getbasisstatus from ticket for GLPK
 
 #add basic variables to list
-for i in range(p2.number_of_variables()):
-    if b2.get_col_stat(i) == 1:
+
+for i in range(LP.number_of_variables()):
+    if b.get_col_stat(i) == 1:
         basic_vars.append(i)
-        
+
 for i in range(len(basic_vars)):
     basic_vars[i] += 1
         
 
-D = LPRevisedDictionary(P,basic_vars)
+
 
 F = P.final_revised_dictionary()
 
