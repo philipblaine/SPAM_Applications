@@ -55,16 +55,19 @@ def exact_optsol3(LP):
             basic_indices.append(i)
 
     D = LPRevisedDictionary(LP,basic_indices)
+    #HELP: construct dictionary with exact solver using basic_indices
 
-    #HELP: construct dictionary with exact solver using basic_indices 
+ 
     #HELP: perform one pivot with final basic variables and solve() 
-    # need MILP get/set basis status functions here?
+    # need MILP get/set basis status functions here: get_col_stat is this for GLPK
     
-    d = self.backends[-1].dictionary()
+    #create LPProblemStandardForm here, with A, b, c matrices to compare speed with poly and solve_right
 
-    basic_vars = d.basic_variables()
 
-    basic_sol = d.basic_solution()
+
+    #d = self.backends[-1].dictionary()
+    #basic_vars = d.basic_variables()
+    #basic_sol = d.basic_solution()
 
     return basic_sol
     
