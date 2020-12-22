@@ -1,9 +1,7 @@
-
-
 def exact_optsol_intLP(LP):
 
     """
-    INPUT:  MILP object with at least one designated exact rational solver
+    INPUT:  MILP object with an inexact solver
     OUTPUT: exact rational solution to LP (found using LP's backend basis functions)
 
     EXAMPLE::
@@ -26,6 +24,7 @@ def exact_optsol_intLP(LP):
     LP.solve()
 
     b = LP.get_backend()
+    
 
     basic_vars = []
 
@@ -35,6 +34,8 @@ def exact_optsol_intLP(LP):
         
     for i in range(len(basic_vars)):
         basic_vars[i] += 1
+    
+    
     
     A = []
     Y = []
@@ -55,21 +56,31 @@ def exact_optsol_intLP(LP):
         if Rational(LP.constraints()[i][2])!= 0:
             Y.append(Rational(LP.constraints()[i][2]))
     
-    A = Matrix(A)
+    print("hi")
+    #A = Matrix(A)
     
-    Y = Matrix(Y)
-
+    #Y = Matrix(Y)
+    
     c = []
+    print(LP.number_of_variables())
+
+    #psolver = get_solver(LP)
+    #print(psolver)
 
     for j in range(LP.number_of_variables()):
+        
         c.append(Rational(b.objective_coefficient(j)))
-
+        #print(c)
+    
+    
     P = InteractiveLPProblemStandardForm(A, Y, c)
 
+    #depending on test:
     #Arithmetic Error: self must be a square matrix
-    D = LPRevisedDictionary(P,[1,2])
-    
+    #ValueError: inconsistent number of columns: should be 99 but got 97
 
+    D = LPRevisedDictionary(P,basic_vars)
+    
     return D.basic_solution()
     
 

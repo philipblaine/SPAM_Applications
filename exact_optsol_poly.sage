@@ -62,7 +62,7 @@ def exact_optsol_poly(LP):
             n += 1
 
     polysol = ppl_poly_solve(A,Y)
-
+    
     return polysol[0:ncol]
 
     
