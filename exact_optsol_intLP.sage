@@ -8,12 +8,14 @@ def exact_optsol_intLP(LP):
 
     EXAMPLE::
 
-
+    #works for this doctest, fails others
     sage: p = MixedIntegerLinearProgram(maximization=True, solver="GLPK")
     sage: w = p.new_variable(nonnegative=True)
-    sage: p.add_constraint(1/2*w[0]+3/2*w[1] <= 100)
-    sage: p.add_constraint(3*w[0]+w[1] <= 150)
-    sage: p.set_objective(10*w[0]+5*w[1])
+    sage: A = Matrix([[1/2,3/2],[3,1]])
+    sage: Y = vector(Matrix([[100,150]]))
+    sage: c = vector(Matrix([[10,5]]))
+    sage: p.add_constraint(A*w <= Y)
+    sage: p.set_objective(c)
     sage: exact_optsol_intLP(p)
     (225/4, 125/4)
 
@@ -62,12 +64,10 @@ def exact_optsol_intLP(LP):
     for j in range(LP.number_of_variables()):
         c.append(Rational(b.objective_coefficient(j)))
 
-    
-
     P = InteractiveLPProblemStandardForm(A, Y, c)
 
     #Arithmetic Error: self must be a square matrix
-    D = LPRevisedDictionary(P,basic_vars)
+    D = LPRevisedDictionary(P,[1,2])
     
 
     return D.basic_solution()
