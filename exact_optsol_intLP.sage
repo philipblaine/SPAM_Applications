@@ -36,7 +36,7 @@ def exact_optsol_intLP(LP):
         basic_vars[i] += 1
     
     
-    
+    """
     A = []
     Y = []
     
@@ -69,7 +69,7 @@ def exact_optsol_intLP(LP):
     
     #print(A)
     #print(Y)
-
+    """
     P = InteractiveLPProblemStandardForm(A, Y, c)
 
     #depending on test:
