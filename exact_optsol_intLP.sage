@@ -9,22 +9,7 @@ def exact_optsol_intLP(LP):
     EXAMPLE::
 
 
-    #NOTE: simply testing the get_solver2 solver functionality for compatibility with tuple
-    sage: p,q = get_solver2(solver=("glpk","interactivelp"))
-    sage: p.add_variables(2)
-    1
-    sage: q.add_variables(2)
-    1
-    sage: p.add_linear_constraint([(0,1), (1,2)], None, 3)
-    sage: q.add_linear_constraint([(0,1), (1,2)], None, 3)
-    sage: p.set_objective([2,5])
-    sage: q.set_objective([2,5])
-    sage: p.solve()
-    0
-    sage: q.solve()
-    0
-
-    sage: p = MixedIntegerLinearProgram(maximization=True, solver=("GLPK","InteractiveLP"))
+    sage: p = MixedIntegerLinearProgram(maximization=True, solver="GLPK")
     sage: w = p.new_variable(nonnegative=True)
     sage: p.add_constraint(1/2*w[0]+3/2*w[1] <= 100)
     sage: p.add_constraint(3*w[0]+w[1] <= 150)
@@ -76,12 +61,14 @@ def exact_optsol_intLP(LP):
 
     for j in range(LP.number_of_variables()):
         c.append(Rational(b.objective_coefficient(j)))
-        
+
+    
 
     P = InteractiveLPProblemStandardForm(A, Y, c)
 
+    #Arithmetic Error: self must be a square matrix
     D = LPRevisedDictionary(P,basic_vars)
-    print(D)
+    
 
     return D.basic_solution()
     

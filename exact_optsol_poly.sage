@@ -1,4 +1,4 @@
-def exact_optsol2(LP):
+def exact_optsol_poly(LP):
     r"""
 
     INPUT:  MILP object with solver="GLPK"

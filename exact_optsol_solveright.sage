@@ -1,4 +1,4 @@
-def exact_optsol(LP):
+def exact_optsol_solveright(LP):
 
     
 
