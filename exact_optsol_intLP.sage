@@ -1,4 +1,4 @@
-def exact_optsol_intLP(LP):
+def exact_optsol_intLP(LP, A, Y, c):
 
     """
     INPUT:  MILP object with an inexact solver
@@ -36,7 +36,7 @@ def exact_optsol_intLP(LP):
         basic_vars[i] += 1
     
     
-    
+    """
     A = []
     Y = []
     
@@ -68,10 +68,10 @@ def exact_optsol_intLP(LP):
     #print(psolver)
 
     for j in range(LP.number_of_variables()):
-        
-        c.append(Rational(b.objective_coefficient(j)))
-        #print(c)
-    
+        if b.objective_coefficient(j) != []:
+            c.append(Rational(b.objective_coefficient(j)))
+            print(c)
+    """
     
     P = InteractiveLPProblemStandardForm(A, Y, c)
 
