@@ -1,4 +1,4 @@
-def exact_optsol_intLP(LP, A, Y, c):
+def exact_optsol_intLP(LP):
 
     """
     INPUT:  MILP object with an inexact solver
@@ -36,7 +36,7 @@ def exact_optsol_intLP(LP, A, Y, c):
         basic_vars[i] += 1
     
     
-    """
+    
     A = []
     Y = []
     
@@ -53,26 +53,23 @@ def exact_optsol_intLP(LP, A, Y, c):
             A.append(A_list)
         
         
-        if Rational(LP.constraints()[i][2])!= 0:
-            Y.append(Rational(LP.constraints()[i][2]))
+        #if Rational(LP.constraints()[i][2])!= 0:
+        Y.append(Rational(LP.constraints()[i][2]))
     
-    print("hi")
+
     #A = Matrix(A)
-    
     #Y = Matrix(Y)
     
     c = []
-    print(LP.number_of_variables())
-
-    #psolver = get_solver(LP)
-    #print(psolver)
 
     for j in range(LP.number_of_variables()):
-        if b.objective_coefficient(j) != []:
-            c.append(Rational(b.objective_coefficient(j)))
-            print(c)
-    """
+        #if b.objective_coefficient(j) != []:
+        c.append(Rational(b.objective_coefficient(j)))
+            #print(c)
     
+    #print(A)
+    #print(Y)
+
     P = InteractiveLPProblemStandardForm(A, Y, c)
 
     #depending on test:
@@ -80,6 +77,7 @@ def exact_optsol_intLP(LP, A, Y, c):
     #ValueError: inconsistent number of columns: should be 99 but got 97
 
     D = LPRevisedDictionary(P,basic_vars)
+    
     
     return D.basic_solution()
     
