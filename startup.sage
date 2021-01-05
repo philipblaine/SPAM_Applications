@@ -1,7 +1,7 @@
 import sys
 import cProfile
 import numpy as np
-sys.path.append("/mnt/c/users/phili/cutgeneratingfunctionology")
+sys.path.append("/mnt/c/users/phili/SAGEMATH/cutgeneratingfunctionology")
 from sage.numerical.interactive_simplex_method import *
 import cutgeneratingfunctionology.igp as igp; from cutgeneratingfunctionology.igp import *
 load("LPSolver.sage")
