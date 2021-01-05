@@ -3,7 +3,7 @@ import cProfile
 import numpy as np
 sys.path.append("/mnt/c/users/phili/SAGEMATH/cutgeneratingfunctionology-master")
 from sage.numerical.interactive_simplex_method import *
-import cutgeneratingfunctionology-master.igp as igp; from cutgeneratingfunctionology-master.igp import *
+import cutgeneratingfunctionology.igp as igp; from cutgeneratingfunctionology.igp import *
 load("LPSolver.sage")
 load("ineq.sage")
 load("ineq2.sage")
