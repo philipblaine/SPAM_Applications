@@ -31,24 +31,25 @@ def exact_optsol_intLP(LP):
 
     basic_vars = [(i+1) for i in range(b.ncols()) if b.is_variable_basic(i)]+[(b.nrows()+j+1) for j in range(b.nrows()) if b.is_slack_variable_basic(j)]
 
-    A = []
-    Y = []
-    
-    for i in range(len(LP.constraints())):
-        
-        A_list = []
+    num_cons = LP.number_of_constraints()
 
-        for j in range(len(LP.constraints()[i][1][1])):
+    A = matrix(QQ,num_cons)
+    Y = matrix(QQ,num_cons,1)
+    
+    for j in range(LP.number_of_variables()):
+        lst1 = LP.constraints()[j][1][1]
+        for i in range(LP.number_of_variables()):
+            if i in LP.constraints()[j][1][0]:
             
-            A_list.append(Rational(LP.constraints()[i][1][1][-(j+1)]))
+                A[j,i] = Rational(lst1[-(i+1)])
+            
+            else:
+                lst1.insert(-i,0)
             
         
-        if A_list != []:
-            A.append(A_list)
-        
-        
+    for i in range(LP.number_of_variables()):
         if Rational(LP.constraints()[i][2])!= 0:
-            Y.append(Rational(LP.constraints()[i][2]))
+            Y[i] = Rational(LP.constraints()[i][2])
     
     
     c = []
@@ -56,14 +57,9 @@ def exact_optsol_intLP(LP):
     for j in range(LP.number_of_variables()):
         if b.objective_coefficient(j) != []:
             c.append(Rational(b.objective_coefficient(j)))
-            #print(c)
-
-    #print(A)
-    #print(Y)
-    #print(c)
 
     P = InteractiveLPProblemStandardForm(A, Y, c)
 
     D = P.dictionary(*basic_vars)
 
-    return D.basic_solution()
+    return tuple(D.basic_solution())

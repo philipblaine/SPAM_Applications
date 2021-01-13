@@ -73,4 +73,4 @@ def exact_optsol_solveright(LP):
 
     #X = A \ Y
     X = A.solve_right(Y, check=False)
-    return X[0:ncol]
+    return tuple(X[0:ncol])
