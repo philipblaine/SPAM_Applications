@@ -35,6 +35,30 @@ def exact_optsol_intLP(LP):
 
     A = matrix(QQ,num_cons)
     Y = matrix(QQ,num_cons,1)
+
+
+    
+
+    #same problem here with index = 99, not 99 elements to index through. 
+    #list index out of range
+
+    j = 0
+
+    for l in LP.constraints():
+        #print(l)
+        for i in l[1][0]:
+            print(i)
+            A[j,i]= Rational(l[1][1][-(i+1)])
+            #print(A[j,i])
+        j += 1
+
+    """
+
+    for (l,j) in zip(LP.constraints(), range(LP.number_of_variables())):
+        for i in l[1][0]:
+            A[j,i]= Rational(l[1][1][-(i+1)])
+
+    
     
     for j in range(LP.number_of_variables()):
         lst1 = LP.constraints()[j][1][1]
@@ -46,7 +70,7 @@ def exact_optsol_intLP(LP):
             else:
                 lst1.insert(-i,0)
             
-        
+    """
     for i in range(LP.number_of_variables()):
         if Rational(LP.constraints()[i][2])!= 0:
             Y[i] = Rational(LP.constraints()[i][2])
