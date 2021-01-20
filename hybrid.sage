@@ -411,11 +411,18 @@ class HybridBackend:
         for b in self.backends:
             b.add_linear_constraints(number, lower_bound, upper_bound, names)
 
-    def solve(self):
+    def solve(self, solve_method):
         """
         Solve the problem.
 
         .. NOTE::
+
+            Takes an MILP object as input. Outputs the exact optimal solution to
+            MILP in one of two ways: using .solve() from InteractiveLP or by 
+            constructing a polyhedron from the matrices defining the MILP.
+
+            Solve_method can be either "IntLP" or "Polyhedron", corresponding
+            to exact_optsol_intLP and exact_optsol_poly, respectively.
 
             This method raises ``MIPSolverException`` exceptions when
             the solution can not be computed for any reason (none
@@ -437,8 +444,164 @@ class HybridBackend:
         """
         ## FIXME: Call backends, copy bases, ...
 
+        if solve_method is "IntLP":
+            LP.solver_parameter("simplex_or_intopt", "simplex_only")
+            LP.solve()
 
-        return self.backends[-1].solve()
+            b = LP.get_backend()
+
+            basic_vars = [(i+1) for i in range(b.ncols()) if b.is_variable_basic(i)]+[(b.nrows()+j+1) for j in range(b.nrows()) if b.is_slack_variable_basic(j)]
+
+            num_cons = LP.number_of_constraints()
+
+            A = matrix(QQ,num_cons)
+            Y = matrix(QQ,num_cons,1)
+
+
+    
+
+            #same problem here with index = 99, not 99 elements to index through. 
+            #list index out of range
+
+            j = 0
+
+            for l in LP.constraints():
+                #print(l)
+                for i in l[1][0]:
+                    print(i)
+                    A[j,i]= Rational(l[1][1][-(i+1)])
+                    #print(A[j,i])
+                j += 1
+
+            """
+
+            for (l,j) in zip(LP.constraints(), range(LP.number_of_variables())):
+                for i in l[1][0]:
+                    A[j,i]= Rational(l[1][1][-(i+1)])
+
+    
+    
+            for j in range(LP.number_of_variables()):
+                lst1 = LP.constraints()[j][1][1]
+                for i in range(LP.number_of_variables()):
+                    if i in LP.constraints()[j][1][0]:
+            
+                        A[j,i] = Rational(lst1[-(i+1)])
+            
+                    else:
+                        lst1.insert(-i,0)
+             
+            """
+            for i in range(LP.number_of_variables()):
+                if Rational(LP.constraints()[i][2])!= 0:
+                    Y[i] = Rational(LP.constraints()[i][2])
+    
+    
+            c = []
+
+            for j in range(LP.number_of_variables()):
+                if b.objective_coefficient(j) != []:
+                    c.append(Rational(b.objective_coefficient(j)))
+
+            P = InteractiveLPProblemStandardForm(A, Y, c)
+
+            D = P.dictionary(*basic_vars)
+
+
+            #how to format the return using self.backends[....]?
+
+            return tuple(D.basic_solution())
+
+            return self.backends[-1].solve()
+
+        elif solve_method is "Polyhedron":
+            LP.solver_parameter("simplex_or_intopt", "simplex_only")
+            LP.solve()
+
+            b = LP.get_backend()
+
+            ncol = b.ncols()
+            nrow = b.nrows()
+            A = matrix(QQ, ncol + nrow, ncol + nrow, sparse = True)
+            for i in range(nrow):
+                r = b.row(i)
+                for (j, c) in zip(r[0], r[1]):
+                    A[i, j] = QQ(c)
+                A[i, ncol + i] = -1
+            n = nrow
+            Y = zero_vector(QQ, ncol + nrow)
+            for i in range(ncol):
+                status =  b.get_col_stat(i)
+                if status > 1:
+                    A[n, i] = 1
+                    if status == 2:
+                        Y[n] = b.col_bounds(i)[0]
+                    else:
+                        Y[n] = b.col_bounds(i)[1]
+                    n += 1
+
+            for i in range(nrow):
+                status =  b.get_row_stat(i)
+                if status > 1:
+                    A[n, ncol + i] = 1
+                    if status == 2:
+                        Y[n] = b.row_bounds(i)[0]
+                    else:
+                        Y[n] = b.row_bounds(i)[1]
+                    n += 1
+
+            polysol = ppl_poly_solve(A,Y)
+    
+            return polysol[0:ncol]
+
+    
+    def ppl_poly_solve(A,Y):
+
+        poly = make_ppl_poly(A,Y)
+
+        verts = get_poly_verts(poly)
+
+        return verts
+
+    def make_ppl_poly(A,Y):
+
+        ncol = A.ncols()
+        nrow = A.nrows()
+        Y = vector(Y)
+
+        eqnlist = []
+        alist = [ele for ele in A]
+
+        for i in range(len(Y)):
+            eqnlist.append([-Y[i]])
+
+        for j in range(ncol):
+            for k in range(ncol):
+                eqnlist[j].append(alist[j][k])
+
+        poly = Polyhedron(eqns=eqnlist, backend="ppl")
+
+        return poly
+
+    def get_poly_verts(poly):
+
+        """ retrieves the vertices of the polyhedron construced with make_poly
+   
+            sage: verts = get_poly_verts(poly)
+            sage: verts
+            (60, -27, -17)
+
+        """
+
+        X = poly.vertices_list()
+    
+        for s in range(len(X)):
+            X[s] = tuple(X[s])
+
+    
+        for l in range(len(X)):
+            return tuple(X)[l]
+
 
     def get_objective_value(self):
         """
