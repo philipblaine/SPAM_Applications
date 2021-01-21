@@ -42,6 +42,18 @@ def exact_optsol_intLP(LP):
     #same problem here with index = 99, not 99 elements to index through. 
     #list index out of range
 
+    
+    j = 0
+
+    for l in LP.constraints():
+        for (i, r) in zip(l[1][0], l[1][1]):
+            A[j, i]=QQ(r)
+        j += 1
+
+    """
+
+    
+
     j = 0
 
     for l in LP.constraints():
@@ -52,7 +64,7 @@ def exact_optsol_intLP(LP):
             #print(A[j,i])
         j += 1
 
-    """
+    
 
     for (l,j) in zip(LP.constraints(), range(LP.number_of_variables())):
         for i in l[1][0]:

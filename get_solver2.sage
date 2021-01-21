@@ -170,6 +170,8 @@ def get_solver2(constraint_generation = False, solver = None, base_ring = None):
     elif type(solver) == tuple:
         solver_list = ["",""]
         
+#change to return hybrid backend with soplvers in list
+
         for i in range(len(solver)):
             if solver[i].upper() == "COIN":
                 from sage_numerical_backends_coin.coin_backend import CoinBackend

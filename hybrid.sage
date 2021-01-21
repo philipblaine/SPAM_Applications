@@ -475,6 +475,7 @@ class HybridBackend:
 
                 for i in l[1][0]:
                     #print(i)
+
                     A[j,i]= QQ(l[1][1][-(i+1)])
 
                     #print(A[j,i])
@@ -485,7 +486,7 @@ class HybridBackend:
 
             for (l,j) in zip(LP.constraints(), range(LP.number_of_variables())):
                 for i in l[1][0]:
-                    A[j,i]= Rational(l[1][1][-(i+1)])
+                    A[j,i]= QQ(l[1][1][-(i+1)])
 
     
     
@@ -494,7 +495,7 @@ class HybridBackend:
                 for i in range(LP.number_of_variables()):
                     if i in LP.constraints()[j][1][0]:
             
-                        A[j,i] = Rational(lst1[-(i+1)])
+                        A[j,i] = QQ(lst1[-(i+1)])
             
                     else:
                         lst1.insert(-i,0)
@@ -502,7 +503,7 @@ class HybridBackend:
             """
             for i in range(LP.number_of_variables()):
                 if Rational(LP.constraints()[i][2])!= 0:
-                    Y[i] = Rational(LP.constraints()[i][2])
+                    Y[i] = QQ(LP.constraints()[i][2])
     
     
             c = []
