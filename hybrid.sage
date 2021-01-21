@@ -445,6 +445,7 @@ class HybridBackend:
         ## FIXME: Call backends, copy bases, ...
 
         if solve_method is "IntLP":
+
             LP.solver_parameter("simplex_or_intopt", "simplex_only")
             LP.solve()
 
@@ -460,17 +461,21 @@ class HybridBackend:
 
     
 
-            #same problem here with index = 99, not 99 elements to index through. 
-            #list index out of range
+            #same problem here with index = 99, not 99 elements to index through
+            #IndexError: list index out of range
 
             j = 0
 
             for l in LP.constraints():
+
                 #print(l)
+
                 for i in l[1][0]:
-                    print(i)
-                    A[j,i]= Rational(l[1][1][-(i+1)])
+                    #print(i)
+                    A[j,i]= QQ(l[1][1][-(i+1)])
+
                     #print(A[j,i])
+
                 j += 1
 
             """
