@@ -430,6 +430,9 @@ class HybridBackend:
 
         EXAMPLE::
 
+            QUESTION: doctests formatted how? using solve from IntLP? Or exact_optsol?
+
+
             sage: from sage.numerical.backends.generic_backend import get_solver
             sage: p = get_solver(solver = ("GLPK", "InteractiveLP"))
             sage: p.add_linear_constraints(5, 0, None)
@@ -514,11 +517,15 @@ class HybridBackend:
 
 
             #how to format the return using self.backends[....]?
+            #have to add to Interactive backend as solve options?
 
             return tuple(D.basic_solution())
 
             return self.backends[-1].solve()
 
+
+
+       
         elif solve_method is "Polyhedron":
             LP.solver_parameter("simplex_or_intopt", "simplex_only")
             LP.solve()
@@ -562,6 +569,24 @@ class HybridBackend:
     
     def ppl_poly_solve(A,Y):
 
+        """
+        Returns the vertex defined by the polyhedron constructed with make_ppl_poly.
+
+        INPUT:
+
+        - ``A`` (matrix) -- LHS matrix of constraints.
+
+        - ``Y`` (matrix) -- RHS matrix of constraint upper bounds
+
+        EXAMPLE::
+
+            sage: A = Matrix([[1,2],[2,3]])
+            sage: Y = Matrix([[3,4]])
+            sage: ppl_poly_solve(A,Y)
+            (-1,2)
+
+        """
+
         poly = make_ppl_poly(A,Y)
 
         verts = get_poly_verts(poly)
@@ -569,6 +594,24 @@ class HybridBackend:
         return verts
 
     def make_ppl_poly(A,Y):
+
+        """
+        Constructs a polyhedron defined by matrix A*x <= vector Y using PPL backend.
+
+        INPUT:
+
+        - ``A`` (matrix) -- LHS matrix of constraints.
+
+        - ``Y`` (matrix) -- RHS matrix of constraint upper bounds
+
+        EXAMPLE::
+
+            sage: A = Matrix([[1,2],[2,3]])
+            sage: Y = Matrix([[3,4]])
+            sage: make_ppl_poly(A,Y)
+            A 0-dimensional polyhedron in QQ^2 defined as the convex hull of 1 vertex
+
+        """
 
         ncol = A.ncols()
         nrow = A.nrows()
@@ -590,7 +633,8 @@ class HybridBackend:
 
     def get_poly_verts(poly):
 
-        """ retrieves the vertices of the polyhedron construced with make_poly
+        """ 
+        Retrieves the vertices of the polyhedron construced with make_ppl_poly.
    
             sage: verts = get_poly_verts(poly)
             sage: verts
