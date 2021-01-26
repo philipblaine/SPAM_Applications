@@ -449,40 +449,40 @@ class HybridBackend:
 
         if self.backends[-1] is "InteractiveLP":
 
-            LP.solver_parameter("simplex_or_intopt", "simplex_only")
-            LP.solve()
+            lp.solver_parameter("simplex_or_intopt", "simplex_only")
+            lp.solve()
 
-            b = LP.get_backend()
+            b = lp.get_backend()
 
             basic_vars = [(i+1) for i in range(b.ncols()) if b.is_variable_basic(i)]+[(b.nrows()+j+1) for j in range(b.nrows()) if b.is_slack_variable_basic(j)]
 
-            num_cons = LP.number_of_constraints()
+            num_cons = lp.number_of_constraints()
 
-            A = matrix(QQ,num_cons)
-            Y = matrix(QQ,num_cons,1)
+            a = matrix(QQ,num_cons)
+            y = matrix(QQ,num_cons,1)
 
             j = 0
 
-            for l in LP.constraints():
+            for l in lp.constraints():
                 for (i, r) in zip(l[1][0], l[1][1]):
-                    A[j, i]=QQ(r)
+                    a[j, i]=QQ(r)
                 j += 1
 
-            for i in range(LP.number_of_variables()):
-                if Rational(LP.constraints()[i][2])!= 0:
-                    Y[i] = QQ(LP.constraints()[i][2])
+            for i in range(lp.number_of_variables()):
+                if QQ(lp.constraints()[i][2])!= 0:
+                    y[i] = QQ(lp.constraints()[i][2])
     
             c = []
 
-            for j in range(LP.number_of_variables()):
+            for j in range(lp.number_of_variables()):
                 if b.objective_coefficient(j) != []:
                     c.append(QQ(b.objective_coefficient(j)))
 
-            P = InteractiveLPProblemStandardForm(A, Y, c)
+            p = InteractiveLPProblemStandardForm(a, y, c)
 
-            D = P.dictionary(*basic_vars)
+            d = p.dictionary(*basic_vars)
 
-            return tuple(D.basic_solution())
+            return tuple(d.basic_solution())
 
             return self.backends[-1].solve()
 
@@ -491,50 +491,50 @@ class HybridBackend:
        
         elif self.backends[-1] is "Polyhedron":
 
-            LP.solver_parameter("simplex_or_intopt", "simplex_only")
-            LP.solve()
+            lp.solver_parameter("simplex_or_intopt", "simplex_only")
+            lp.solve()
 
-            b = LP.get_backend()
+            b = lp.get_backend()
 
             ncol = b.ncols()
             nrow = b.nrows()
-            A = matrix(QQ, ncol + nrow, ncol + nrow, sparse = True)
+            a = matrix(QQ, ncol + nrow, ncol + nrow, sparse = True)
             for i in range(nrow):
                 r = b.row(i)
                 for (j, c) in zip(r[0], r[1]):
-                    A[i, j] = QQ(c)
-                A[i, ncol + i] = -1
+                    a[i, j] = QQ(c)
+                a[i, ncol + i] = -1
             n = nrow
-            Y = zero_vector(QQ, ncol + nrow)
+            y = zero_vector(QQ, ncol + nrow)
             for i in range(ncol):
                 status =  b.get_col_stat(i)
                 if status > 1:
-                    A[n, i] = 1
+                    a[n, i] = 1
                     if status == 2:
-                        Y[n] = b.col_bounds(i)[0]
+                        y[n] = b.col_bounds(i)[0]
                     else:
-                        Y[n] = b.col_bounds(i)[1]
+                        y[n] = b.col_bounds(i)[1]
                     n += 1
 
             for i in range(nrow):
                 status =  b.get_row_stat(i)
                 if status > 1:
-                    A[n, ncol + i] = 1
+                    a[n, ncol + i] = 1
                     if status == 2:
-                        Y[n] = b.row_bounds(i)[0]
+                        y[n] = b.row_bounds(i)[0]
                     else:
-                        Y[n] = b.row_bounds(i)[1]
+                        y[n] = b.row_bounds(i)[1]
                     n += 1
 
-            ncol = A.ncols()
-            nrow = A.nrows()
-            Y = vector(Y)
+            ncol = a.ncols()
+            nrow = a.nrows()
+            y = vector(y)
 
             eqnlist = []
-            alist = [ele for ele in A]
+            alist = [ele for ele in a]
 
-            for i in range(len(Y)):
-                eqnlist.append([-Y[i]])
+            for i in range(len(y)):
+                eqnlist.append([-y[i]])
 
             for j in range(ncol):
                 for k in range(ncol):
@@ -542,13 +542,13 @@ class HybridBackend:
 
             poly = Polyhedron(eqns=eqnlist, backend="ppl")\
             
-            X = poly.vertices_list()
+            verts_list = poly.vertices_list()
     
-            for s in range(len(X)):
-                X[s] = tuple(X[s])
+            for s in range(len(verts_list)):
+                verts_list[s] = tuple(verts_list[s])
     
-            for l in range(len(X)):
-                verts = tuple(X)[l]
+            for l in range(len(verts_list)):
+                verts = tuple(verts_list)[l]
     
             return verts[0:ncol]
 
