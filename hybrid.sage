@@ -449,32 +449,32 @@ class HybridBackend:
 
         if self.backends[-1] is "InteractiveLP":
 
-            lp.solver_parameter("simplex_or_intopt", "simplex_only")
-            lp.solve()
+            self.solver_parameter("simplex_or_intopt", "simplex_only")
+            self.solve()
 
-            b = lp.get_backend()
+            b = self.get_backend()
 
             basic_vars = [(i+1) for i in range(b.ncols()) if b.is_variable_basic(i)]+[(b.nrows()+j+1) for j in range(b.nrows()) if b.is_slack_variable_basic(j)]
 
-            num_cons = lp.number_of_constraints()
+            num_cons = self.number_of_constraints()
 
             a = matrix(QQ,num_cons)
             y = matrix(QQ,num_cons,1)
 
             j = 0
 
-            for l in lp.constraints():
+            for l in self.constraints():
                 for (i, r) in zip(l[1][0], l[1][1]):
                     a[j, i]=QQ(r)
                 j += 1
 
-            for i in range(lp.number_of_variables()):
-                if QQ(lp.constraints()[i][2])!= 0:
-                    y[i] = QQ(lp.constraints()[i][2])
+            for i in range(self.number_of_variables()):
+                if QQ(self.constraints()[i][2])!= 0:
+                    y[i] = QQ(self.constraints()[i][2])
     
             c = []
 
-            for j in range(lp.number_of_variables()):
+            for j in range(self.number_of_variables()):
                 if b.objective_coefficient(j) != []:
                     c.append(QQ(b.objective_coefficient(j)))
 
@@ -489,10 +489,10 @@ class HybridBackend:
 
         elif self.backends[-1] is "Polyhedron":
 
-            lp.solver_parameter("simplex_or_intopt", "simplex_only")
-            lp.solve()
+            self.solver_parameter("simplex_or_intopt", "simplex_only")
+            self.solve()
 
-            b = lp.get_backend()
+            b = self.get_backend()
 
             ncol = b.ncols()
             nrow = b.nrows()
