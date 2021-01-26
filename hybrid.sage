@@ -482,13 +482,11 @@ class HybridBackend:
 
             d = p.dictionary(*basic_vars)
 
-            return tuple(d.basic_solution())
+            tuple_d = tuple(d.basic_solution())
 
-            return self.backends[-1].solve()
+            return tuple_d
 
 
-
-       
         elif self.backends[-1] is "Polyhedron":
 
             lp.solver_parameter("simplex_or_intopt", "simplex_only")
@@ -549,8 +547,10 @@ class HybridBackend:
     
             for l in range(len(verts_list)):
                 verts = tuple(verts_list)[l]
+
+            verts_sol = verts[0:ncol]
     
-            return verts[0:ncol]
+            return verts_sol
 
 
     def get_objective_value(self):
