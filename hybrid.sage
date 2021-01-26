@@ -411,7 +411,7 @@ class HybridBackend:
         for b in self.backends:
             b.add_linear_constraints(number, lower_bound, upper_bound, names)
 
-    def solve(self, solve_method):
+    def solve(self):
         """
         Solve the problem.
 
@@ -428,10 +428,11 @@ class HybridBackend:
             the solution can not be computed for any reason (none
             exists, or the LP solver was not able to find it, etc...)
 
+        OUTPUT:
+
+        - exact rational optimal solution to the LP (self)
+
         EXAMPLE::
-
-            QUESTION: doctests formatted how? using solve from IntLP? Or exact_optsol?
-
 
             sage: from sage.numerical.backends.generic_backend import get_solver
             sage: p = get_solver(solver = ("GLPK", "InteractiveLP"))
@@ -445,9 +446,8 @@ class HybridBackend:
             ...
             MIPSolverException: ...
         """
-        ## FIXME: Call backends, copy bases, ...
 
-        if solve_method is "IntLP":
+        if self.backends[-1] is "InteractiveLP":
 
             LP.solver_parameter("simplex_or_intopt", "simplex_only")
             LP.solve()
@@ -461,64 +461,26 @@ class HybridBackend:
             A = matrix(QQ,num_cons)
             Y = matrix(QQ,num_cons,1)
 
-
-    
-
-            #same problem here with index = 99, not 99 elements to index through
-            #IndexError: list index out of range
-
             j = 0
 
             for l in LP.constraints():
-
-                #print(l)
-
-                for i in l[1][0]:
-                    #print(i)
-
-                    A[j,i]= QQ(l[1][1][-(i+1)])
-
-                    #print(A[j,i])
-
+                for (i, r) in zip(l[1][0], l[1][1]):
+                    A[j, i]=QQ(r)
                 j += 1
 
-            """
-
-            for (l,j) in zip(LP.constraints(), range(LP.number_of_variables())):
-                for i in l[1][0]:
-                    A[j,i]= QQ(l[1][1][-(i+1)])
-
-    
-    
-            for j in range(LP.number_of_variables()):
-                lst1 = LP.constraints()[j][1][1]
-                for i in range(LP.number_of_variables()):
-                    if i in LP.constraints()[j][1][0]:
-            
-                        A[j,i] = QQ(lst1[-(i+1)])
-            
-                    else:
-                        lst1.insert(-i,0)
-             
-            """
             for i in range(LP.number_of_variables()):
                 if Rational(LP.constraints()[i][2])!= 0:
                     Y[i] = QQ(LP.constraints()[i][2])
-    
     
             c = []
 
             for j in range(LP.number_of_variables()):
                 if b.objective_coefficient(j) != []:
-                    c.append(Rational(b.objective_coefficient(j)))
+                    c.append(QQ(b.objective_coefficient(j)))
 
             P = InteractiveLPProblemStandardForm(A, Y, c)
 
             D = P.dictionary(*basic_vars)
-
-
-            #how to format the return using self.backends[....]?
-            #have to add to Interactive backend as solve options?
 
             return tuple(D.basic_solution())
 
@@ -527,7 +489,8 @@ class HybridBackend:
 
 
        
-        elif solve_method is "Polyhedron":
+        elif self.backends[-1] is "Polyhedron":
+
             LP.solver_parameter("simplex_or_intopt", "simplex_only")
             LP.solve()
 
@@ -563,94 +526,31 @@ class HybridBackend:
                         Y[n] = b.row_bounds(i)[1]
                     n += 1
 
-            polysol = ppl_poly_solve(A,Y)
+            ncol = A.ncols()
+            nrow = A.nrows()
+            Y = vector(Y)
+
+            eqnlist = []
+            alist = [ele for ele in A]
+
+            for i in range(len(Y)):
+                eqnlist.append([-Y[i]])
+
+            for j in range(ncol):
+                for k in range(ncol):
+                    eqnlist[j].append(alist[j][k])
+
+            poly = Polyhedron(eqns=eqnlist, backend="ppl")\
+            
+            X = poly.vertices_list()
     
-            return polysol[0:ncol]
-
+            for s in range(len(X)):
+                X[s] = tuple(X[s])
     
-    def ppl_poly_solve(A,Y):
-
-        """
-        Returns the vertex defined by the polyhedron constructed with make_ppl_poly.
-
-        INPUT:
-
-        - ``A`` (matrix) -- LHS matrix of constraints.
-
-        - ``Y`` (matrix) -- RHS matrix of constraint upper bounds
-
-        EXAMPLE::
-
-            sage: A = Matrix([[1,2],[2,3]])
-            sage: Y = Matrix([[3,4]])
-            sage: ppl_poly_solve(A,Y)
-            (-1,2)
-
-        """
-
-        poly = make_ppl_poly(A,Y)
-
-        verts = get_poly_verts(poly)
-
-        return verts
-
-    def make_ppl_poly(A,Y):
-
-        """
-        Constructs a polyhedron defined by matrix A*x <= vector Y using PPL backend.
-
-        INPUT:
-
-        - ``A`` (matrix) -- LHS matrix of constraints.
-
-        - ``Y`` (matrix) -- RHS matrix of constraint upper bounds
-
-        EXAMPLE::
-
-            sage: A = Matrix([[1,2],[2,3]])
-            sage: Y = Matrix([[3,4]])
-            sage: make_ppl_poly(A,Y)
-            A 0-dimensional polyhedron in QQ^2 defined as the convex hull of 1 vertex
-
-        """
-
-        ncol = A.ncols()
-        nrow = A.nrows()
-        Y = vector(Y)
-
-        eqnlist = []
-        alist = [ele for ele in A]
-
-        for i in range(len(Y)):
-            eqnlist.append([-Y[i]])
-
-        for j in range(ncol):
-            for k in range(ncol):
-                eqnlist[j].append(alist[j][k])
-
-        poly = Polyhedron(eqns=eqnlist, backend="ppl")
-
-        return poly
-
-    def get_poly_verts(poly):
-
-        """ 
-        Retrieves the vertices of the polyhedron construced with make_ppl_poly.
-   
-            sage: verts = get_poly_verts(poly)
-            sage: verts
-            (60, -27, -17)
-
-        """
-
-        X = poly.vertices_list()
+            for l in range(len(X)):
+                verts = tuple(X)[l]
     
-        for s in range(len(X)):
-            X[s] = tuple(X[s])
-
-    
-        for l in range(len(X)):
-            return tuple(X)[l]
+            return verts[0:ncol]
 
 
     def get_objective_value(self):
@@ -1225,33 +1125,3 @@ class HybridBackend:
             True
         """
         return self.backends[-1].is_slack_variable_nonbasic_at_lower_bound(index)
-
-
-    """ exact_optsol does not exist in another backend for Hybrid to delegate to """
-
-
-    #def exact_optsol(self, b):
-    """
-    Reconstruct exact rational basic solution. (solver = ``glp_simplex``)
-        EXAMPLES::
-            sage: from cutgeneratingfunctionology.igp import *
-            sage: lp = MixedIntegerLinearProgram(solver = 'GLPK', maximization = False)
-            sage: x, y = lp[0], lp[1]
-            sage: lp.add_constraint(-2*x + y <= 1)
-            sage: lp.add_constraint(x - y <= 1)
-            sage: lp.add_constraint(x + y >= 2)
-            sage: lp.set_objective(x + y)
-            sage: lp.solver_parameter("simplex_or_intopt", "simplex_only")
-            sage: lp.solve()
-            2.0
-            sage: lp.get_values(x)
-            1.5
-            sage: lp.get_values(y)
-            0.5
-            sage: b = lp.get_backend()
-            sage: exact_optsol(b)
-            (3/2, 1/2)
-    """
-
-        #return self.backends[-1].exact_optsol(b)
-        
