@@ -3,7 +3,7 @@ def portfolio(mu,base_ring=None):
     #if base_ring is None:
         #base_ring = mu.parent()
 
-    p = MixedIntegerLinearProgram(solver="GLPK",maximization=True, base_ring=K)  
+    p = MixedIntegerLinearProgram(solver="InteractiveLP",maximization=True, base_ring=K)  
     x = p.new_variable(integer=False, nonnegative=True)
     w = p.new_variable(integer=False, nonnegative=True)
     #x0, x1, x2 are portfolio weights
@@ -11,7 +11,7 @@ def portfolio(mu,base_ring=None):
     #x27-75 are slack variables
 
     col1 = [1,1003/1000,1005/1000,1007/1000,1002/1000,1001/1000,1005/1000,1004/1000,1004/1000,1008/1000,1007/1000,1002/1000,1002/1000,1002/1000,1002/1000,1,1002/1000,1004/1000,1004/1000,999/1000,997/1000,1007/1000,996/1000,1002/1000]; col2 = [1044/1000,1015/1000,1024/1000,1027/1000,1040/1000,995/1000,1044/1000,1060/1000,1,1030/1000,963/1000,1005/1000,960/1000,1035/1000,1047/1000,978/1000,1048/1000,1029/1000,1076/1000,1002/1000,1008/1000,958/1000,1056/1000,980/1000]; col3 = [1068/1000,1051/1000,1062/1000,980/1000,991/1000,969/1000,1086/1000,1043/1000,963/1000,949/1000,1034/1000,1022/1000,972/1000,1050/1000,1042/1000,908/1000,1146/1000,1018/1000,1015/1000,909/1000,1063/1000,1064/1000,1071/1000,1070/1000]
-    #col4 = [1016/1000,1039/1000,994/1000,971/1000,1009/1000,1030/1000,1007/1000]
+
 
     r1sum = 0; r2sum = 0; r3sum = 0
 
@@ -56,10 +56,10 @@ def portfolio(mu,base_ring=None):
     for j in range(3,27):
         c[j] = (1/24)*x[j]
   
-
+    p.set_objective(mu*(x[0]*r1 + x[1]*r2 + x[2]*r3) - ((1/24) * sum([x[o] for o in range(3,27,1)])))
     #p.set_objective(mu*(x[0]*r1 + x[1]*r2 + x[2]*r3) - ((1/24) * sum([x[o] for o in range(3,27,1)])) + sum([0*x[j] for j in range(28,75)]))
     
-    p.set_objective(c)
+    #p.set_objective(c)
 
     #p.show()
     p.solve()
