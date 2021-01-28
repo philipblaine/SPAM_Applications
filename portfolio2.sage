@@ -2,8 +2,8 @@ def portfolio2(mu,base_ring=None):
 
     p2 = MixedIntegerLinearProgram(solver="GLPK",maximization=True, base_ring=K)  
 
-    #if base_ring is None:
-    #    base_ring = mu.parent()
+    if base_ring is None:
+        base_ring = mu.parent()
 
     x = p2.new_variable(integer=False, nonnegative=True)
     #x0, x1, x2, x3, x4, x5, x6, x7, x8 are portfolio weights
@@ -66,7 +66,8 @@ def portfolio2(mu,base_ring=None):
     p2.set_objective(mu*(x[0]*r1 + x[1]*r2 + x[2]*r3 + x[3]*r4 + x[4]*r5 + x[5]*r6 + x[6]*r7 + x[7]*r8 + x[8]*r9) - ((1/24) * sum([x[o] for o in range(9,33)])))
     
     #p2.show()
-    p2.solve()
+    #p2.solve()
+    p2sol = exact_optsol_intLP(p2)
 
     p2sol_list = []
     for i in range(0,9):
@@ -74,7 +75,9 @@ def portfolio2(mu,base_ring=None):
 
     p2sol_tuple = tuple(p2sol_list)
 
-    return p2sol_tuple
+    #return p2sol_tuple
+
+    return(p2sol)
     
     
 

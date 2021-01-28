@@ -34,9 +34,9 @@ def portfolio(mu,base_ring=None):
     r3 = r3sum/24
     #print(r3)
 
-    p.add_constraint(x[0]>=0)
-    p.add_constraint(x[1]>=0)
-    p.add_constraint(x[2]>=0)
+    #p.add_constraint(x[0]>=0)
+    #p.add_constraint(x[1]>=0)
+    #p.add_constraint(x[2]>=0)
 
     p.add_constraint(x[0]+x[1]+x[2] == 1)
 
@@ -57,21 +57,24 @@ def portfolio(mu,base_ring=None):
     #p.add_constraint(y[3] >= x[1]*(col1[3]-r1) + x[2]*(col2[3]-r2) + x[3]*(col3[3]-r3))
    
 
-    for ttt in range(3,27):
+    for ttt in range(27):
         p.add_constraint(x[ttt]>=0)
 
     p.set_objective(mu * (x[0]*r1 + x[1]*r2 + x[2]*r3) - ((1/24) * sum([x[o] for o in range(3,27)])))
     
     #p.show()
-    p.solve()
+    #p.solve()
+    psol = exact_optsol_intLP(p)
+    #psol = exact_optsol_poly(p)
 
-    psol_list = []
-    for i in range(0,3):
-        psol_list.append(p.get_values(x[i]))
+    #psol_list = []
+    #for i in range(0,3):
+        #psol_list.append(p.get_values(x[i]))
 
-    psol_tuple = tuple(psol_list)
+    #psol_tuple = tuple(psol_list)
 
-    return psol_tuple
+    #return psol_tuple
+    return psol
     
     
 

@@ -449,8 +449,12 @@ class HybridBackend:
 
         if self.backends[-1] is "InteractiveLP":
 
-            self.solver_parameter("simplex_or_intopt", "simplex_only")
-            self.solve()
+self.backends[0].solve()
+
+            lp.solver_parameter("simplex_or_intopt", "simplex_only")
+
+            
+            lp.solve()
 
             b = self.get_backend()
 
