@@ -3,7 +3,7 @@ def portfolio(mu,base_ring=None):
     #if base_ring is None:
         #base_ring = mu.parent()
 
-    p = MixedIntegerLinearProgram(solver="InteractiveLP",maximization=True, base_ring=K)  
+    p = MixedIntegerLinearProgram(solver="GLPK",maximization=True, base_ring=K)  
     x = p.new_variable(integer=False, nonnegative=True)
     w = p.new_variable(integer=False, nonnegative=True)
     #x0, x1, x2 are portfolio weights
@@ -29,6 +29,12 @@ def portfolio(mu,base_ring=None):
 
     p.add_constraint(x[0]+x[1]+x[2] <= 1); p.add_constraint(x[0]+x[1]+x[2] >= 1)
 
+    for ttt in range(75):
+        p.add_constraint(x[ttt]>=0)
+
+    #need to use A, Y and create constraints with matrices instead of individually (need A same ncols as c)
+    A = matrix(QQ,75)
+    Y = matrix(QQ,75,1)
    
     for t in range(3,27,1):
         p.add_constraint((-x[t] - (x[0]*(col1[t-3]-r1) + x[1]*(col2[t-3]-r2) + x[2]*(col3[t-3]-r3)) + x[t+24]) <= 0)
@@ -46,8 +52,7 @@ def portfolio(mu,base_ring=None):
         #p.add_constraint(x[tt] >= x[0]*(col1[tt-3]-r1) + x[1]*(col2[tt-3]-r2) + x[2]*(col3[tt-3]-r3))
    
 
-    for ttt in range(75):
-        p.add_constraint(x[ttt]>=0)
+
 
     c = [0] * 75
     c[0] = mu*x[0]*r1
@@ -55,8 +60,11 @@ def portfolio(mu,base_ring=None):
     c[2] = mu*x[2]*r3
     for j in range(3,27):
         c[j] = (1/24)*x[j]
+
+
   
-    p.set_objective(mu*(x[0]*r1 + x[1]*r2 + x[2]*r3) - ((1/24) * sum([x[o] for o in range(3,27,1)])))
+    p.set_objective(mu*(x[0]*r1 + x[1]*r2 + x[2]*r3) - ((1/24) * sum([x[o] for o in range(3,27,1)])) + sum([0*x[j] for j in range(28,75)]))
+
     #p.set_objective(mu*(x[0]*r1 + x[1]*r2 + x[2]*r3) - ((1/24) * sum([x[o] for o in range(3,27,1)])) + sum([0*x[j] for j in range(28,75)]))
     
     #p.set_objective(c)
