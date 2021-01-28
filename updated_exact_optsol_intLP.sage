@@ -94,8 +94,8 @@ def exact_optsol_intLP(LP):
         if b.objective_coefficient(j) != []:
             c.append(Rational(b.objective_coefficient(j)))
 
-    print(A)
-    print(c)
+    #print(A)
+    #print(c)
 
     P = InteractiveLPProblemStandardForm(A, Y, c)
 
