@@ -43,8 +43,7 @@ def portfolio2(mu,base_ring=None):
 
     r1 = r1sum/24; r2 = r2sum/24; r3 = r3sum/24; r4 = r4sum/24; r5 = r5sum/24; r6 = r6sum/24; r7 = r7sum/24; r8 = r8sum/24; r9 = r9sum/24
 
-    p2.add_constraint(x[0]+x[1]+x[2]+x[3]+x[4]+x[5]+x[6]+x[7]+x[8] <= 1)
-    p2.add_constraint(x[0]+x[1]+x[2]+x[3]+x[4]+x[5]+x[6]+x[7]+x[8] >= 1)
+    p2.add_constraint(x[0]+x[1]+x[2]+x[3]+x[4]+x[5]+x[6]+x[7]+x[8] == 1)
 
     #print("hi")
     for t in range(9,33):
@@ -73,18 +72,18 @@ def portfolio2(mu,base_ring=None):
     p2.set_objective(mu*(x[0]*r1 + x[1]*r2 + x[2]*r3 + x[3]*r4 + x[4]*r5 + x[5]*r6 + x[6]*r7 + x[7]*r8 + x[8]*r9) - ((1/24) * sum([x[o] for o in range(9,33)])))
     
     #p2.show()
-    #p2.solve()
-    p2sol = exact_optsol_intLP(p2)
+    p2.solve()
+    #p2sol = exact_optsol_intLP(p2)
 
-    #p2sol_list = []
-    #for i in range(0,9):
-        #p2sol_list.append(p2.get_values(x[i]))
+    p2sol_list = []
+    for i in range(0,9):
+        p2sol_list.append(p2.get_values(x[i]))
 
-    #p2sol_tuple = tuple(p2sol_list)
+    p2sol_tuple = tuple(p2sol_list)
 
-    #return p2sol_tuple
+    return p2sol_tuple
 
-    return p2sol
+    #return p2sol
     
     
 

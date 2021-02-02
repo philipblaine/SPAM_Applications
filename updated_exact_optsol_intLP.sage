@@ -123,10 +123,16 @@ def exact_optsol_intLP(LP):
     #print("after P")
 
     j = P.run_revised_simplex_method()
-    
+
+    final_dictionary = P.final_revised_dictionary()
 
     #D = P.dictionary(*basic_vars)
     #print("after d")
 
+    #is feasible, is optimal needed
     #return tuple(D.basic_solution())
-    return j
+
+    solution = final_dictionary.basic_solution()
+    #return j, P
+
+    return solution

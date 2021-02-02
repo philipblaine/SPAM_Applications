@@ -3,7 +3,7 @@ def portfolio(mu,base_ring=None):
     #if base_ring is None:
         #base_ring = mu.parent()
 
-    p = MixedIntegerLinearProgram(solver = "GLPK",maximization=True)  
+    p = MixedIntegerLinearProgram(solver = "GLPK", maximization=True, base_ring = K)  
     x = p.new_variable(integer=False, nonnegative=True)
     w = p.new_variable(integer=False, nonnegative=True)
     #x0, x1, x2 are portfolio weights
@@ -50,17 +50,6 @@ def portfolio(mu,base_ring=None):
 
     #for tt in range(3,27,1):
         #p.add_constraint(x[tt] >= x[0]*(col1[tt-3]-r1) + x[1]*(col2[tt-3]-r2) + x[2]*(col3[tt-3]-r3))
-   
-
-
-
-    c = [0] * 75
-    c[0] = mu*x[0]*r1
-    c[1] = mu*x[1]*r2
-    c[2] = mu*x[2]*r3
-    for j in range(3,27):
-        c[j] = (1/24)*x[j]
-
 
   
     p.set_objective(mu*(x[0]*r1 + x[1]*r2 + x[2]*r3) - ((1/24) * sum([x[o] for o in range(3,27,1)])))
