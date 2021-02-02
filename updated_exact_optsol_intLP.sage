@@ -30,33 +30,33 @@ def exact_optsol_intLP(LP):
     b = LP.get_backend()
     #b.solve()
     
-    print(b.ncols())
-    print(b.nrows())
+    #print(b.ncols())
+    #print(b.nrows())
 
-    #basic_vars = []
+    basic_vars = []
 
-    #for i in range(LP.number_of_variables()):
-        #if b.get_col_stat(i) == 1:
-            #basic_vars.append(i)
-        
-    #for i in range(len(basic_vars)):
-        #basic_vars[i] += 1
+    for i in range(LP.number_of_variables()):
+        if b.get_col_stat(i) == 1:
+            basic_vars.append(i)
+       
+    for i in range(len(basic_vars)):
+        basic_vars[i] += 1
 
-    basic_vars = [(i+1) for i in range(b.ncols()) if b.is_variable_basic(i)]+[(b.nrows()+j+1) for j in range(b.nrows()) if b.is_slack_variable_basic(j)]
+    #basic_vars = [(i+1) for i in range(b.ncols()) if b.is_variable_basic(i)]+[(b.nrows()+j+1) for j in range(b.nrows()) if b.is_slack_variable_basic(j)]
     
 
     #basic_vars = [(i+1) for i in range(b.ncols()) if b.is_variable_basic(i)]
-    print(basic_vars)
+    #print(basic_vars)
     num_cons = LP.number_of_constraints()
 
     num_vars = LP.number_of_variables()
     #print(num_cons)
 
-    print("hi")
+    #print("hi")
     A = matrix(QQ,num_cons, num_vars)
     Y = matrix(QQ,num_cons,1)
 
-    print("hello")
+    #print("hello")
     
 
     #same problem here with index = 99, not 99 elements to index through. 
@@ -69,7 +69,7 @@ def exact_optsol_intLP(LP):
         for (i, r) in zip(l[1][0], l[1][1]):
             A[j, i]=QQ(r)
         j += 1
-    print("test")
+    #print("test")
     
     """
 
@@ -107,23 +107,26 @@ def exact_optsol_intLP(LP):
     for i in range(LP.number_of_variables()):
         if Rational(LP.constraints()[i][2])!= 0:
             Y[i] = Rational(LP.constraints()[i][2])
-    print("after Y")
+    #print("after Y")
     
     c = []
 
     for j in range(LP.number_of_variables()):
         if b.objective_coefficient(j) != []:
-            c.append(Rational(b.objective_coefficient(j)))
-    print("after c")
+            c.append(QQ(b.objective_coefficient(j)))
+    #print("after c")
 
     #print(A)
     #print(c)
 
     P = InteractiveLPProblemStandardForm(A, Y, c)
-    print("after P")
+    #print("after P")
 
-    D = P.dictionary(*basic_vars)
-    print("after d")
+    j = P.run_revised_simplex_method()
+    
 
-    return tuple(D.basic_solution())
-    #return A, c
+    #D = P.dictionary(*basic_vars)
+    #print("after d")
+
+    #return tuple(D.basic_solution())
+    return j
