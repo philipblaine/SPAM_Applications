@@ -28,15 +28,35 @@ def exact_optsol_intLP(LP):
     LP.solve()
 
     b = LP.get_backend()
+    #b.solve()
+    
+    print(b.ncols())
+    print(b.nrows())
+
+    #basic_vars = []
+
+    #for i in range(LP.number_of_variables()):
+        #if b.get_col_stat(i) == 1:
+            #basic_vars.append(i)
+        
+    #for i in range(len(basic_vars)):
+        #basic_vars[i] += 1
 
     basic_vars = [(i+1) for i in range(b.ncols()) if b.is_variable_basic(i)]+[(b.nrows()+j+1) for j in range(b.nrows()) if b.is_slack_variable_basic(j)]
+    
 
+    #basic_vars = [(i+1) for i in range(b.ncols()) if b.is_variable_basic(i)]
+    print(basic_vars)
     num_cons = LP.number_of_constraints()
 
-    A = matrix(QQ,num_cons)
+    num_vars = LP.number_of_variables()
+    #print(num_cons)
+
+    print("hi")
+    A = matrix(QQ,num_cons, num_vars)
     Y = matrix(QQ,num_cons,1)
 
-
+    print("hello")
     
 
     #same problem here with index = 99, not 99 elements to index through. 
@@ -49,7 +69,8 @@ def exact_optsol_intLP(LP):
         for (i, r) in zip(l[1][0], l[1][1]):
             A[j, i]=QQ(r)
         j += 1
-
+    print("test")
+    
     """
 
     
@@ -66,7 +87,7 @@ def exact_optsol_intLP(LP):
 
     
 
-    for (l,j) in zip(LP.constraints(), range(LP.number_of_variables())):
+    for (l,j) in zip(LP.constraints(), range(num_vars)):
         for i in l[1][0]:
             A[j,i]= Rational(l[1][1][-(i+1)])
 
@@ -86,19 +107,23 @@ def exact_optsol_intLP(LP):
     for i in range(LP.number_of_variables()):
         if Rational(LP.constraints()[i][2])!= 0:
             Y[i] = Rational(LP.constraints()[i][2])
-    
+    print("after Y")
     
     c = []
 
     for j in range(LP.number_of_variables()):
         if b.objective_coefficient(j) != []:
             c.append(Rational(b.objective_coefficient(j)))
+    print("after c")
 
     #print(A)
     #print(c)
 
     P = InteractiveLPProblemStandardForm(A, Y, c)
+    print("after P")
 
     D = P.dictionary(*basic_vars)
+    print("after d")
 
     return tuple(D.basic_solution())
+    #return A, c
