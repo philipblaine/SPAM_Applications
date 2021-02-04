@@ -36,7 +36,7 @@ def exact_optsol_intLP(LP):
     basic_vars = []
 
     for i in range(LP.number_of_variables()):
-        if b.get_col_stat(i) == 1:
+        if b.is_variable_basic(i) == True:
             basic_vars.append(i)
        
     for i in range(len(basic_vars)):
@@ -122,7 +122,7 @@ def exact_optsol_intLP(LP):
     P = InteractiveLPProblemStandardForm(A, Y, c)
     #print("after P")
 
-    j = P.run_revised_simplex_method()
+    #j = P.run_revised_simplex_method()
 
     final_dictionary = P.final_revised_dictionary()
 
