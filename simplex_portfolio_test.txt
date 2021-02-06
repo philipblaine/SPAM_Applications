@@ -378,3 +378,714 @@ sage: cProfile.run("sol = exact_optsol_intLP(p)")
         3    0.000    0.000    0.000    0.000 {sage.rings.real_double.is_RealDoubleField}
         2    0.000    0.000    0.000    0.000 {sage.rings.ring.is_Ring}
         3    0.000    0.000    0.000    0.000 {sage.symbolic.ring.is_SymbolicExpressionRing}
+
+
+solve:
+
+sage: cProfile.run("longsol = p.solve()")
+INFO: 2021-02-03 22:41:49,427 New constraint: mu - 787939/370284 < 0
+INFO: 2021-02-03 22:41:51,195 New constraint: mu - 125959/61714 < 0
+INFO: 2021-02-03 22:42:27,513 New constraint: mu - 83717/73612 < 0
+INFO: 2021-02-03 22:43:45,557 New constraint: mu - 58960/57939 < 0
+         4584084397 function calls (4570337698 primitive calls) in 2961.166 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     1592    0.004    0.000    0.005    0.000 <frozen importlib._bootstrap>:1017(_handle_fromlist)
+   184106    0.058    0.000    0.077    0.000 <frozen importlib._bootstrap>:389(parent)
+        1    0.000    0.000 2961.166 2961.166 <string>:1(<module>)
+        1    0.000    0.000    0.000    0.000 <string>:1(__new__)
+        4    0.000    0.000    0.000    0.000 __init__.py:1058(flush)
+        4    0.000    0.000    0.000    0.000 __init__.py:1069(emit)
+        4    0.000    0.000    0.000    0.000 __init__.py:119(getLevelName)
+       44    0.000    0.000    0.000    0.000 __init__.py:1412(debug)
+        4    0.000    0.000    0.001    0.000 __init__.py:1424(info)
+        4    0.000    0.000    0.000    0.000 __init__.py:1502(findCaller)
+        4    0.000    0.000    0.000    0.000 __init__.py:1538(makeRecord)
+        4    0.000    0.000    0.001    0.000 __init__.py:1553(_log)
+        4    0.000    0.000    0.000    0.000 __init__.py:156(<lambda>)
+        4    0.000    0.000    0.000    0.000 __init__.py:1579(handle)
+        4    0.000    0.000    0.000    0.000 __init__.py:1633(callHandlers)
+       48    0.000    0.000    0.000    0.000 __init__.py:1677(isEnabledFor)
+        2    0.000    0.000    0.000    0.000 __init__.py:20(isfunction)
+        4    0.000    0.000    0.001    0.000 __init__.py:2062(info)
+       44    0.000    0.000    0.000    0.000 __init__.py:2072(debug)
+        4    0.000    0.000    0.000    0.000 __init__.py:284(__init__)
+        4    0.000    0.000    0.000    0.000 __init__.py:360(getMessage)
+        4    0.000    0.000    0.000    0.000 __init__.py:423(usesTime)
+        4    0.000    0.000    0.000    0.000 __init__.py:431(_format)
+        4    0.000    0.000    0.000    0.000 __init__.py:434(format)
+        4    0.000    0.000    0.000    0.000 __init__.py:584(formatTime)
+        4    0.000    0.000    0.000    0.000 __init__.py:629(usesTime)
+        4    0.000    0.000    0.000    0.000 __init__.py:635(formatMessage)
+        4    0.000    0.000    0.000    0.000 __init__.py:651(format)
+        8    0.000    0.000    0.000    0.000 __init__.py:792(filter)
+        8    0.000    0.000    0.000    0.000 __init__.py:894(acquire)
+        8    0.000    0.000    0.000    0.000 __init__.py:901(release)
+        4    0.000    0.000    0.000    0.000 __init__.py:914(format)
+        4    0.000    0.000    0.000    0.000 __init__.py:937(handle)
+        1    0.000    0.000    0.000    0.000 _weakrefset.py:38(_remove)
+        2    0.000    0.000    0.000    0.000 abstract_method.py:203(__get__)
+      525    0.001    0.000    0.001    0.000 additive_magmas.py:207(__init_extra__)
+      100    0.003    0.000    0.004    0.000 basic_semialgebraic.py:1107(_ppl_constraint)
+      200    0.000    0.000    0.000    0.000 basic_semialgebraic.py:1113(<genexpr>)
+       96    0.000    0.000    0.011    0.000 basic_semialgebraic.py:1154(is_linear_constraint_valid)
+        4    0.000    0.000    0.000    0.000 basic_semialgebraic.py:1176(add_linear_constraint)
+       88    0.000    0.000    0.000    0.000 basic_semialgebraic.py:1571(eq_poly)
+       52    0.000    0.000    0.000    0.000 basic_semialgebraic.py:1580(lt_poly)
+       96    0.000    0.000    0.000    0.000 basic_semialgebraic.py:1598(is_polynomial_constraint_valid)
+        4    0.000    0.000    0.000    0.000 basic_semialgebraic.py:1642(add_polynomial_constraint)
+      300    0.000    0.000    0.000    0.000 basic_semialgebraic.py:1760(upstairs)
+      100    0.000    0.000    0.000    0.000 basic_semialgebraic.py:1969(v_dict)
+      100    0.002    0.000    0.008    0.000 basic_semialgebraic.py:1976(_to_upstairs_linear_constraint)
+        4    0.000    0.000    0.000    0.000 basic_semialgebraic.py:2001(add_polynomial_constraint)
+       96    0.000    0.000    0.020    0.000 basic_semialgebraic.py:2088(is_polynomial_constraint_valid)
+      112    0.000    0.000    0.000    0.000 basic_semialgebraic.py:2124(<genexpr>)
+      100    0.000    0.000    0.000    0.000 basic_semialgebraic.py:213(ambient_dim)
+      100    0.000    0.000    0.005    0.000 basic_semialgebraic.py:216(linear_forms_space)
+      200    0.000    0.000    0.000    0.000 basic_semialgebraic.py:224(base_ring)
+      100    0.000    0.000    0.000    0.000 basic_semialgebraic.py:227(poly_ring)
+        2    0.000    0.000    0.000    0.000 bimodules.py:124(left_base_ring)
+        2    0.000    0.000    0.000    0.000 bimodules.py:136(right_base_ring)
+        2    0.000    0.000    0.000    0.000 bimodules.py:162(super_categories)
+        1    0.000    0.000    0.000    0.000 bimodules.py:173(additional_structure)
+        1    0.000    0.000    0.000    0.000 bimodules.py:58(_make_named_class_key)
+        1    0.000    0.000    0.000    0.000 calculus.py:2277(_find_var)
+        1    0.000    0.000    0.000    0.000 calculus.py:2356(symbolic_expression_from_string)
+      491    0.000    0.000    0.000    0.000 callable.py:70(is_CallableSymbolicExpressionRing)
+      7/4    0.000    0.000    0.001    0.000 category.py:1015(_super_categories_for_classes)
+        2    0.000    0.000    0.000    0.000 category.py:1045(additional_structure)
+     10/1    0.000    0.000    0.000    0.000 category.py:1200(structure)
+     10/1    0.000    0.000    0.000    0.000 category.py:1256(<setcomp>)
+       12    0.000    0.000    0.000    0.000 category.py:1261(is_full_subcategory)
+        8    0.000    0.000    0.000    0.000 category.py:1322(full_super_categories)
+        8    0.000    0.000    0.000    0.000 category.py:1378(<listcomp>)
+    28/14    0.000    0.000    0.002    0.000 category.py:1479(_make_named_class)
+    73/50    0.000    0.000    0.000    0.000 category.py:1601(<genexpr>)
+    13/10    0.000    0.000    0.001    0.000 category.py:1606(subcategory_class)
+      6/5    0.000    0.000    0.000    0.000 category.py:1647(parent_class)
+      5/1    0.000    0.000    0.000    0.000 category.py:1692(element_class)
+     10/1    0.000    0.000    0.000    0.000 category.py:1738(morphism_class)
+  161/143    0.000    0.000    0.000    0.000 category.py:1781(is_subcategory)
+     24/6    0.000    0.000    0.000    0.000 category.py:1901(_meet_)
+    38/10    0.000    0.000    0.000    0.000 category.py:1956(<genexpr>)
+      3/2    0.000    0.000    0.000    0.000 category.py:1990(axioms)
+     11/6    0.000    0.000    0.000    0.000 category.py:2008(<genexpr>)
+     15/8    0.000    0.000    0.000    0.000 category.py:2012(_with_axiom_as_tuple)
+      4/2    0.000    0.000    0.000    0.000 category.py:2060(<genexpr>)
+        1    0.000    0.000    0.001    0.001 category.py:2069(_with_axiom)
+        1    0.000    0.000    0.000    0.000 category.py:2276(__and__)
+    29/16    0.000    0.000    0.001    0.000 category.py:2306(join)
+      521    0.002    0.000    0.003    0.000 category.py:2511(category)
+      106    0.000    0.000    0.000    0.000 category.py:2583(is_Category)
+    23/13    0.000    0.000    0.001    0.000 category.py:2715(_make_named_class)
+        2    0.000    0.000    0.000    0.000 category.py:2876(_subcategory_hook_)
+        2    0.000    0.000    0.000    0.000 category.py:2942(__init__)
+        6    0.000    0.000    0.000    0.000 category.py:2963(<genexpr>)
+        5    0.000    0.000    0.000    0.000 category.py:2972(_make_named_class_key)
+       15    0.000    0.000    0.000    0.000 category.py:3002(<genexpr>)
+        5    0.000    0.000    0.000    0.000 category.py:3004(super_categories)
+        1    0.000    0.000    0.000    0.000 category.py:3016(additional_structure)
+       19    0.000    0.000    0.000    0.000 category.py:3030(_subcategory_hook_)
+       44    0.000    0.000    0.000    0.000 category.py:3051(<genexpr>)
+  547/540    0.001    0.000    0.002    0.000 category.py:3053(is_subcategory)
+        5    0.000    0.000    0.000    0.000 category.py:3067(<genexpr>)
+  585/577    0.004    0.000    0.005    0.000 category.py:419(__classcall__)
+    13/10    0.000    0.000    0.002    0.000 category.py:450(__init__)
+      599    0.001    0.000    0.001    0.000 category.py:648(_subcategory_hook_)
+        2    0.000    0.000    0.000    0.000 category.py:692(__contains__)
+        8    0.000    0.000    0.000    0.000 category.py:710(__classcontains__)
+      264    0.000    0.000    0.000    0.000 category.py:750(<genexpr>)
+      7/4    0.000    0.000    0.001    0.000 category.py:845(_all_super_categories)
+        7    0.000    0.000    0.000    0.000 category.py:870(<listcomp>)
+        7    0.000    0.000    0.000    0.000 category.py:938(all_super_categories)
+      7/4    0.000    0.000    0.001    0.000 category.py:990(_super_categories)
+        1    0.000    0.000    0.000    0.000 category_types.py:169(__init__)
+       12    0.000    0.000    0.000    0.000 category_types.py:208(_make_named_class_key)
+       29    0.000    0.000    0.000    0.000 category_types.py:257(base)
+        1    0.000    0.000    0.000    0.000 category_types.py:336(__init__)
+       29    0.000    0.000    0.000    0.000 category_types.py:352(base_ring)
+       51    0.000    0.000    0.000    0.000 category_types.py:365(_subcategory_hook_)
+        1    0.000    0.000    0.000    0.000 category_types.py:50(__init__)
+        1    0.000    0.000    0.000    0.000 category_types.py:88(super_categories)
+  522/519    0.003    0.000    0.023    0.000 category_with_axiom.py:1968(__classcall__)
+        1    0.000    0.000    0.000    0.000 category_with_axiom.py:2008(__classget__)
+        1    0.000    0.000    0.000    0.000 category_with_axiom.py:2137(super_categories)
+        4    0.000    0.000    0.000    0.000 category_with_axiom.py:2177(<genexpr>)
+        4    0.000    0.000    0.000    0.000 category_with_axiom.py:2184(additional_structure)
+        1    0.000    0.000    0.000    0.000 category_with_axiom.py:2322(base_category)
+        1    0.000    0.000    0.000    0.000 category_with_axiom.py:2445(axioms)
+       15    0.000    0.000    0.000    0.000 category_with_axiom.py:2490(<genexpr>)
+        1    0.000    0.000    0.000    0.000 category_with_axiom.py:2497(__init__)
+        1    0.000    0.000    0.000    0.000 complex_field.py:74(is_ComplexField)
+        2    0.000    0.000    0.000    0.000 copy.py:66(copy)
+      3/1    0.000    0.000    0.001    0.001 covariant_functorial_construction.py:293(__classcall__)
+        4    0.000    0.000    0.000    0.000 covariant_functorial_construction.py:323(__classget__)
+      8/1    0.000    0.000    0.001    0.001 covariant_functorial_construction.py:383(category_of)
+      3/1    0.000    0.000    0.001    0.001 covariant_functorial_construction.py:417(__init__)
+        5    0.000    0.000    0.000    0.000 covariant_functorial_construction.py:441(base_category)
+        1    0.000    0.000    0.000    0.000 covariant_functorial_construction.py:456(extra_super_categories)
+      2/1    0.000    0.000    0.001    0.001 covariant_functorial_construction.py:471(super_categories)
+     1098    0.004    0.000    0.006    0.000 dynamic_class.py:129(dynamic_class)
+       44    0.002    0.000    0.002    0.000 dynamic_class.py:348(dynamic_class_internal)
+      106    0.000    0.000    0.000    0.000 dynamic_class.py:447(<genexpr>)
+        4    0.000    0.000    0.000    0.000 enum.py:283(__call__)
+        4    0.000    0.000    0.000    0.000 enum.py:562(__new__)
+        2    0.000    0.000    0.000    0.000 enum.py:833(__and__)
+       44    0.000    0.000    0.003    0.000 factorization.py:215(__init__)
+       44    0.000    0.000    0.000    0.000 factorization.py:296(<listcomp>)
+       88    0.000    0.000    0.000    0.000 factorization.py:299(<genexpr>)
+       44    0.000    0.000    0.000    0.000 factorization.py:303(<listcomp>)
+      264    0.000    0.000    0.000    0.000 factorization.py:319(__getitem__)
+      176    0.000    0.000    0.000    0.000 factorization.py:359(__len__)
+       44    0.000    0.000    0.000    0.000 factorization.py:509(universe)
+       44    0.000    0.000    0.000    0.000 factorization.py:571(is_commutative)
+       44    0.000    0.000    0.000    0.000 factorization.py:618(simplify)
+       44    0.000    0.000    0.000    0.000 factorization.py:635(<lambda>)
+       44    0.000    0.000    0.000    0.000 factorization.py:639(<listcomp>)
+       44    0.000    0.000    0.001    0.000 factorization.py:646(sort)
+       44    0.000    0.000    0.000    0.000 factorization.py:708(sort_key)
+       88    0.000    0.000    0.000    0.000 factorization.py:720(unit)
+      523    0.004    0.000    0.008    0.000 fields.py:62(__contains__)
+    14369    0.135    0.000    0.135    0.000 fields.py:798(inverse_of_unit)
+        1    0.000    0.000    0.000    0.000 fraction_field.py:1025(_coerce_map_from_)
+        1    0.000    0.000    0.000    0.000 fraction_field.py:137(is_FractionField)
+        1    0.000    0.000    0.000    0.000 fraction_field.py:196(_coerce_map_from_)
+  1903897   15.011    0.000   16.194    0.000 fraction_field.py:316(wrapper)
+   238702    0.189    0.000    0.211    0.000 fraction_field.py:415(base_ring)
+  7256938    0.734    0.000    0.734    0.000 fraction_field.py:497(ring)
+     2799    0.001    0.000    0.002    0.000 fraction_field.py:718(__eq__)
+        1    0.000    0.000    0.000    0.000 fraction_field.py:754(__hash__)
+   157158    0.293    0.000    0.788    0.000 free_module.py:1063(_element_constructor_)
+      543    0.001    0.000    0.001    0.000 free_module.py:1129(__richcmp__)
+        1    0.000    0.000    0.000    0.000 free_module.py:1367(_eq)
+       75    0.000    0.000    0.000    0.000 free_module.py:1838(coordinates)
+   157812    0.024    0.000    0.024    0.000 free_module.py:1962(degree)
+        7    0.000    0.000    0.000    0.000 free_module.py:1978(dimension)
+   157813    0.085    0.000    0.085    0.000 free_module.py:201(create_key)
+     3749    0.001    0.000    0.001    0.000 free_module.py:2050(coordinate_ring)
+      515    0.009    0.000    0.074    0.000 free_module.py:224(create_object)
+        8    0.000    0.000    0.000    0.000 free_module.py:2302(is_sparse)
+       35    0.000    0.000    0.000    0.000 free_module.py:2385(rank)
+     2523    0.026    0.000    0.028    0.000 free_module.py:2455(zero_vector)
+       23    0.000    0.000    0.000    0.000 free_module.py:2476(zero)
+   157813    0.273    0.000    0.453    0.000 free_module.py:271(FreeModule)
+        1    0.000    0.000    0.004    0.004 free_module.py:3630(_Hom_)
+      515    0.001    0.000    0.063    0.000 free_module.py:4660(__init__)
+       13    0.000    0.000    0.000    0.000 free_module.py:4698(__hash__)
+      521    0.001    0.000    0.001    0.000 free_module.py:4720(_coerce_map_from_)
+        1    0.000    0.000    0.000    0.000 free_module.py:5012(basis)
+      515    0.001    0.000    0.064    0.000 free_module.py:5321(__init__)
+       75    0.000    0.000    0.000    0.000 free_module.py:5423(coordinate_vector)
+       27    0.000    0.000    0.004    0.000 free_module.py:5491(__init__)
+       26    0.000    0.000    0.004    0.000 free_module.py:5583(__init__)
+        1    0.000    0.000    0.000    0.000 free_module.py:5605(_repr_)
+       75    0.000    0.000    0.000    0.000 free_module.py:5649(ambient_vector_space)
+   155890    0.182    0.000    0.539    0.000 free_module.py:5673(_element_constructor_)
+        8    0.000    0.000    0.000    0.000 free_module.py:722(is_FreeModule)
+        1    0.000    0.000    0.000    0.000 free_module.py:7274(basis_seq)
+      515    0.007    0.000    0.011    0.000 free_module.py:7322(element_class)
+      515    0.023    0.000    0.062    0.000 free_module.py:752(__init__)
+        3    0.000    0.000    0.000    0.000 free_module.py:855(construction)
+        1    0.000    0.000    0.000    0.000 free_module.py:874(_Hom_)
+        4    0.000    0.000    0.000    0.000 free_module_homspace.py:226(_matrix_space)
+        1    0.000    0.000    0.002    0.002 free_module_homspace.py:279(identity)
+        2    0.000    0.000    0.000    0.000 free_module_homspace.py:86(is_FreeModuleHomspace)
+        2    0.000    0.000    0.002    0.001 free_module_morphism.py:66(__init__)
+        4    0.000    0.000    0.000    0.000 genericpath.py:121(_splitext)
+        6    0.000    0.000    0.000    0.000 groupoid.py:34(__init__)
+        6    0.000    0.000    0.000    0.000 groupoid.py:61(_make_named_class_key)
+        1    0.000    0.000    0.002    0.002 homset.py:1157(one)
+      541    0.000    0.000    0.000    0.000 homset.py:1173(domain)
+      541    0.000    0.000    0.000    0.000 homset.py:1188(codomain)
+      9/8    0.000    0.000    0.004    0.001 homset.py:1232(__init__)
+        2    0.000    0.000    0.000    0.000 homset.py:1254(is_Homset)
+        7    0.000    0.000    0.000    0.000 homset.py:40(RingHomset)
+  533/532    0.007    0.000    0.013    0.000 homset.py:583(__init__)
+        7    0.000    0.000    0.000    0.000 homset.py:71(__init__)
+     1064    0.000    0.000    0.000    0.000 homset.py:748(homset_category)
+  538/532    0.009    0.000    0.025    0.000 homset.py:84(Hom)
+        1    0.000    0.000    0.001    0.001 homset.py:946(_abstract_element_class)
+      7/1    0.000    0.000    0.001    0.001 homsets.py:115(<listcomp>)
+        1    0.000    0.000    0.000    0.000 homsets.py:205(super_categories)
+      8/1    0.000    0.000    0.001    0.001 homsets.py:24(default_super_categories)
+        1    0.000    0.000    0.000    0.000 homsets.py:314(is_endomorphism_set)
+        1    0.000    0.000    0.000    0.000 inspect.py:1028(getargs)
+        1    0.000    0.000    0.000    0.000 inspect.py:260(iscode)
+        4    0.000    0.000    0.000    0.000 inspect.py:487(getmro)
+        6    0.000    0.000    0.000    0.000 inspect.py:72(isclass)
+    16217    0.005    0.000    0.007    0.000 integer_mod_ring.py:242(is_IntegerModRing)
+      535    0.001    0.000    0.001    0.000 interactive_simplex_method.py:1017(constant_terms)
+    19959    0.003    0.000    0.003    0.000 interactive_simplex_method.py:1038(constraint_coefficients)
+        2    0.000    0.000    0.000    0.000 interactive_simplex_method.py:1080(decision_variables)
+        1    0.000    0.000    0.000    0.000 interactive_simplex_method.py:1278(is_negative)
+        2    0.000    0.000    0.000    0.000 interactive_simplex_method.py:1296(is_primal)
+    35602    0.019    0.000    0.025    0.000 interactive_simplex_method.py:1350(n_constraints)
+    35686    0.012    0.000    0.016    0.000 interactive_simplex_method.py:1371(n_variables)
+      290    0.001    0.000    0.001    0.000 interactive_simplex_method.py:1392(objective_coefficients)
+        2    0.000    0.000    0.000    0.000 interactive_simplex_method.py:1413(objective_constant_term)
+        1    0.002    0.002    0.132    0.132 interactive_simplex_method.py:1713(standard_form)
+        2    0.000    0.000    0.000    0.000 interactive_simplex_method.py:1803(<genexpr>)
+       76    0.000    0.000    0.000    0.000 interactive_simplex_method.py:1815(<genexpr>)
+        1    0.000    0.000    0.030    0.030 interactive_simplex_method.py:1961(__init__)
+        1    0.000    0.000    0.000    0.000 interactive_simplex_method.py:1996(<listcomp>)
+        1    0.000    0.000    0.006    0.006 interactive_simplex_method.py:2005(<listcomp>)
+       76    0.004    0.000    0.006    0.000 interactive_simplex_method.py:213(_assemble_arrayl)
+        4    0.000    0.000    0.000    0.000 interactive_simplex_method.py:2140(auxiliary_variable)
+    35073    0.006    0.000    0.006    0.000 interactive_simplex_method.py:2169(coordinate_ring)
+        1    0.000    0.000    0.000    0.000 interactive_simplex_method.py:2336(final_revised_dictionary)
+        1    0.000    0.000    0.049    0.049 interactive_simplex_method.py:2460(revised_dictionary)
+        1    0.011    0.011 2959.337 2959.337 interactive_simplex_method.py:2510(run_revised_simplex_method)
+        1    0.000    0.000    0.000    0.000 interactive_simplex_method.py:2651(slack_variables)
+        1    0.000    0.000    0.000    0.000 interactive_simplex_method.py:2689(__init__)
+       76    0.001    0.000  278.335    3.662 interactive_simplex_method.py:2705(_html_)
+       75    0.000    0.000    0.022    0.000 interactive_simplex_method.py:2729(_preupdate_output)
+      685    0.001    0.000    0.011    0.000 interactive_simplex_method.py:2822(base_ring)
+        1    0.002    0.002    0.526    0.526 interactive_simplex_method.py:2865(basic_solution)
+        1    0.000    0.000    0.000    0.000 interactive_simplex_method.py:2904(<listcomp>)
+        1    0.000    0.000    0.000    0.000 interactive_simplex_method.py:2906(<listcomp>)
+     3522    0.005    0.000    0.061    0.000 interactive_simplex_method.py:2955(coordinate_ring)
+       75    0.002    0.000    1.002    0.013 interactive_simplex_method.py:3022(enter)
+      150    0.000    0.000    0.000    0.000 interactive_simplex_method.py:3068(entering)
+      375    0.002    0.000  137.794    0.367 interactive_simplex_method.py:3091(entering_coefficients)
+      229    0.005    0.000  134.498    0.587 interactive_simplex_method.py:3115(is_dual_feasible)
+     4378    0.018    0.000    0.160    0.000 interactive_simplex_method.py:3137(<genexpr>)
+      304    0.003    0.000  104.257    0.343 interactive_simplex_method.py:3139(is_feasible)
+    52896    0.149    0.000    0.905    0.000 interactive_simplex_method.py:3161(<genexpr>)
+       79    0.000    0.000   74.017    0.937 interactive_simplex_method.py:3163(is_optimal)
+       75    0.008    0.000    0.017    0.000 interactive_simplex_method.py:3192(leave)
+      225    0.000    0.000    0.000    0.000 interactive_simplex_method.py:3238(leaving)
+       75    0.001    0.000  118.829    1.584 interactive_simplex_method.py:3412(possible_entering)
+       75    0.017    0.000    0.163    0.002 interactive_simplex_method.py:3441(<listcomp>)
+       75    0.001    0.000   80.443    1.073 interactive_simplex_method.py:3447(possible_leaving)
+       75    0.003    0.000    0.082    0.001 interactive_simplex_method.py:3476(<listcomp>)
+      249    0.005    0.000    0.045    0.000 interactive_simplex_method.py:352(variable)
+      150    0.009    0.000  106.963    0.713 interactive_simplex_method.py:3523(ratios)
+      150    0.177    0.001    0.871    0.006 interactive_simplex_method.py:3557(<listcomp>)
+        1    0.040    0.040 2957.025 2957.025 interactive_simplex_method.py:3677(run_simplex_method)
+        2    0.000    0.000    0.000    0.000 interactive_simplex_method.py:444(default_variable_name)
+        1    0.000    0.000    0.047    0.047 interactive_simplex_method.py:4452(__init__)
+        1    0.010    0.010    0.045    0.045 interactive_simplex_method.py:4473(<listcomp>)
+       76    1.061    0.014  278.316    3.662 interactive_simplex_method.py:4511(_latex_)
+    13148    0.506    0.000    9.965    0.001 interactive_simplex_method.py:4592(<listcomp>)
+      304    0.002    0.000    0.722    0.002 interactive_simplex_method.py:4602(make_line)
+      304    0.015    0.000    0.718    0.002 interactive_simplex_method.py:4603(<listcomp>)
+       75    0.012    0.000   50.571    0.674 interactive_simplex_method.py:4633(_preupdate_output)
+    35072    1.179    0.000    9.267    0.000 interactive_simplex_method.py:4679(A)
+        2    0.000    0.000    0.000    0.000 interactive_simplex_method.py:469(style)
+      456    0.019    0.000   16.691    0.037 interactive_simplex_method.py:4718(A_N)
+      456    0.021    0.000    9.154    0.020 interactive_simplex_method.py:4739(<listcomp>)
+        1    0.000    0.000    0.084    0.084 interactive_simplex_method.py:4741(B)
+        1    0.000    0.000    0.082    0.082 interactive_simplex_method.py:4762(<listcomp>)
+     1590    0.001    0.000    1.073    0.001 interactive_simplex_method.py:4764(B_inverse)
+      150    0.002    0.000   55.725    0.371 interactive_simplex_method.py:4792(E)
+      150    0.011    0.000   56.049    0.374 interactive_simplex_method.py:4829(E_inverse)
+      990    0.003    0.000    9.886    0.010 interactive_simplex_method.py:4952(basic_indices)
+      990    0.365    0.000    9.871    0.010 interactive_simplex_method.py:4979(<listcomp>)
+     3750    0.010    0.000    0.063    0.000 interactive_simplex_method.py:4981(basic_variables)
+      534    0.006    0.000    5.228    0.010 interactive_simplex_method.py:5001(c_B)
+      156    0.002    0.000    0.002    0.000 interactive_simplex_method.py:5029(<listcomp>)
+      456    0.005    0.000    7.240    0.016 interactive_simplex_method.py:5031(c_N)
+    10032    0.002    0.000    0.002    0.000 interactive_simplex_method.py:5056(<genexpr>)
+      375   11.552    0.031  137.793    0.367 interactive_simplex_method.py:5059(column_coefficients)
+      531   16.531    0.031  178.635    0.336 interactive_simplex_method.py:5088(constant_terms)
+      132    0.001    0.000    2.425    0.018 interactive_simplex_method.py:5137(nonbasic_indices)
+      132    0.003    0.000    0.630    0.005 interactive_simplex_method.py:5165(<listcomp>)
+     1190    0.482    0.000   16.947    0.014 interactive_simplex_method.py:5167(nonbasic_variables)
+     1190    3.867    0.003   14.736    0.012 interactive_simplex_method.py:5186(<listcomp>)
+      380    4.686    0.012  226.904    0.597 interactive_simplex_method.py:5188(objective_coefficients)
+        2    0.001    0.000    0.956    0.478 interactive_simplex_method.py:5231(objective_value)
+    37204    0.012    0.000    0.012    0.000 interactive_simplex_method.py:5252(problem)
+       75  343.958    4.586 2356.157   31.415 interactive_simplex_method.py:5317(update)
+      458   13.256    0.029  176.706    0.386 interactive_simplex_method.py:5343(y)
+        1    0.000    0.000    0.015    0.015 interactive_simplex_method.py:633(__init__)
+        1    0.000    0.000    0.006    0.006 interactive_simplex_method.py:668(<listcomp>)
+        1    0.000    0.000    0.000    0.000 interactive_simplex_method.py:904(Abcx)
+      914    0.003    0.000    0.003    0.000 interactive_simplex_method.py:989(base_ring)
+      150    0.000    0.000    0.000    0.000 latex.py:1176(matrix_delimiters)
+        1    0.000    0.000    0.000    0.000 latex.py:1237(vector_delimiters)
+      150    0.000    0.000    0.000    0.000 latex.py:1292(matrix_column_alignment)
+       76    0.000    0.000    0.000    0.000 latex.py:1529(add_package_to_preamble_if_available)
+      250    0.000    0.000    0.000    0.000 latex.py:2509(latex_varify)
+      250    0.000    0.000    0.001    0.000 latex.py:2556(latex_variable_name)
+  8992350    3.943    0.000    3.943    0.000 latex.py:463(__add__)
+    39600    0.015    0.000    0.038    0.000 latex.py:500(__radd__)
+ 13708455    3.472    0.000    6.275    0.000 latex.py:536(has_latex_attr)
+13708455/378    6.200    0.000  299.281    0.792 latex.py:889(__call__)
+        1    0.000    0.000    0.000    0.000 left_modules.py:34(super_categories)
+        4    0.000    0.000    0.000    0.000 logging.sagemsjwbogz.py:23(flush)
+        4    0.000    0.000    0.000    0.000 logging.sagemsjwbogz.py:30(emit)
+     2386    0.001    0.000    0.001    0.000 macaulay2.py:1831(is_Macaulay2Element)
+        4    0.000    0.000    0.000    0.000 magmas.py:817(__init_extra__)
+        2    0.000    0.000    0.000    0.000 magmatic_algebras.py:171(product)
+      125    0.000    0.000    0.001    0.000 matrix_misc.py:26(row_iterator)
+        2    0.000    0.000    0.000    0.000 matrix_morphism.py:1278(__init__)
+        2    0.000    0.000    0.000    0.000 matrix_morphism.py:75(__init__)
+    15729    0.105    0.000    0.139    0.000 matrix_space.py:104(get_matrix_class)
+        1    0.000    0.000    0.001    0.001 matrix_space.py:1565(identity_matrix)
+    16198    0.003    0.000    0.003    0.000 matrix_space.py:1686(is_sparse)
+        1    0.000    0.000    0.000    0.000 matrix_space.py:1738(zero_matrix)
+    32458    0.004    0.000    0.004    0.000 matrix_space.py:1926(ncols)
+    32458    0.005    0.000    0.005    0.000 matrix_space.py:1938(nrows)
+    15729    0.057    0.000    0.197    0.000 matrix_space.py:448(__classcall__)
+        7    0.000    0.000    0.001    0.000 matrix_space.py:514(__init__)
+        2    0.000    0.000    0.000    0.000 matrix_space.py:687(transposed)
+    16186    5.612    0.000    5.715    0.000 matrix_space.py:754(__call__)
+        8    0.000    0.000    0.000    0.000 matrix_space.py:85(is_MatrixSpace)
+        3    0.000    0.000    0.000    0.000 matrix_space.py:903(construction)
+        4    0.000    0.000    0.000    0.000 matrix_space.py:918(_get_action_)
+        2    0.000    0.000    0.000    0.000 matrix_space.py:990(_coerce_map_from_base_ring)
+        1    0.000    0.000    0.000    0.000 misc.py:282(cputime)
+      523    0.005    0.000    0.019    0.000 modules.py:115(__classcall_private__)
+        2    0.000    0.000    0.000    0.000 modules.py:160(super_categories)
+        1    0.000    0.000    0.000    0.000 modules.py:177(additional_structure)
+        1    0.000    0.000    0.000    0.000 modules.py:618(extra_super_categories)
+        2    0.000    0.000    0.000    0.000 modules.py:627(base_ring)
+        1    0.000    0.000    0.000    0.000 modules.py:705(extra_super_categories)
+ 60992571   16.955    0.000   20.091    0.000 multi_polynomial_element.py:1555(__eq__)
+     2072    0.003    0.000    0.399    0.000 multi_polynomial_element.py:164(_richcmp_)
+     1193    0.008    0.000    0.034    0.000 multi_polynomial_element.py:253(_add_)
+    55794    0.011    0.000    0.011    0.000 multi_polynomial_element.py:342(element)
+     3828    0.335    0.000    0.435    0.000 multi_polynomial_element.py:384(__init__)
+      399    0.001    0.000    0.037    0.000 multi_polynomial_element.py:428(_repr_)
+    19127    0.057    0.000    2.204    0.000 multi_polynomial_element.py:449(_latex_)
+      249    0.000    0.000    0.001    0.000 multi_polynomial_element.py:539(degree)
+     3828    0.002    0.000    0.002    0.000 multi_polynomial_element.py:75(__init__)
+    36019    0.025    0.000    0.043    0.000 multi_polynomial_element.py:755(dict)
+        1    0.001    0.001    0.007    0.007 multi_polynomial_ring.py:109(__init__)
+        1    0.000    0.000    0.000    0.000 multi_polynomial_ring.py:134(_poly_class)
+      253    0.000    0.000    0.000    0.000 multi_polynomial_ring.py:138(__eq__)
+    38188    0.048    0.000    0.155    0.000 multi_polynomial_ring.py:167(__hash__)
+   183368    0.568    0.000    1.311    0.000 multi_polynomial_ring.py:178(__call__)
+        1    0.000    0.000    0.007    0.007 multi_polynomial_ring.py:903(__init__)
+      488    0.000    0.000    0.000    0.000 multi_polynomial_ring.py:910(is_field)
+     1193    0.061    0.000    1.039    0.001 multi_polynomial_sequence.py:193(PolynomialSequence)
+     2386    0.004    0.000    0.006    0.000 multi_polynomial_sequence.py:283(<lambda>)
+     1193    0.005    0.000    0.010    0.000 multi_polynomial_sequence.py:360(__init__)
+     1193    0.000    0.000    0.000    0.000 multi_polynomial_sequence.py:417(ring)
+    15724    0.004    0.000    0.007    0.000 number_field.py:1186(is_CyclotomicField)
+        1    0.000    0.000    0.002    0.002 objects.py:143(Endsets)
+      8/1    0.000    0.000    0.001    0.001 objects.py:80(Homsets)
+       96    0.000    0.000    0.020    0.000 parametric.sagek2w1_crg.py:1084(is_factor_known)
+        4    0.000    0.000    0.001    0.000 parametric.sagek2w1_crg.py:1092(record_factor)
+       44    0.000    0.000    0.000    0.000 parametric.sagek2w1_crg.py:300(ngens)
+        6    0.000    0.000    0.000    0.000 parametric.sagek2w1_crg.py:304(_coerce_map_from_)
+       48    0.000    0.000    0.000    0.000 parametric.sagek2w1_crg.py:336(__repr__)
+   239061    0.764    0.000    2.234    0.000 parametric.sagek2w1_crg.py:580(assume_comparison)
+        4    0.000    0.000    0.000    0.000 parametric.sagek2w1_crg.py:891(factor_sign)
+  6841469    6.023    0.000   15.660    0.000 parametric_real_field_element.py:295(_latex_)
+435185463  491.895    0.000 1137.278    0.000 parametric_real_field_element.py:299(_add_)
+   267831    0.505    0.000    1.081    0.000 parametric_real_field_element.py:308(_sub_)
+    19748    0.021    0.000    0.112    0.000 parametric_real_field_element.py:317(_neg_)
+435259446  591.186    0.000 1358.579    0.000 parametric_real_field_element.py:324(_mul_)
+    15989    0.066    0.000    0.317    0.000 parametric_real_field_element.py:337(_div_)
+    36019    0.020    0.000    0.030    0.000 parametric_real_field_element.py:363(__hash__)
+   477763    0.091    0.000    0.142    0.000 parametric_real_field_element.py:397(is_parametric_element)
+870903177 1144.454    0.000 1270.185    0.000 parametric_real_field_element.py:53(__init__)
+   477763    0.056    0.000    0.056    0.000 parametric_real_field_element.py:68(sym)
+  1573109    0.169    0.000    0.169    0.000 parametric_real_field_element.py:71(val)
+   239061    0.607    0.000    3.107    0.000 parametric_real_field_element.py:77(_richcmp_)
+    15724    0.004    0.000    0.006    0.000 polynomial_ring.py:186(is_PolynomialRing)
+    14369    0.196    0.000    0.198    0.000 polynomial_ring.py:312(_element_constructor_)
+        1    0.000    0.000    0.000    0.000 polynomial_ring.py:965(__hash__)
+        2    0.000    0.000    0.007    0.004 polynomial_ring_constructor.py:52(PolynomialRing)
+        4    0.000    0.000    0.000    0.000 polynomial_ring_constructor.py:567(<genexpr>)
+        3    0.000    0.000    0.000    0.000 polynomial_ring_constructor.py:667(_get_from_cache)
+        2    0.000    0.000    0.000    0.000 polynomial_ring_constructor.py:672(_save_in_cache)
+        2    0.000    0.000    0.007    0.004 polynomial_ring_constructor.py:755(_multi_variate)
+        1    0.000    0.000    0.000    0.000 polynomial_ring_constructor.py:823(polynomial_default_category)
+        1    0.000    0.000    0.000    0.000 polynomial_singular_interface.py:355(can_convert_to_singular)
+        4    0.000    0.000    0.000    0.000 posixpath.py:117(splitext)
+        4    0.000    0.000    0.000    0.000 posixpath.py:140(basename)
+        4    0.000    0.000    0.000    0.000 posixpath.py:41(_get_sep)
+        8    0.000    0.000    0.000    0.000 posixpath.py:52(normcase)
+        4    0.000    0.000    0.000    0.000 process.py:189(name)
+        4    0.000    0.000    0.000    0.000 process.py:37(current_process)
+        3    0.000    0.000    0.000    0.000 pushout.py:1550(__init__)
+        6    0.000    0.000    0.000    0.000 pushout.py:1599(__eq__)
+        3    0.000    0.000    0.000    0.000 pushout.py:1613(__ne__)
+        3    0.000    0.000    0.000    0.000 pushout.py:1629(merge)
+        3    0.000    0.000    0.000    0.000 pushout.py:1826(__init__)
+        6    0.000    0.000    0.000    0.000 pushout.py:1910(__eq__)
+        3    0.000    0.000    0.000    0.000 pushout.py:1951(merge)
+        6    0.000    0.000    0.000    0.000 pushout.py:260(commutes)
+        6    0.000    0.000    0.000    0.000 pushout.py:286(expand)
+        3    0.000    0.000    0.000    0.000 pushout.py:3684(pushout)
+        3    0.000    0.000    0.000    0.000 pushout.py:4073(<listcomp>)
+        3    0.000    0.000    0.000    0.000 pushout.py:4074(<listcomp>)
+        3    0.000    0.000    0.000    0.000 pushout.py:4130(<listcomp>)
+        3    0.000    0.000    0.000    0.000 pushout.py:4131(<listcomp>)
+        6    0.000    0.000    0.000    0.000 pushout.py:4386(construction_tower)
+        6    0.000    0.000    0.000    0.000 pushout.py:4421(expand_tower)
+        3    0.000    0.000    0.000    0.000 pushout.py:592(__init__)
+        6    0.000    0.000    0.000    0.000 qqbar.py:1128(_coerce_map_from_)
+     1637    0.001    0.000    0.001    0.000 quotient_ring.py:321(is_QuotientRing)
+      515    0.000    0.000    0.001    0.000 rational_field.py:1554(is_RationalField)
+     2909    0.001    0.000    0.001    0.000 rational_field.py:256(_repr_option)
+        1    0.000    0.000    0.000    0.000 rational_field.py:343(_coerce_map_from_)
+      252    0.000    0.000    0.000    0.000 re.py:188(match)
+      250    0.000    0.000    0.000    0.000 re.py:198(search)
+     5818    0.003    0.000    0.010    0.000 re.py:203(sub)
+        2    0.000    0.000    0.000    0.000 re.py:233(findall)
+     6322    0.003    0.000    0.005    0.000 re.py:289(_compile)
+        1    0.000    0.000    0.000    0.000 right_modules.py:34(super_categories)
+        1    0.000    0.000    0.000    0.000 rings.py:334(is_zero)
+        7    0.000    0.000    0.000    0.000 rings.py:383(_Hom_)
+        1    0.000    0.000    0.000    0.000 sageinspect.py:1372(sage_getargspec)
+        1    0.000    0.000    0.000    0.000 sageinspect.py:1833(_sage_getdoc_unformatted)
+        1    0.000    0.000    0.000    0.000 sageinspect.py:268(_extract_embedded_signature)
+      103    0.002    0.000    0.002    0.000 sequence.py:239(<listcomp>)
+     1630    0.020    0.000    0.074    0.000 sequence.py:401(__init__)
+      100    0.000    0.000    0.000    0.000 sequence.py:500(__getitem__)
+      436    0.000    0.000    0.000    0.000 sequence.py:702(universe)
+     1630    0.033    0.000    1.149    0.001 sequence.py:78(Sequence)
+        6    0.000    0.000    0.000    0.000 sets_cat.py:1434(construction)
+      513    0.000    0.000    0.000    0.000 sets_cat.py:1800(is_finite)
+        8    0.000    0.000    0.000    0.000 sets_cat.py:945(_element_constructor_)
+   154700    0.107    0.000    0.475    0.000 sets_cat.py:974(_element_constructor_from_element_class)
+     2386    0.002    0.000    0.002    0.000 singular.py:2317(is_SingularElement)
+      457    0.156    0.000    0.532    0.001 special.py:127(column_matrix)
+    15264    0.032    0.000    5.619    0.000 special.py:845(identity_matrix)
+        4    0.000    0.000    0.000    0.000 sre_compile.py:423(_simple)
+        2    0.000    0.000    0.000    0.000 sre_compile.py:432(_generate_overlap_table)
+        2    0.000    0.000    0.000    0.000 sre_compile.py:453(_get_iscased)
+        2    0.000    0.000    0.000    0.000 sre_compile.py:461(_get_literal_prefix)
+        2    0.000    0.000    0.000    0.000 sre_compile.py:536(_compile_info)
+        4    0.000    0.000    0.000    0.000 sre_compile.py:595(isstring)
+        2    0.000    0.000    0.000    0.000 sre_compile.py:598(_code)
+        2    0.000    0.000    0.000    0.000 sre_compile.py:65(_combine_flags)
+      8/2    0.000    0.000    0.000    0.000 sre_compile.py:71(_compile)
+        2    0.000    0.000    0.000    0.000 sre_compile.py:759(compile)
+        8    0.000    0.000    0.000    0.000 sre_parse.py:111(__init__)
+       16    0.000    0.000    0.000    0.000 sre_parse.py:160(__len__)
+       51    0.000    0.000    0.000    0.000 sre_parse.py:164(__getitem__)
+        4    0.000    0.000    0.000    0.000 sre_parse.py:168(__setitem__)
+       15    0.000    0.000    0.000    0.000 sre_parse.py:172(append)
+     10/4    0.000    0.000    0.000    0.000 sre_parse.py:174(getwidth)
+        2    0.000    0.000    0.000    0.000 sre_parse.py:224(__init__)
+       23    0.000    0.000    0.000    0.000 sre_parse.py:233(__next)
+       12    0.000    0.000    0.000    0.000 sre_parse.py:249(match)
+       19    0.000    0.000    0.000    0.000 sre_parse.py:254(get)
+       10    0.000    0.000    0.000    0.000 sre_parse.py:286(tell)
+        4    0.000    0.000    0.000    0.000 sre_parse.py:355(_escape)
+      4/2    0.000    0.000    0.000    0.000 sre_parse.py:435(_parse_sub)
+      4/2    0.000    0.000    0.000    0.000 sre_parse.py:493(_parse)
+        2    0.000    0.000    0.000    0.000 sre_parse.py:76(__init__)
+        8    0.000    0.000    0.000    0.000 sre_parse.py:81(groups)
+        2    0.000    0.000    0.000    0.000 sre_parse.py:84(opengroup)
+        2    0.000    0.000    0.000    0.000 sre_parse.py:921(fix_flags)
+        2    0.000    0.000    0.000    0.000 sre_parse.py:937(parse)
+        2    0.000    0.000    0.000    0.000 sre_parse.py:96(closegroup)
+    27814    0.614    0.000    1.171    0.000 term_order.py:1019(sortkey_neglex)
+  6927400    0.557    0.000    0.557    0.000 term_order.py:1036(<genexpr>)
+        1    0.000    0.000    0.000    0.000 term_order.py:1640(singular_str)
+        1    0.000    0.000    0.000    0.000 term_order.py:1768(singular_moreblocks)
+        4    0.000    0.000    0.000    0.000 term_order.py:1849(blocks)
+        1    0.000    0.000    0.000    0.000 term_order.py:1896(__eq__)
+        2    0.000    0.000    0.000    0.000 term_order.py:1989(__len__)
+        3    0.000    0.000    0.000    0.000 term_order.py:2006(__getitem__)
+        5    0.000    0.000    0.000    0.000 term_order.py:2118(is_block_order)
+      253    0.000    0.000    0.000    0.000 term_order.py:2130(is_weighted_degree_order)
+        6    0.000    0.000    0.000    0.000 term_order.py:570(__init__)
+    38195    0.018    0.000    0.024    0.000 term_order.py:862(__hash__)
+        4    0.000    0.000    0.000    0.000 term_order.py:872(__copy)
+    21598    0.010    0.000    0.018    0.000 term_order.py:885(sortkey)
+        4    0.000    0.000    0.000    0.000 threading.py:1031(name)
+        4    0.000    0.000    0.000    0.000 threading.py:1306(current_thread)
+        2    0.000    0.000    0.000    0.000 unique_factorization_domains.py:60(__contains__)
+        1    0.000    0.000    0.000    0.000 unique_factorization_domains.py:84(_contains_helper)
+    20/17    0.000    0.000    0.003    0.000 unique_representation.py:993(__classcall__)
+        1    0.000    0.000    0.002    0.002 unital_algebras.py:169(_coerce_map_from_base_ring)
+        4    0.000    0.000    0.003    0.001 unital_algebras.py:71(__init_extra__)
+        2    0.000    0.000    0.000    0.000 vector_space_homspace.py:208(is_VectorSpaceHomspace)
+        2    0.000    0.000    0.017    0.009 vector_space_homspace.py:248(__call__)
+        1    0.000    0.000    0.013    0.013 vector_space_homspace.py:391(<listcomp>)
+        1    0.000    0.000    0.000    0.000 vector_space_homspace.py:392(<listcomp>)
+        1    0.000    0.000    0.000    0.000 vector_space_morphism.py:772(is_VectorSpaceMorphism)
+        2    0.000    0.000    0.003    0.002 vector_space_morphism.py:798(__init__)
+        2    0.000    0.000    0.000    0.000 vector_spaces.py:109(base_field)
+        2    0.000    0.000    0.000    0.000 vector_spaces.py:121(super_categories)
+        1    0.000    0.000    0.000    0.000 vector_spaces.py:131(additional_structure)
+       32    0.000    0.000    0.000    0.000 vector_spaces.py:39(__classcall_private__)
+        1    0.000    0.000    0.000    0.000 verbose.py:116(verbose)
+     4110    0.003    0.000    0.004    0.000 weakref.py:323(__new__)
+     4037    0.002    0.000    0.002    0.000 weakref.py:328(__init__)
+     4112    0.001    0.000    0.001    0.000 {built-in method __new__ of type object at 0x907780}
+    67989    0.026    0.000    0.026    0.000 {built-in method _operator.eq}
+   170713    0.072    0.000    0.072    0.000 {built-in method _operator.lt}
+        2    0.000    0.000    0.000    0.000 {built-in method _sre.compile}
+        8    0.000    0.000    0.000    0.000 {built-in method _thread.get_ident}
+       44    0.000    0.000    0.000    0.000 {built-in method builtins.abs}
+  656/621    0.012    0.000    1.077    0.002 {built-in method builtins.all}
+       11    0.000    0.000    0.000    0.000 {built-in method builtins.any}
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.callable}
+        1    0.000    0.000 2961.166 2961.166 {built-in method builtins.exec}
+21725/21688    0.009    0.000    0.009    0.000 {built-in method builtins.getattr}
+ 14191880    1.594    0.000    1.594    0.000 {built-in method builtins.hasattr}
+112416/74228    0.076    0.000    0.094    0.000 {built-in method builtins.hash}
+1817182050  184.044    0.000  184.044    0.000 {built-in method builtins.isinstance}
+      670    0.000    0.000    0.000    0.000 {built-in method builtins.issubclass}
+     1195    0.001    0.000    0.001    0.000 {built-in method builtins.iter}
+2898/2802    0.001    0.000    0.001    0.000 {built-in method builtins.len}
+      244    0.007    0.000    0.393    0.002 {built-in method builtins.min}
+     1195    0.000    0.000    0.000    0.000 {built-in method builtins.next}
+       13    0.000    0.000    0.000    0.000 {built-in method builtins.ord}
+       44    0.000    0.000    0.000    0.000 {built-in method builtins.repr}
+       14    0.000    0.000    0.000    0.000 {built-in method builtins.sorted}
+     1237    0.001    0.000    0.001    0.000 {built-in method builtins.sum}
+       16    0.000    0.000    0.000    0.000 {built-in method posix.fspath}
+        4    0.000    0.000    0.000    0.000 {built-in method posix.getpid}
+        1    0.000    0.000    0.000    0.000 {built-in method resource.getrusage}
+       20    0.000    0.000    0.000    0.000 {built-in method sage.categories.category_cy_helper._flatten_categories}
+       15    0.000    0.000    0.000    0.000 {built-in method sage.categories.category_cy_helper._sort_uniq}
+        5    0.000    0.000    0.000    0.000 {built-in method sage.categories.category_cy_helper.join_as_tuple}
+        7    0.000    0.000    0.000    0.000 {built-in method sage.misc.c3_controlled.C3_sorted_merge}
+      521    0.001    0.000    0.001    0.000 {built-in method sage.rings.ring._is_Field}
+        2    0.000    0.000    0.000    0.000 {built-in method sage.structure.category_object.normalize_names}
+    13571    0.001    0.000    0.001    0.000 {built-in method sage.structure.coerce.py_scalar_to_element}
+    13468    0.001    0.000    0.001    0.000 {built-in method sage.structure.element.canonical_coercion}
+      147    0.000    0.000    0.000    0.000 {built-in method sage.structure.element.parent}
+   239061    0.059    0.000    0.059    0.000 {built-in method sage.structure.richcmp.richcmp}
+        4    0.000    0.000    0.000    0.000 {built-in method sys._getframe}
+        4    0.000    0.000    0.000    0.000 {built-in method time.localtime}
+        4    0.000    0.000    0.000    0.000 {built-in method time.strftime}
+        4    0.000    0.000    0.000    0.000 {built-in method time.time}
+      520    0.000    0.000    0.000    0.000 {function FreeModule_ambient._coerce_map_from_ at 0x7f1591846ee0}
+      100    0.000    0.000    0.000    0.000 {function Sequence_generic.__getitem__ at 0x7f16a3c41e50}
+        3    0.000    0.000    0.000    0.000 {method '__copy__' of 'sage.matrix.matrix_generic_dense.Matrix_generic_dense' objects}
+      150    0.000    0.000    0.000    0.000 {method '__copy__' of 'sage.modules.free_module_element.FreeModuleElement_generic_dense' objects}
+   183368    0.100    0.000    0.100    0.000 {method '_coerce_' of 'sage.structure.parent_old.Parent' objects}
+        1    0.000    0.000    0.000    0.000 {method '_coerce_map_from_base_ring' of 'sage.rings.polynomial.multi_polynomial_ring_base.MPolynomialRing_base' objects}
+        2    0.000    0.000    0.000    0.000 {method '_generic_coerce_map' of 'sage.structure.parent.Parent' objects}
+        4    0.000    0.000    0.000    0.000 {method '_is_coercion_cached' of 'sage.structure.parent.Parent' objects}
+      150    2.812    0.019   20.924    0.139 {method '_latex_' of 'sage.matrix.matrix0.Matrix' objects}
+        1    0.000    0.000    0.000    0.000 {method '_latex_' of 'sage.modules.free_module_element.FreeModuleElement' objects}
+     7173    0.014    0.000    0.055    0.000 {method '_latex_' of 'sage.rings.fraction_field_element.FractionFieldElement' objects}
+  2232192    0.519    0.000    0.519    0.000 {method '_latex_' of 'sage.rings.integer.Integer' objects}
+     2861    0.017    0.000    0.037    0.000 {method '_latex_' of 'sage.rings.polynomial.polynomial_element.Polynomial' objects}
+  4587564    3.126    0.000    3.126    0.000 {method '_latex_' of 'sage.rings.rational.Rational' objects}
+        3    0.000    0.000    0.000    0.000 {method '_make_weak_references' of 'sage.categories.map.Map' objects}
+    19526    0.007    0.000    0.007    0.000 {method '_repr_option' of 'sage.structure.parent.Parent' objects}
+        8    0.000    0.000    0.000    0.000 {method 'acquire' of '_thread.RLock' objects}
+       51    0.000    0.000    0.000    0.000 {method 'add' of 'set' objects}
+        4    0.000    0.000    0.000    0.000 {method 'add_constraint' of 'ppl.polyhedron.Polyhedron' objects}
+    36079    0.004    0.000    0.004    0.000 {method 'append' of 'list' objects}
+      914    0.000    0.000    0.000    0.000 {method 'base_ring' of 'sage.matrix.matrix0.Matrix' objects}
+   702782    0.055    0.000    0.055    0.000 {method 'base_ring' of 'sage.structure.category_object.CategoryObject' objects}
+        1    0.000    0.000    0.000    0.000 {method 'base_ring' of 'sage.structure.element.Element' objects}
+        7    0.000    0.000    0.000    0.000 {method 'categories' of 'sage.structure.category_object.CategoryObject' objects}
+      530    0.000    0.000    0.000    0.000 {method 'category' of 'sage.rings.ring.Ring' objects}
+        6    0.000    0.000    0.000    0.000 {method 'category' of 'sage.structure.parent.Parent' objects}
+        1    0.000    0.000    0.000    0.000 {method 'change_ring' of 'sage.matrix.matrix0.Matrix' objects}
+        2    0.000    0.000    0.000    0.000 {method 'change_ring' of 'sage.modules.free_module_element.FreeModuleElement' objects}
+    35071    0.211    0.000    0.468    0.000 {method 'column' of 'sage.matrix.matrix1.Matrix' objects}
+        1    0.000    0.000    0.001    0.001 {method 'columns' of 'sage.matrix.matrix1.Matrix' objects}
+        5    0.000    0.000    0.000    0.000 {method 'copy' of 'dict' objects}
+        2    0.000    0.000    0.000    0.000 {method 'degree' of 'sage.modules.free_module_element.FreeModuleElement' objects}
+      249    0.001    0.000    0.001    0.000 {method 'degree' of 'sage.rings.polynomial.polydict.PolyDict' objects}
+      188    0.000    0.000    0.000    0.000 {method 'degree' of 'sage.rings.polynomial.polynomial_rational_flint.Polynomial_rational_flint' objects}
+       44    0.000    0.000    0.000    0.000 {method 'denominator' of 'sage.rings.fraction_field_element.FractionFieldElement' objects}
+  1904097    0.256    0.000    0.256    0.000 {method 'denominator' of 'sage.rings.rational.Rational' objects}
+    36019    0.010    0.000    0.010    0.000 {method 'dict' of 'sage.rings.polynomial.polydict.PolyDict' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        1    0.000    0.000    0.000    0.000 {method 'discard' of 'set' objects}
+    26530    0.052    0.000    0.052    0.000 {method 'extend' of 'list' objects}
+      254    0.000    0.000    0.000    0.000 {method 'find' of 'str' objects}
+        2    0.000    0.000    0.000    0.000 {method 'findall' of 're.Pattern' objects}
+        4    0.000    0.000    0.000    0.000 {method 'flush' of '_io.TextIOWrapper' objects}
+      389    0.001    0.000    0.001    0.000 {method 'format' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 {method 'fraction_field' of 'sage.rings.ring.Field' objects}
+        4    0.000    0.000    0.000    0.000 {method 'gen' of 'sage.rings.polynomial.multi_polynomial_ring_base.MPolynomialRing_base' objects}
+    37636    0.006    0.000    0.006    0.000 {method 'gens' of 'sage.structure.parent_gens.ParentWithGens' objects}
+      129    0.000    0.000    0.000    0.000 {method 'get' of 'dict' objects}
+        3    0.000    0.000    0.000    0.000 {method 'get' of 'sage.misc.weak_dict.WeakValueDictionary' objects}
+        9    0.000    0.000    0.000    0.000 {method 'has_coerce_map_from' of 'sage.structure.parent.Parent' objects}
+        1    0.000    0.000    0.020    0.020 {method 'hom' of 'sage.structure.parent.Parent' objects}
+       96    0.000    0.000    0.000    0.000 {method 'implies' of 'ppl.constraint.Poly_Con_Relation' objects}
+      904    0.009    0.000    0.048    0.000 {method 'index' of 'list' objects}
+   216242    2.790    0.000   11.934    0.000 {method 'index' of 'tuple' objects}
+        1    0.098    0.098    0.987    0.987 {method 'inverse' of 'sage.matrix.matrix2.Matrix' objects}
+       44    0.000    0.000    0.000    0.000 {method 'is_commutative' of 'sage.rings.ring.CommutativeAlgebra' objects}
+     1030    0.000    0.000    0.000    0.000 {method 'is_commutative' of 'sage.rings.ring.CommutativeRing' objects}
+     1193    0.002    0.000    0.002    0.000 {method 'is_exact' of 'sage.rings.polynomial.multi_polynomial_ring_base.MPolynomialRing_base' objects}
+      467    0.000    0.000    0.000    0.000 {method 'is_exact' of 'sage.rings.ring.Ring' objects}
+        1    0.000    0.000    0.000    0.000 {method 'is_field' of 'sage.rings.integer_ring.IntegerRing_class' objects}
+       27    0.000    0.000    0.000    0.000 {method 'is_field' of 'sage.rings.ring.Field' objects}
+        2    0.000    0.000    0.000    0.000 {method 'is_mutable' of 'sage.matrix.matrix0.Matrix' objects}
+        1    0.000    0.000    0.000    0.000 {method 'is_prime_field' of 'sage.rings.ring.Ring' objects}
+        2    0.000    0.000    0.000    0.000 {method 'items' of 'dict' objects}
+    13909    0.059    0.000    0.059    0.000 {method 'join' of 'str' objects}
+        2    0.000    0.000    0.000    0.000 {method 'keys' of 'dict' objects}
+    19127    0.146    0.000    2.086    0.000 {method 'latex' of 'sage.rings.polynomial.polydict.PolyDict' objects}
+    19127    0.022    0.000    0.024    0.000 {method 'latex_variable_names' of 'sage.structure.category_object.CategoryObject' objects}
+       44    0.000    0.000    0.000    0.000 {method 'lc' of 'sage.rings.polynomial.polynomial_element.Polynomial' objects}
+        1    0.000    0.000    0.000    0.000 {method 'list' of 'sage.matrix.matrix0.Matrix' objects}
+      601    0.414    0.001    0.414    0.001 {method 'list' of 'sage.modules.free_module_element.FreeModuleElement_generic_dense' objects}
+       75    0.000    0.000    0.000    0.000 {method 'list' of 'sage.modules.vector_integer_dense.Vector_integer_dense' objects}
+        2    0.000    0.000    0.000    0.000 {method 'lower' of 'str' objects}
+      252    0.000    0.000    0.000    0.000 {method 'match' of 're.Pattern' objects}
+      200    0.000    0.000    0.000    0.000 {method 'monomial_coefficient' of 'sage.rings.polynomial.polynomial_element.Polynomial' objects}
+      100    0.001    0.000    0.001    0.000 {method 'monomials' of 'sage.rings.polynomial.polynomial_element.Polynomial' objects}
+    35691    0.004    0.000    0.004    0.000 {method 'ncols' of 'sage.matrix.matrix0.Matrix' objects}
+    38677    0.004    0.000    0.004    0.000 {method 'ngens' of 'sage.rings.polynomial.multi_polynomial_ring_base.MPolynomialRing_base' objects}
+    35608    0.006    0.000    0.006    0.000 {method 'nrows' of 'sage.matrix.matrix0.Matrix' objects}
+      132    0.000    0.000    0.000    0.000 {method 'numerator' of 'sage.rings.fraction_field_element.FractionFieldElement' objects}
+  1903897    0.203    0.000    0.203    0.000 {method 'numerator' of 'sage.rings.rational.Rational' objects}
+        2    0.000    0.000    0.000    0.000 {method 'one' of 'sage.rings.ring.Ring' objects}
+872137544   73.495    0.000   73.495    0.000 {method 'parent' of 'sage.structure.element.Element' objects}
+      392    0.000    0.000    0.000    0.000 {method 'parent' of 'sage.structure.sage_object.SageObject' objects}
+        1    0.000    0.000    0.000    0.000 {method 'parse_expression' of 'sage.misc.parser.Parser' objects}
+      399    0.002    0.000    0.035    0.000 {method 'poly_repr' of 'sage.rings.polynomial.polydict.PolyDict' objects}
+     7770    0.002    0.000    0.002    0.000 {method 'pop' of 'list' objects}
+        3    0.000    0.000    0.000    0.000 {method 'register_coercion' of 'sage.structure.parent.Parent' objects}
+       96    0.000    0.000    0.000    0.000 {method 'relation_with' of 'ppl.polyhedron.Polyhedron' objects}
+        8    0.000    0.000    0.000    0.000 {method 'release' of '_thread.RLock' objects}
+       12    0.000    0.000    0.000    0.000 {method 'rfind' of 'str' objects}
+     2072    0.010    0.000    0.394    0.000 {method 'rich_compare' of 'sage.rings.polynomial.polydict.PolyDict' objects}
+    13272    0.201    0.000    0.337    0.000 {method 'row' of 'sage.matrix.matrix1.Matrix' objects}
+   184106    0.019    0.000    0.019    0.000 {method 'rpartition' of 'str' objects}
+      250    0.000    0.000    0.000    0.000 {method 'search' of 're.Pattern' objects}
+       75    0.000    0.000    0.000    0.000 {method 'set' of 'sage.modules.free_module_element.FreeModuleElement' objects}
+      150    0.014    0.000    0.090    0.001 {method 'set_col_to_multiple_of_col' of 'sage.matrix.matrix0.Matrix' objects}
+      150    0.005    0.000    0.005    0.000 {method 'set_column' of 'sage.matrix.matrix1.Matrix' objects}
+        5    0.000    0.000    0.000    0.000 {method 'set_immutable' of 'sage.matrix.matrix0.Matrix' objects}
+      101    0.000    0.000    0.000    0.000 {method 'set_immutable' of 'sage.structure.element.ModuleElementWithMutability' objects}
+       44    0.000    0.000    0.000    0.000 {method 'sign' of 'sage.rings.rational.Rational' objects}
+        1    0.001    0.001 2961.166 2961.166 {method 'solve' of 'sage.numerical.mip.MixedIntegerLinearProgram' objects}
+       45    0.001    0.000    0.174    0.004 {method 'sort' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 {method 'split' of 'str' objects}
+      498    0.000    0.000    0.000    0.000 {method 'start' of 're.Match' objects}
+        1    0.000    0.000    0.000    0.000 {method 'startswith' of 'str' objects}
+      249    0.000    0.000    0.000    0.000 {method 'strip' of 'str' objects}
+     5818    0.003    0.000    0.003    0.000 {method 'sub' of 're.Pattern' objects}
+    60035    0.007    0.000    0.007    0.000 {method 'term_order' of 'sage.rings.polynomial.multi_polynomial_ring_base.MPolynomialRing_base' objects}
+      457    0.048    0.000    0.117    0.000 {method 'transpose' of 'sage.matrix.matrix_dense.Matrix_dense' objects}
+    38587    0.004    0.000    0.004    0.000 {method 'variable_names' of 'sage.structure.category_object.CategoryObject' objects}
+        4    0.000    0.000    0.000    0.000 {method 'write' of '_io.TextIOWrapper' objects}
+     2737    0.001    0.000    0.001    0.000 {method 'zero' of 'sage.rings.ring.Ring' objects}
+      200    0.000    0.000    0.000    0.000 {sage.arith.functions.lcm}
+    20/17    0.000    0.000    0.003    0.000 {sage.misc.classcall_metaclass.typecall}
+     6039    0.142    0.000    1.899    0.000 {sage.modules.free_module_element.vector}
+      492    0.000    0.000    0.000    0.000 {sage.rings.complex_double.is_ComplexDoubleField}
+    16267    0.004    0.000    0.004    0.000 {sage.rings.finite_rings.finite_field_base.is_FiniteField}
+      515    0.000    0.000    0.000    0.000 {sage.rings.integer_ring.is_IntegerRing}
+        1    0.000    0.000    0.000    0.000 {sage.rings.number_field.number_field_base.is_NumberField}
+    19993    0.005    0.000    0.005    0.000 {sage.rings.polynomial.multi_polynomial_ring_base.is_MPolynomialRing}
+      492    0.000    0.000    0.000    0.000 {sage.rings.real_double.is_RealDoubleField}
+        1    0.000    0.000    0.000    0.000 {sage.rings.real_mpfr.is_RealField}
+        2    0.000    0.000    0.000    0.000 {sage.rings.ring.is_Ring}
+        4    0.000    0.000    0.000    0.000 {sage.structure.element.is_Matrix}
+      491    0.001    0.000    0.001    0.000 {sage.symbolic.ring.is_SymbolicExpressionRing}
+
+
+sage: longsol
+(40258073/40076000*mu - 826853/240456000)~
+sage: K.get_lt_factor()
+{-mu,
+ -mu + 4800/4813,
+ mu - 787939/370284,
+ mu - 125959/61714,
+ mu - 83717/73612,
+ mu - 58960/57939}
+sage:    

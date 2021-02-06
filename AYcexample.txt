@@ -24,43 +24,13 @@ def exact_optsol_intLP(LP):
 
     """
 
-    #LP.solver_parameter("simplex_or_intopt", "simplex_only")
-    #LP.solve()
-
-    b = LP.get_backend()
-    #b.solve()
-    
-    #print(b.ncols())
-    #print(b.nrows())
-
-    #basic_vars = []
-
-    #for i in range(LP.number_of_variables()):
-        #if b.is_variable_basic(i) == True:
-            #basic_vars.append(i)
-       
-    #for i in range(len(basic_vars)):
-        #basic_vars[i] += 1
-
-    #basic_vars = [(i+1) for i in range(b.ncols()) if b.is_variable_basic(i)]+[(b.nrows()+j+1) for j in range(b.nrows()) if b.is_slack_variable_basic(j)]
-    
-
-    #basic_vars = [(i+1) for i in range(b.ncols()) if b.is_variable_basic(i)]
-    #print(basic_vars)
     num_cons = LP.number_of_constraints()
 
     num_vars = LP.number_of_variables()
-    #print(num_cons)
 
-    #print("hi")
+   
     A = matrix(QQ,num_cons, num_vars)
     Y = matrix(QQ,num_cons,1)
-
-    #print("hello")
-    
-
-    #same problem here with index = 99, not 99 elements to index through. 
-    #list index out of range
 
     
     j = 0
@@ -68,44 +38,34 @@ def exact_optsol_intLP(LP):
     for l in LP.constraints():
         for (i, r) in zip(l[1][0], l[1][1]):
             A[j, i]=QQ(r)
-        j += 1/1
+        j += 1
 
-    #print("test")
+
     
-    
+   
     for i in range(LP.number_of_variables()):
         if Rational(LP.constraints()[i][2])!= 0:
-            Y[i] = QQ(LP.constraints()[i][2])
-    #print(Y)
-    #print("after Y")
+            Y[i] = Rational(LP.constraints()[i][2])
+ 
     
     c = []
 
     for j in range(LP.number_of_variables()):
         if b.objective_coefficient(j) != []:
             c.append(QQ(b.objective_coefficient(j)))
-    #print("after c")
 
-    #print(A)
-    #print(c)
 
-    #print(A.dimensions())
-    #print(Y.dimensions())
 
     P = InteractiveLPProblemStandardForm(A, Y, c)
-    #print("after P")
 
-    #j = P.run_revised_simplex_method()
+
+
 
     final_dictionary = P.final_revised_dictionary()
 
-    #D = P.dictionary(*basic_vars)
-    #print("after d")
 
-    #is feasible, is optimal needed
-    #return tuple(D.basic_solution())
 
     solution = final_dictionary.basic_solution()
-    #return j, P
 
-    return solution
+
+    return A, Y, c
