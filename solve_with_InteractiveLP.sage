@@ -7,4 +7,6 @@ def solve_with_InteractiveLP(InteractiveLP_lp):
 
     int_sol = InteractiveLP_lp.solve()
 
-    return int_sol
+    int_sol_list = InteractiveLP_lp.get_values(w)
+
+    return int_sol_list

@@ -1,0 +1,20 @@
+import sys
+import cProfile
+
+sys.path.append("/mnt/c/users/phili/SAGEMATH/SPAM_Applications")
+load_attach_path("/mnt/c/users/phili/SAGEMATH/SPAM_Applications")
+load("startup.sage")
+
+
+
+from sage.numerical.interactive_simplex_method import *
+from sage.numerical.backends.generic_backend import get_solver
+
+def compare(GLPK_lp):
+
+
+
+    exact_sol = exact_optsol_intLP(GLPK_lp)
+
+    lpsol = 
+

@@ -1,0 +1,23 @@
+
+    LP setup
+
+    A = matrix(QQ, [[1,2,-2,-2,1],[-1,0,2,-2,1],[2,2,1,-2,-2],[0,0,1,-2,-1],[-1,0,-2,2,2]])
+    Y = matrix(QQ, [[-1,-2,-1,2,2]])
+    c = matrix(QQ, [[2,0,-1,-2,-1]])
+
+    c = vector(c)
+    Y = vector(Y)
+
+    lp = MixedIntegerLinearProgram(maximization=True,solver="InteractiveLP")
+    w = lp.new_variable(nonnegative=True)
+    lp.add_constraint(A*w <= Y)
+    lp.set_objective(c)
+
+
+then this LP is used as input with "solve_with_final_dictionary" and "solve_with_InteractiveLP"
+
+
+right now, solving over a parametric field K works with "solve_with_InteractiveLP" (the traditional .solve()) but not with 
+"solve_with_final_dictionary"
+
+the portfolio example (in SPAM_Applications) is a better example of the time discrepancy between the two methods (at least over QQ)
