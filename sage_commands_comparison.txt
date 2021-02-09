@@ -1,0 +1,107 @@
+sage: A = matrix(QQ, [[1,2,-2,-2,1],[-1,0,2,-2,1],[2,2,1,-2,-2],[0,0,1,-2,-1],[-1,0,-2,2,2]])
+sage: Y = vector(matrix(QQ, [[-1,-2,-1,2,2]]))
+sage: c = vector(matrix(QQ, [[2,0,-1,-2,-1]]))
+sage: lp = MixedIntegerLinearProgram(maximization=True,solver="InteractiveLP")
+sage: w = lp.new_variable(nonnegative=True)
+sage: lp.add_constraint(A*w <= Y)
+sage: lp.set_objective(c)
+sage: cProfile.run("solve_with_InteractiveLP(lp)")
+         19641 function calls (19070 primitive calls) in 0.018 seconds
+sage: cProfile.run("solve_with_final_dictionary(lp2)")
+         19635 function calls (19062 primitive calls) in 0.018 seconds
+
+
+using portfolio LP on rational numbers (not parametric real field)
+
+sage: mu = 1
+sage: mu
+1
+sage: p = MixedIntegerLinearProgram(solver = "InteractiveLP", maximization=True)
+sage: x = p.new_variable(integer=False, nonnegative=True)
+sage: num_cols = 3
+sage: col1 = [1,1003/1000,1005/1000,1007/1000,1002/1000,1001/1000,1005/1000,1004/1000,1004/1000,1008/1000,100
+....: 7/1000,1002/1000,1002/1000,1002/1000,1002/1000,1,1002/1000,1004/1000,1004/1000,999/1000,997/1000,1007/1
+....: 000,996/1000,1002/1000]; col2 = [1044/1000,1015/1000,1024/1000,1027/1000,1040/1000,995/1000,1044/1000,1
+....: 060/1000,1,1030/1000,963/1000,1005/1000,960/1000,1035/1000,1047/1000,978/1000,1048/1000,1029/1000,1076/
+....: 1000,1002/1000,1008/1000,958/1000,1056/1000,980/1000]; col3 = [1068/1000,1051/1000,1062/1000,980/1000,9
+....: 91/1000,969/1000,1086/1000,1043/1000,963/1000,949/1000,1034/1000,1022/1000,972/1000,1050/1000,1042/1000
+....: ,908/1000,1146/1000,1018/1000,1015/1000,909/1000,1063/1000,1064/1000,1071/1000,1070/1000]
+sage: r1sum = 0; r2sum = 0; r3sum = 0
+sage:     for i in range(len(col1)):
+....:             r1sum += col1[i]
+....:
+sage:     for j in range(len(col2)):
+....:             r2sum += col2[j]
+....:
+sage:     for k in range(len(col3)):
+....:             r3sum += col3[k]
+....:
+sage: r1 = r1sum/24; r2 = r2sum/24; r3 = r3sum/24
+sage: p.add_constraint(x[0]+x[1]+x[2] == 1)
+sage:     for ttt in range(75):
+....:             p.add_constraint(x[ttt]>=0)
+....:
+sage:     for t in range(3,27,1):
+....:             p.add_constraint((-x[t] - (x[0]*(col1[t-3]-r1) + x[1]*(col2[t-3]-r2) + x[2]*(col3[t-3]-r3))
+....:  + x[t+24]) == 0)
+....:
+sage:     for t in range(3,27,1):
+....:             p.add_constraint((-x[t] + (x[0]*(col1[t-3]-r1) + x[1]*(col2[t-3]-r2) + x[2]*(col3[t-3]-r3))
+....:  + x[t+48]) == 0)
+....:
+sage: p.set_objective(mu*(x[0]*r1 + x[1]*r2 + x[2]*r3) - ((1/24) * sum([x[o] for o in range(3,27,1)])))
+
+sage: cProfile.run("p.solve()")
+         45019649 function calls (38159204 primitive calls) in 40.773 seconds
+sage: sage: cProfile.run("exact_optsol_intLP(p)")
+         18863357 function calls (16305369 primitive calls) in 23.182 seconds
+
+--------------------------------------------------------------------------------------------------------
+
+using portfolio LP on K (error when try to use final_dictionary (exact_optsol_intLP) on K)
+
+sage: K.<mu> = ParametricRealField([1])
+sage: p = MixedIntegerLinearProgram(solver = "InteractiveLP", maximization=True, base_ring=K)
+sage: x = p.new_variable(integer=False, nonnegative=True)
+sage: num_cols = 3
+sage: col1 = [1,1003/1000,1005/1000,1007/1000,1002/1000,1001/1000,1005/1000,1004/1000,1004/1000,1008/1000,100
+....: 7/1000,1002/1000,1002/1000,1002/1000,1002/1000,1,1002/1000,1004/1000,1004/1000,999/1000,997/1000,1007/1
+....: 000,996/1000,1002/1000]; col2 = [1044/1000,1015/1000,1024/1000,1027/1000,1040/1000,995/1000,1044/1000,1
+....: 060/1000,1,1030/1000,963/1000,1005/1000,960/1000,1035/1000,1047/1000,978/1000,1048/1000,1029/1000,1076/
+....: 1000,1002/1000,1008/1000,958/1000,1056/1000,980/1000]; col3 = [1068/1000,1051/1000,1062/1000,980/1000,9
+....: 91/1000,969/1000,1086/1000,1043/1000,963/1000,949/1000,1034/1000,1022/1000,972/1000,1050/1000,1042/1000
+....: ,908/1000,1146/1000,1018/1000,1015/1000,909/1000,1063/1000,1064/1000,1071/1000,1070/1000]
+sage: r1sum = 0; r2sum = 0; r3sum = 0
+sage:     for i in range(len(col1)):
+....:             r1sum += col1[i]
+....:
+sage:     for j in range(len(col2)):
+....:             r2sum += col2[j]
+....:
+sage:     for k in range(len(col3)):
+....:             r3sum += col3[k]
+....:
+sage: r1 = r1sum/24; r2 = r2sum/24; r3 = r3sum/24
+sage: p.add_constraint(x[0]+x[1]+x[2] == 1)
+sage:     for ttt in range(75):
+....:             p.add_constraint(x[ttt]>=0)
+....:
+sage:     for t in range(3,27,1):
+....:             p.add_constraint((-x[t] - (x[0]*(col1[t-3]-r1) + x[1]*(col2[t-3]-r2) + x[2]*(col3[t-3]-r3))
+....:  + x[t+24]) == 0)
+....:
+sage:     for t in range(3,27,1):
+....:             p.add_constraint((-x[t] + (x[0]*(col1[t-3]-r1) + x[1]*(col2[t-3]-r2) + x[2]*(col3[t-3]-r3))
+....:  + x[t+48]) == 0)
+....:
+sage: p.set_objective(mu*(x[0]*r1 + x[1]*r2 + x[2]*r3) - ((1/24) * sum([x[o] for o in range(3,27,1)])))
+sage: cProfile.run("p.solve()")
+INFO: 2021-02-03 22:41:49,427 New constraint: mu - 787939/370284 < 0
+INFO: 2021-02-03 22:41:51,195 New constraint: mu - 125959/61714 < 0
+INFO: 2021-02-03 22:42:27,513 New constraint: mu - 83717/73612 < 0
+INFO: 2021-02-03 22:43:45,557 New constraint: mu - 58960/57939 < 0
+         4584084397 function calls (4570337698 primitive calls) in 2961.166 seconds
+
+sage: cProfile.run("exact_optsol_intLP(p)")
+sage: 
+TypeError: unable to convert 1 to a rational
