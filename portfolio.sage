@@ -3,9 +3,9 @@ def portfolio(mu,base_ring=None):
     #if base_ring is None:
         #base_ring = mu.parent()
 
-    p = MixedIntegerLinearProgram(solver = "InteractiveLP", maximization=True, base_ring=K)  
+    p = MixedIntegerLinearProgram(solver = "PPL", maximization=True)  
     x = p.new_variable(integer=False, nonnegative=True)
-    w = p.new_variable(integer=False, nonnegative=True)
+    
     #x0, x1, x2 are portfolio weights
     #x3-x26 are constraint variables
     #x27-75 are slack variables
@@ -33,15 +33,15 @@ def portfolio(mu,base_ring=None):
 
     p.add_constraint(x[0]+x[1]+x[2] == 1)
 
-    for ttt in range(75):
+    for ttt in range(27):
         p.add_constraint(x[ttt]>=0)
 
    
     for t in range(3,27,1):
-        p.add_constraint((-x[t] - (x[0]*(col1[t-3]-r1) + x[1]*(col2[t-3]-r2) + x[2]*(col3[t-3]-r3)) + x[t+24]) == 0)
+        p.add_constraint((-x[t] <= (x[0]*(col1[t-3]-r1) + x[1]*(col2[t-3]-r2) + x[2]*(col3[t-3]-r3))))
         
     for t in range(3,27,1):
-        p.add_constraint((-x[t] + (x[0]*(col1[t-3]-r1) + x[1]*(col2[t-3]-r2) + x[2]*(col3[t-3]-r3)) + x[t+48]) == 0)
+        p.add_constraint((x[t] >= (x[0]*(col1[t-3]-r1) + x[1]*(col2[t-3]-r2) + x[2]*(col3[t-3]-r3))))
 
   
     p.set_objective(mu*(x[0]*r1 + x[1]*r2 + x[2]*r3) - ((1/24) * sum([x[o] for o in range(3,27,1)])))
