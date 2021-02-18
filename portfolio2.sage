@@ -1,6 +1,6 @@
 def portfolio2(mu,base_ring=None):
 
-    p2 = MixedIntegerLinearProgram(solver="InteractiveLP",maximization=True, base_ring=K)  
+    p2 = MixedIntegerLinearProgram(solver="PPL",maximization=True)  
 
     #if base_ring is None:
         #base_ring = mu.parent()
@@ -54,21 +54,8 @@ def portfolio2(mu,base_ring=None):
     for tt in range(9,33):
         p2.add_constraint(x[tt] >= x[0]*(col1[tt-9]-r1) + x[1]*(col2[tt-9]-r2) + x[2]*(col3[tt-9]-r3) + x[3]*(col4[tt-9]-r4)+ x[4]*(col5[tt-9]-r5)+ x[5]*(col6[tt-9]-r6)+ x[6]*(col7[tt-9]-r7)+ x[7]*(col8[tt-9]-r8)+ x[8]*(col9[tt-9]-r9))
 
-    """
-    for t in range(9,33):
-        p2.add_constraint((-x[t] - (x[0]*(col1[t-9]-r1) + x[1]*(col2[t-9]-r2) + x[2]*(col3[t-9]-r3) + x[3]*(col4[t-9]-r4)+ x[4]*(col5[t-9]-r5)+ x[5]*(col6[t-9]-r6)+ x[6]*(col7[t-9]-r7)+ x[7]*(col8[t-9]-r8)+ x[8]*(col9[t-9]-r9) + x[t+24])) <= 0)
 
-    for t in range(9,33):
-        p2.add_constraint((-x[t] - (x[0]*(col1[t-9]-r1) + x[1]*(col2[t-9]-r2) + x[2]*(col3[t-9]-r3) + x[3]*(col4[t-9]-r4)+ x[4]*(col5[t-9]-r5)+ x[5]*(col6[t-9]-r6)+ x[6]*(col7[t-9]-r7)+ x[7]*(col8[t-9]-r8)+ x[8]*(col9[t-9]-r9) + x[t+24])) >= 0)
-        
-    for t in range(9,33):
-        p2.add_constraint((-x[t] + (x[0]*(col1[t-9]-r1) + x[1]*(col2[t-9]-r2) + x[2]*(col3[t-9]-r3) + x[3]*(col4[t-9]-r4)+ x[4]*(col5[t-9]-r5)+ x[5]*(col6[t-9]-r6)+ x[6]*(col7[t-9]-r7)+ x[7]*(col8[t-9]-r8)+ x[8]*(col9[t-9]-r9) + x[t+48])) <= 0)
-
-    for t in range(9,33):
-        p2.add_constraint((-x[t] + (x[0]*(col1[t-9]-r1) + x[1]*(col2[t-9]-r2) + x[2]*(col3[t-9]-r3) + x[3]*(col4[t-9]-r4)+ x[4]*(col5[t-9]-r5)+ x[5]*(col6[t-9]-r6)+ x[6]*(col7[t-9]-r7)+ x[7]*(col8[t-9]-r8)+ x[8]*(col9[t-9]-r9) + x[t+48])) >= 0)
-    """
-
-    for ttt in range(81):
+    for ttt in range(33):
         p2.add_constraint(x[ttt]>=0)
 
     p2.set_objective(mu*(x[0]*r1 + x[1]*r2 + x[2]*r3 + x[3]*r4 + x[4]*r5 + x[5]*r6 + x[6]*r7 + x[7]*r8 + x[8]*r9) - ((1/24) * sum([x[o] for o in range(9,33)])))
