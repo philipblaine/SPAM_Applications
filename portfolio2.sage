@@ -1,13 +1,13 @@
 def portfolio2(mu,base_ring=None):
 
-    p2 = MixedIntegerLinearProgram(solver="PPL",maximization=True)  
+      
 
     #if base_ring is None:
         #base_ring = mu.parent()
 
+    p2 = MixedIntegerLinearProgram(solver=("GLPK", "InteractiveLP"),maximization=True, base_ring=K)
+
     x = p2.new_variable(integer=False, nonnegative=True)
-    #x0, x1, x2, x3, x4, x5, x6, x7, x8 are portfolio weights
-    #x9-x32 are constraint variables
 
     num_cols = 9
 
@@ -45,20 +45,19 @@ def portfolio2(mu,base_ring=None):
 
     r1 = r1sum/24; r2 = r2sum/24; r3 = r3sum/24; r4 = r4sum/24; r5 = r5sum/24; r6 = r6sum/24; r7 = r7sum/24; r8 = r8sum/24; r9 = r9sum/24
 
-    p2.add_constraint(x[0]+x[1]+x[2]+x[3]+x[4]+x[5]+x[6]+x[7]+x[8] == 1)
+    x0 = 1 - x[1] - x[2] - x[3] - x[4] - x[5] - x[6] -x[7] - x[8]
+    p2.add_constraint(x0 >= 0)
+    
 
-    #print("hi")
+
     for t in range(9,33):
-        p2.add_constraint(-x[t] <= x[0]*(col1[t-9]-r1) + x[1]*(col2[t-9]-r2) + x[2]*(col3[t-9]-r3) + x[3]*(col4[t-9]-r4)+ x[4]*(col5[t-9]-r5)+ x[5]*(col6[t-9]-r6)+ x[6]*(col7[t-9]-r7)+ x[7]*(col8[t-9]-r8)+ x[8]*(col9[t-9]-r9))
+        p2.add_constraint(-x[t] <= x0*(col1[t-9]-r1) + x[1]*(col2[t-9]-r2) + x[2]*(col3[t-9]-r3) + x[3]*(col4[t-9]-r4)+ x[4]*(col5[t-9]-r5)+ x[5]*(col6[t-9]-r6)+ x[6]*(col7[t-9]-r7)+ x[7]*(col8[t-9]-r8)+ x[8]*(col9[t-9]-r9))
 
     for tt in range(9,33):
-        p2.add_constraint(x[tt] >= x[0]*(col1[tt-9]-r1) + x[1]*(col2[tt-9]-r2) + x[2]*(col3[tt-9]-r3) + x[3]*(col4[tt-9]-r4)+ x[4]*(col5[tt-9]-r5)+ x[5]*(col6[tt-9]-r6)+ x[6]*(col7[tt-9]-r7)+ x[7]*(col8[tt-9]-r8)+ x[8]*(col9[tt-9]-r9))
+        p2.add_constraint(x[tt] >= x0*(col1[tt-9]-r1) + x[1]*(col2[tt-9]-r2) + x[2]*(col3[tt-9]-r3) + x[3]*(col4[tt-9]-r4)+ x[4]*(col5[tt-9]-r5)+ x[5]*(col6[tt-9]-r6)+ x[6]*(col7[tt-9]-r7)+ x[7]*(col8[tt-9]-r8)+ x[8]*(col9[tt-9]-r9))
 
 
-    for ttt in range(33):
-        p2.add_constraint(x[ttt]>=0)
-
-    p2.set_objective(mu*(x[0]*r1 + x[1]*r2 + x[2]*r3 + x[3]*r4 + x[4]*r5 + x[5]*r6 + x[6]*r7 + x[7]*r8 + x[8]*r9) - ((1/24) * sum([x[o] for o in range(9,33)])))
+    p2.set_objective(mu*(x0*r1 + x[1]*r2 + x[2]*r3 + x[3]*r4 + x[4]*r5 + x[5]*r6 + x[6]*r7 + x[7]*r8 + x[8]*r9) - ((1/24) * sum([x[o] for o in range(9,33)])))
     
     #p2.show()
     p2.solve()

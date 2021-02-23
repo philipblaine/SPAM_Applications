@@ -1,9 +1,9 @@
 def portfolio(mu,base_ring=None):
 
-    #if base_ring is None:
-        #base_ring = mu.parent()
+    if base_ring is None:
+        base_ring = mu.parent()
 
-    p = MixedIntegerLinearProgram(solver = "PPL", maximization=True)  
+    p = MixedIntegerLinearProgram(solver = ("GLPK", "InteractiveLP"), maximization=True, base_ring=K)  
     x = p.new_variable(integer=False, nonnegative=True)
     
     #x0, x1, x2 are portfolio weights
@@ -29,36 +29,31 @@ def portfolio(mu,base_ring=None):
 
     r1 = r1sum/24; r2 = r2sum/24; r3 = r3sum/24
 
-   
-
-    p.add_constraint(x[0]+x[1]+x[2] == 1)
-
-    for ttt in range(27):
-        p.add_constraint(x[ttt]>=0)
-
+    x0 = 1 - x[2] - x[1]
+    p.add_constraint(x0>=0)
    
     for t in range(3,27,1):
-        p.add_constraint((-x[t] <= (x[0]*(col1[t-3]-r1) + x[1]*(col2[t-3]-r2) + x[2]*(col3[t-3]-r3))))
+        p.add_constraint((-x[t] <= (x0*(col1[t-3]-r1) + x[1]*(col2[t-3]-r2) + x[2]*(col3[t-3]-r3))))
         
     for t in range(3,27,1):
-        p.add_constraint((x[t] >= (x[0]*(col1[t-3]-r1) + x[1]*(col2[t-3]-r2) + x[2]*(col3[t-3]-r3))))
+        p.add_constraint((x[t] >= (x0*(col1[t-3]-r1) + x[1]*(col2[t-3]-r2) + x[2]*(col3[t-3]-r3))))
 
   
-    p.set_objective(mu*(x[0]*r1 + x[1]*r2 + x[2]*r3) - ((1/24) * sum([x[o] for o in range(3,27,1)])))
+    p.set_objective(mu*(x0*r1 + x[1]*r2 + x[2]*r3) - ((1/24) * sum([x[o] for o in range(3,27,1)])))
 
 
-    #p.solve()
-    psol = exact_optsol_intLP(p)
+    p.solve()
+    #psol = exact_optsol_intLP(p)
     #psol = exact_optsol_poly(p)
 
-    #psol_list = []
-    #for i in range(0,3):
-        #psol_list.append(p.get_values(x[i]))
+    psol_list = []
+    for i in range(0,3):
+        psol_list.append(p.get_values(x[i]))
 
-    #psol_tuple = tuple(psol_list)
+    psol_tuple = tuple(psol_list)
 
-    #return psol_tuple
-    return psol[0:num_cols]
+    return psol_tuple
+    #return psol[0:num_cols]
     
     
 
