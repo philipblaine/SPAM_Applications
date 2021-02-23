@@ -36,7 +36,7 @@ def portfolio_lp(num_sec, periods, hist_data, mu):
             #lp.add_constraint((-x[t] <= (x0*cols[i][t-num_sec]-rsums[i]) + (x
 
 
-    lp.set_objective(mu*(sum([x0*colsums[0] + x[i]*colsums[i] for i in range(1,num_sec)])) - ((1/periods)*sum([x[o] for o in range(num_sec,num_sec+periods)])))
+    lp.set_objective(mu*(x0*colsums[0]+sum([x[i]*colsums[i] for i in range(1,num_sec)])) - ((1/periods)*sum([x[o] for o in range(num_sec,num_sec+periods)])))
 
     print(x0)
 
