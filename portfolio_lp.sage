@@ -1,5 +1,17 @@
 def portfolio_lp(num_sec, periods, hist_data, mu):
 
+    """
+
+    INPUT:  num_sec - number of securities/commodities in the problem
+            periods - number of time periods, 
+            hist_data - list of lists of historical data, 
+            mu - risk aversion parameter
+
+    OUTPUT: MILP defined by these inputs with hybrid_backend solver
+
+
+    """
+
 
     lp = MixedIntegerLinearProgram(solver = ("GLPK", "InteractiveLP"), maximization=True, base_ring=K)
     x = lp.new_variable(nonnegative=True)
