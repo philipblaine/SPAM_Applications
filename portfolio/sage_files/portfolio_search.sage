@@ -1,8 +1,13 @@
 def portfolio_search(mu_value, base_ring=None):
 
-    
-   
+    #right now I am only trying to retrieve an inequality from the bsa in order to give
+    #this program a new value of mu to run with
+
+
+
     while mu_value >=0 and mu_value <= 10:
+
+    #setup of portfolio2 lp
         
 
         K.<mu> = ParametricRealField([mu_value])
@@ -64,12 +69,18 @@ def portfolio_search(mu_value, base_ring=None):
 
         p.get_values(x[1],x[2], x[3], x[4], x[5], x[6], x[7], x[8])
 
+
+    #setup of bsa and attempting to get list of inequalities to solve for mu (need new value of mu for future iterations of loop)
+
         c = K.make_proof_cell()
 
         bsa = c.bsa
 
+    #set list up to gather lt, le, eq constraints from bsa
         constraints = []
 
+
+    #adding bsa constraints to empty list
         if list(bsa.eq_poly()) != []:
             poly = list(bsa.eq_poly())
             for ele in poly:
@@ -85,13 +96,20 @@ def portfolio_search(mu_value, base_ring=None):
             for ele in poly:
                 constraints.append(ele)
 
-        mu = var('mu')
+
+    #here is the problem, cannot solve for mu (error in email)
+        x = var('x')
         new_mus = []
+
+    #right now it prints "constraints" which is correct (contains inequalities from bsa)
         print(constraints)
         for i in range(len(constraints)):
-            sol = solve(constraints[i], mu)
+            P = constraints[i]
+            sol = solve(P(x), x)
             new_mus.append(sol)
 
+
+    #right now this just ends the program (I will change once I've fixed the problem of recording new value of mu)
         mu_value = -1
 
     return new_mus

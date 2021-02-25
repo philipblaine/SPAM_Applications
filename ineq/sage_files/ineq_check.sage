@@ -1,4 +1,4 @@
-def ineqex2check():
+def ineqcheck():
     r'''
     Checks to see if Adib's set of inequalities describes the same cell as my generated inequalities from SPAM.
     

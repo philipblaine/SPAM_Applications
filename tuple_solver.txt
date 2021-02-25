@@ -1,6 +1,0 @@
-elif type(solver) == tuple:
-    solver_list = []
-    for ele in solver:
-       solver_list.append(ele)
-
-    return solver_list
