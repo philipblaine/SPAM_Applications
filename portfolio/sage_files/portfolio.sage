@@ -47,7 +47,7 @@ def portfolio(mu,base_ring=None):
     #psol = exact_optsol_poly(p)
 
     psol_list = []
-    for i in range(0,3):
+    for i in range(1,3):
         psol_list.append(p.get_values(x[i]))
 
     psol_tuple = tuple(psol_list)
