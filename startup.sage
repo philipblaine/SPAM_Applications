@@ -28,4 +28,6 @@ load("get_solver2.sage")
 load("intLP_solve.sage")
 load("test_if_IP_reconstruct.sage")
 load("portfolio_search.sage")
+load("portfolio_lp.sage")
+load("portfolio_bsa.sage")
 

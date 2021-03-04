@@ -1,4 +1,4 @@
-def portfolio_lp(num_sec, periods, hist_data, mu):
+def portfolio_lp(num_sec, periods, hist_data, mu_value, base_ring=None):
 
     """
 
@@ -11,17 +11,17 @@ def portfolio_lp(num_sec, periods, hist_data, mu):
 
 
     """
+    
+    if base_ring == None:
+        base_ring = mu.parent()
 
-
-    lp = MixedIntegerLinearProgram(solver = ("GLPK", "InteractiveLP"), maximization=True, base_ring=K)
+    lp = MixedIntegerLinearProgram(solver = ("GLPK", "InteractiveLP"), maximization=True, base_ring=base_ring)
     x = lp.new_variable(nonnegative=True)
 
     cols = []
 
     for ele in hist_data:
         cols.append(ele)
-
-    print(cols)
 
     colsums = []
     colsum = 0
@@ -31,8 +31,6 @@ def portfolio_lp(num_sec, periods, hist_data, mu):
         for i in ele:
             colsum += i
         colsums.append(colsum)
-
-    print(colsums)
 
     for i in range(len(colsums)):
         colsums[i] = colsums[i]/periods
@@ -44,13 +42,9 @@ def portfolio_lp(num_sec, periods, hist_data, mu):
     lp.add_constraint(x0 >= 0)
 
     for t in range(num_sec, num_sec + periods):
-        print(t)
         lp.add_constraint((-x[t] <= (x0*cols[0][t-num_sec]-colsums[0]) + sum([x[j]*(cols[j][t-num_sec]-colsums[j]) for j in range(1,num_sec)])))
-        print((x0*cols[0][t-num_sec]-colsums[0]))
-        print(sum([x[j]*(cols[j][t-num_sec]-colsums[j]) for j in range(1,num_sec)]))
 
     for t in range(num_sec, num_sec + periods):
-        print(t)
         lp.add_constraint((x[t] >= (x0*cols[0][t-num_sec]-colsums[0]) + sum([x[j]*(cols[j][t-num_sec]-colsums[j]) for j in range(1,num_sec)])))
 
 
