@@ -3,8 +3,8 @@ def portfolio_lp(num_sec, periods, hist_data, mu_value, base_ring=None):
     """
 
     INPUT:  num_sec - number of securities/commodities in the problem
-            periods - number of time periods, 
-            hist_data - list of lists of historical data, 
+            periods - number of time periods
+            hist_data - list of lists of historical data (each sublist is a different security's returns) 
             mu - risk aversion parameter
 
     OUTPUT: MILP defined by these inputs with hybrid_backend solver

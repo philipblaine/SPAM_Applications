@@ -52,7 +52,7 @@ def portfolio(mu,base_ring=None):
 
     psol_tuple = tuple(psol_list)
 
-    return psol_tuple
+    return p
     #return psol[0:num_cols]
     
     

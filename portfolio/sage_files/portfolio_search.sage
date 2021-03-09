@@ -1,9 +1,11 @@
 def portfolio_search(mu_value, base_ring=None):
 
     mu_master_list = []
+    cell_list = []
 
     while mu_value >=0 and mu_value <= 10:
         print("mu is ", mu_value)
+        print(mu_value.parent())
         new_mus = []
         if new_mus != []:
             mu_master_list.append(new_mus)
@@ -45,11 +47,11 @@ def portfolio_search(mu_value, base_ring=None):
             p.add_constraint(-x[t] <= x0*(col1[t-9]-r1) + x[1]*(col2[t-9]-r2) + x[2]*(col3[t-9]-r3) + x[3]*(col4[t-9]-r4)+ x[4]*(col5[t-9]-r5)+ x[5]*(col6[t-9]-r6)+ x[6]*(col7[t-9]-r7)+ x[7]*(col8[t-9]-r8)+ x[8]*(col9[t-9]-r9))
         for tt in range(9,33):
             p.add_constraint(x[tt] >= x0*(col1[tt-9]-r1) + x[1]*(col2[tt-9]-r2) + x[2]*(col3[tt-9]-r3) + x[3]*(col4[tt-9]-r4)+ x[4]*(col5[tt-9]-r5)+ x[5]*(col6[tt-9]-r6)+ x[6]*(col7[tt-9]-r7)+ x[7]*(col8[tt-9]-r8)+ x[8]*(col9[tt-9]-r9))
-        print("before obj")
+        print("before obj, ", mu, mu._val)
         p.set_objective(mu*(x0*r1 + x[1]*r2 + x[2]*r3 + x[3]*r4 + x[4]*r5 + x[5]*r6 + x[6]*r7 + x[7]*r8 + x[8]*r9) - ((1/24) * sum([x[o] for o in range(9,33)])))
         print("before solve")
         p.solve()
-        p.get_values(x[1],x[2], x[3], x[4], x[5], x[6], x[7], x[8])
+        optsol = p.get_values(x[1],x[2], x[3], x[4], x[5], x[6], x[7], x[8])
         c = K.make_proof_cell()
         print("before bsa")
         bsa = c.bsa
@@ -61,26 +63,29 @@ def portfolio_search(mu_value, base_ring=None):
                 lti = lt[i]
                 lti_roots = lti.roots()
                 new_mus.append(lti_roots[0][0])
+                cell_list.append(f"mu range: {lti_roots[0][0]} with sol: {optsol}")
+                
         if le != []:
             for i in range(len(le)):
                 lei = le[i]
                 lei_roots = lei.roots()
                 new_mus.append(lei_roots[0][0])
+                cell_list.append(f"mu range: {lei_roots[0][0]} with sol: {optsol}")
         if eq != []:
             for i in range(len(eq)):
                 eqi = eq[i]
                 eqi_roots = eqi.roots()
                 new_mus.append((eqi_roots[0][0]+1/100))
+                cell_list.append(f"mu range: {eqi_roots[0][0]} with sol: {optsol}")
         for ele in new_mus:
             mu_master_list.append(ele)
-        print(mu_master_list)
         for ele in mu_master_list:
             if mu_value == ele:
                 mu_master_list.remove(ele)
         print(mu_master_list)
         mu_value = mu_master_list[0]
 
-    return new_mus
+    return cell_list
         
 
     

@@ -30,4 +30,5 @@ load("test_if_IP_reconstruct.sage")
 load("portfolio_search.sage")
 load("portfolio_lp.sage")
 load("portfolio_bsa.sage")
+load("setup_portfolio_lp.sage")
 
