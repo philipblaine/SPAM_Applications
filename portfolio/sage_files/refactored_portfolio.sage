@@ -56,9 +56,23 @@ def portfolio_bsa(portfolio_lp):
 
 def find_portfolio_complex(hist_data, mu_value):
 
-    K.<mu> = ParametricRealField(mu_value)
-    lp = setup_portfolio_lp(hist_data, mu)
-    bsa = portfolio_bsa(lp)
+    while mu_value >= 0 and mu_value <= 10:
+   
+        K.<mu> = ParametricRealField(mu_value)
+        lp = setup_portfolio_lp(hist_data, mu)
+        obj_value = lp.solve()
+        
+        bsa = portfolio_bsa(lp)
+
+        mu_master_list = []
+        lt = list(bsa.lt_poly())
+        if lt != []:
+            for ele in lt:
+                mu_master_list.append(ele)
+        mu_value = mu_master_list[0]
+        mu_master_list.remove(mu_value)
+
     
+
 
     
