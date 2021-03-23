@@ -31,4 +31,6 @@ load("portfolio_search.sage")
 load("portfolio_lp.sage")
 load("portfolio_bsa.sage")
 load("setup_portfolio_lp.sage")
+load("portfolio_sol_val.sage")
+load("refactored_portfolio.sage")
 
