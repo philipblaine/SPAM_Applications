@@ -52,7 +52,7 @@ def primal_solver(m,n,A,base_ring=None):
     for o in range(m):
         psol_list.append(primal.get_values(p[o]))
 
-    return psol_list
+    return psol_list, primal
 
 
 

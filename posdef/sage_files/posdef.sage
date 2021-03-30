@@ -1,5 +1,5 @@
 def test_posdef(a, b):
-    return is_positive_definite(matrix([[a, b], [b, 1/4]]))
+    return is_positive_definite(matrix([[1/3, a], [a, b]]))
 
 def is_positive_definite(self):
     # copyed from "sage/matrix/matrix2.pyx":12383, modified L12579.
