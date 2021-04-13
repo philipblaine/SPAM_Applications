@@ -23,7 +23,15 @@ def parametric_simplex_method(hist_data):
         4. find leaving variable by ratio test
         5. use .enter and .leave to pivot once
         6. mu value at which coefficient from above changed signs is the mu value endpoint of interval
-        7. repeat 1-6 until mu becomes 0
+        7. add mu value interval to list
+        8. retrieve optimal solution from dictionary #how?
+        9. retrieve objective value from dictionary
+        10. optimal solution and obj value to list
+        11. repeat 1-10 until mu=0
+
+    12. return list 
+
+    
         
         
 
