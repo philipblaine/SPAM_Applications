@@ -4,9 +4,7 @@ def merge_info_list(info_list):
 
     EXAMPLES::
 
-        sage: int_list = [(0,1), (2,4), (1,3)]
-        sage: test_union_of_intervals(int_list)
-        sage: (0,4)
+        
 
     """
     sorted_info = sorted(info_list)
