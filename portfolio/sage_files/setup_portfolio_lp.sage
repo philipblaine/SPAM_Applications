@@ -16,13 +16,13 @@ def setup_portfolio_lp(hist_data, mu):
     reward = sum([x[j] * exp_return[j] for j in range(n)])
     risk = sum([y[t] for t in range(T)]) / T
     obj = mu * reward - risk
-    # lp.set_objective(obj)
+    lp.set_objective(obj)
     # workaround as mip.pyx L1545 records unnecessary ineqs.
-    f = obj.dict()
-    h = lp.get_backend()
-    d = f.pop(-1, h.zero())
-    values = [f.get(i, h.zero()) for i in range(h.ncols())] 
-    h.set_objective(values, d)
+    # f = obj.dict()
+    # h = lp.get_backend()
+    # d = f.pop(-1, h.zero())
+    # values = [f.get(i, h.zero()) for i in range(h.ncols())] 
+    # h.set_objective(values, d)
     return lp
 
 

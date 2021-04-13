@@ -1,4 +1,4 @@
-def test_union_of_intervals(int_list):
+def test_union_of_intervals(info_list):
     r"""
     Returns the total interval covered by some list of intervals.
 
@@ -9,15 +9,16 @@ def test_union_of_intervals(int_list):
         sage: (0,4)
 
     """
-
-    sorted_intervals = sorted(int_list)
-    if not sorted_intervals:
-        return
-    low, high = sorted_intervals[0]
-    for interval in sorted_intervals[1:]:
-        if interval[0] <= high:
-            high = max(high, interval[1])
+    sorted_info = sorted(info_list)
+    merged_list= []
+    for i in range(len(sorted_info)):
+        intervals = (sorted_info[i][0], sorted_info[i+1][0])
+        if info_list[i][1] == info_list[i+1][1]:
+            intervals = union_of_intervals(sorted_info[i][0], sorted_info[i+1][0])
+        if len(intervals) == 1:
+            merged_list.append([intervals, info_list[i][1]
         else:
-            low, high = interval
-
-    return low, high
+            merged_list.append([intervals[0], info_list[i][1]])
+            merged_list.append([intervals[1], info_list[i+1][1])
+            
+    return output_list
