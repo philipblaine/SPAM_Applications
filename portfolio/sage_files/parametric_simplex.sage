@@ -1,26 +1,40 @@
 def parametric_simplex_method(hist_data):
 
-
-
-    #how to setup InteractiveLPProblem using hist_data? 
-    #previously I displayed 
-
-
-    # use interactiveLP for first phase, mu = infty
-
-
-    K.<mu> = ParametricRealField([any concrete value])
-
+    K.<mu> = ParametricRealField([10])
     P = setup_portfolio_lp(hist_data)
     b = P.get_backend()
-
-    lp = b.interactiveLp
+    lp = b.InteractiveLPProblem()
     interactivelpproblem
-    standardofmr
-    finalreviseddictionary
+    lp_st = lp.standard_form()
+    FD = lp_st.final_revised_dictionary()
 
-    objcoeffs
-    sym
+    threshold = Infinity
+    while threshold >= 0
+        obj_coeffs = FD.objective_coefficients()
+        mu = var('mu')
+        coeff_list = []
+        #how to record indices along with objective coefficients?
+        for ele in obj_coeffs:
+            coeff_list.append(ele)
+        numerator_list = []
+        for ele in coeff_list:
+            numerator_list.append(ele.numerator())
+        mu_sol_list = []
+        for ele in numerator_list:
+            mu_sol_list.append(numer.roots()[0][0])
+        max = 0
+        for ele in mu_sol_list:
+            if ele >= max:
+                max = ele
+        D.enter(index_of_max)
+        leaving_var = min(D.possible_leaving)
+        D.leave(leaving_var)
+        
+        threshold = max
+    
+
+steps in loop
+    symbolic mu 
     poly in mu
     list of ^ 
     solve for mu, take max
@@ -28,25 +42,6 @@ def parametric_simplex_method(hist_data):
     D.ente
     D.possible_leaving, take min
     record threshold
-
-    #once setup...
-
-    while threshold >= 0:
-        
-        1. with basic_vars from FD, look at objective function with nonbasic_vars
-        2. check coefficients with mu in objective function
-        3. coefficient that becomes 0 first from incrementally decresing mu corresponds to entering var
-        4. find leaving variable by ratio test
-        5. use .enter and .leave to pivot once
-        6. mu value at which coefficient from above changed signs is the mu value endpoint of interval
-        7. add mu value interval to list
-        8. retrieve optimal solution from dictionary #how?
-        9. retrieve objective value from dictionary
-        10. optimal solution and obj value to list
-
-        11. repeat 1-10 until mu=0
-
-    12. return list 
 
     
         
