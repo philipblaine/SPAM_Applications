@@ -1,23 +1,4 @@
-def setup_portfolio_lp(hist_data, mu, base_ring=None):
+def find_efficient_frontier(combined_list):
 
-    if base_ring is None:
-        base_ring = mu.parent()
-
-    n = len(hist_data)
-    T = len(hist_data[0])
-    lp = MixedIntegerLinearProgram(solver=("GLPK","InteractiveLP"),maximization=True,base_ring=mu.parent())
-    x_var = lp.new_variable(nonnegative=True)
-    x = [x_var[j] for j in range(n-1)]
-    x.append(1-sum(x))
-    lp.add_constraint(x[-1]>=0)
-    y = lp.new_variable(nonnegative=True)
-    exp_return = [sum(r)/T for r in hist_data]
-    for t in range(T):
-        dev = sum(x[j]*hist_data[j][t] - exp_return[j]) for j in range(n))
-        lp.add_constraint(dev <= y[t])
-        lp.add_constraint(dev >= -y[t])
-    reward = sum([x[j]*exp_return[j] for j in range(n)])
-    risk = sum([y[t] for t in range(T)])/T
-    obj_fun = mu*reward-risk
-    lp.set_objective(obj_fun)
-    return lp
+    
+    

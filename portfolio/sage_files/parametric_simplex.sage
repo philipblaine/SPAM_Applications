@@ -1,10 +1,10 @@
 def parametric_simplex_method(hist_data):
-
+    
+    info_list = []
     K.<mu> = ParametricRealField([10])
     P = setup_portfolio_lp(hist_data)
     b = P.get_backend()
-    lp = b.InteractiveLPProblem()
-    interactivelpproblem
+    lp = b.interactive_lp_problem()
     lp_st = lp.standard_form()
     FD = lp_st.final_revised_dictionary()
 
@@ -21,15 +21,32 @@ def parametric_simplex_method(hist_data):
             numerator_list.append(ele.numerator())
         mu_sol_list = []
         for ele in numerator_list:
+            #check roots() otherwise use constant/coeff
             mu_sol_list.append(numer.roots()[0][0])
+
+
+     
+     mu_value
+     i = mu_sol_list.index(mu_value)
+     L = D.nonbasic_variables()
+     L[i] = entering
+      
+
+
+
+
+
+
         max = 0
         for ele in mu_sol_list:
             if ele >= max:
                 max = ele
-        D.enter(index_of_max)
+
+        FD.enter(index_of_max)
         leaving_var = min(D.possible_leaving)
-        D.leave(leaving_var)
-        
+        FD.leave(leaving_var)
+        info_list.append((max, FD.basic_solution())
+        #choose largest ratio less than previous threshold
         threshold = max
     
 
