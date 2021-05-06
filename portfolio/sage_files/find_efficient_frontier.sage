@@ -28,7 +28,7 @@ def find_efficient_frontier(hist_data, combined_list):
         port_mad = 0
         #computes MAD for each portfolio
         for j in range(len(hist_data)):
-            $reset MAD and absolute weighted difference from mean for each asset
+            #reset MAD and absolute weighted difference from mean for each asset
             asset_mad = 0
             awdiff_sum = 0
             for k in range(len(hist_data[j])):
@@ -55,12 +55,6 @@ def find_efficient_frontier(hist_data, combined_list):
         
 
     return P_plot
-
-
-    
-
-
-
 
 
 
