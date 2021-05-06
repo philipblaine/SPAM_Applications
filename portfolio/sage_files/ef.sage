@@ -14,7 +14,7 @@ def portfolio_risk_and_reward(hist_data, weights):
 
     risk = sum_abs_dev / T
 
-    return risk, reward
+    return reward, risk
 
 
 def ef(hist_data, combined_list):
@@ -24,7 +24,7 @@ def ef(hist_data, combined_list):
 
     for i in range(num_portfolios):
     
-        risk, reward = portfolio_risk_and_reward(hist_data, combined_list[i][1])
+        reward, risk = portfolio_risk_and_reward(hist_data, combined_list[i][1])
         points.append((reward, risk))
 
     return points
